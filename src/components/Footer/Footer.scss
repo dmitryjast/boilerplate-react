@@ -1,0 +1,42 @@
+.footer {
+    padding: 60px 0;
+    border-top: 1px solid var(--color-background-2);
+    .container {
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            .row-top {
+                display: flex;
+                gap: 60px;
+                justify-content: space-between;
+                .column {
+                    display: flex;
+                    flex: 1;
+                    flex-direction: column;
+                    gap: 24px;
+                    .logo {
+                        flex: 1;
+                        img {
+                            max-width: 160px;
+                        }
+                    }
+                }
+            }
+            .row-bottom {
+                display: flex;
+                gap: 24px;
+                justify-content: space-between;
+                .column {
+                    .legal-pages-menu {
+                        ul {
+                            display: flex;
+                            gap: 18px;
+                            list-style-type: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
