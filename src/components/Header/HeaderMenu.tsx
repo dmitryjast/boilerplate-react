@@ -6,7 +6,8 @@ export default function HeaderMenu() {
             <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about-us">About Us</Link></li>
-                 <li><Link to="/Contacts">Contacts</Link></li>
+                <li><Link to="/services">Services</Link></li>
+                <li><Link to="/Contacts">Contacts</Link></li>
             </ul>
         </div>
     )

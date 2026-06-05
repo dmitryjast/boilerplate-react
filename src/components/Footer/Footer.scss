@@ -21,11 +21,21 @@
                             max-width: 160px;
                         }
                     }
+                    .footer-list {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 12px;
+                        ul {
+                            padding: 0;
+                            list-style-type: none;
+                        }
+                    }
                 }
             }
             .row-bottom {
                 display: flex;
                 gap: 24px;
+                align-items: center;
                 justify-content: space-between;
                 .column {
                     .legal-pages-menu {
