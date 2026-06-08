@@ -1,0 +1,17 @@
+.page-hero-section {
+    min-height: 350px;
+    display: flex;
+    background: var(--color-background-2);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    .container {
+        width: 100%;
+        .section-inner {
+            padding: 120px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

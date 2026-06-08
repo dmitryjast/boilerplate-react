@@ -1,0 +1,135 @@
+import HeroPage from "../../components/Hero/HeroPage"
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs"
+
+import "./Elements.scss"
+
+import heroBackground from "../../assets/img/demo-background.jpg"
+
+export default function Elements() {
+
+    const title = "UI Elements";
+
+    return(
+        <>
+             <HeroPage title={title} background={heroBackground} />
+             <Breadcrumbs 
+                items={[
+                    {label: "Home", link: "/"},
+                    {label: title},
+                ]} 
+             />
+             <section className="section-modal">
+                <div className="container">
+                    <div className="section-inner">
+                        <div className="heading-wrapper">
+                            <h1>Hading H1</h1>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h2>Hading H2</h2>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h3>Hading H3</h3>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h4>Hading H4</h4>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h5>Hading H5</h5>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h6>Hading H6</h6>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="section-colors">
+                <div className="container">
+                    <div className="section-inner">
+                        <h3>Main colors:</h3>
+                        <div className="colors-wrapper">
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="section-headings">
+                <div className="container">
+                    <div className="section-inner">
+                        <h3>Headings:</h3>
+                        <div className="heading-wrapper">
+                            <h1>Hading H1</h1>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h2>Hading H2</h2>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h3>Hading H3</h3>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h4>Hading H4</h4>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h5>Hading H5</h5>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                            <h6>Hading H6</h6>
+                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="section-lists">
+                <div className="container">
+                    <div className="section-inner">
+                        <h3>Lists:</h3>
+                        <div className="lists-wrapper">
+                            <ul>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                            </ul>
+                            <ol>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="section-forms">
+                <div className="container">
+                    <div className="section-inner">
+                        <h3>Forms:</h3>
+                      
+                    </div>
+                </div>
+            </section>
+            <section className="section-checkboxes">
+                <div className="container">
+                    <div className="section-inner">
+                        <h3>Checkboxes:</h3>
+                        <div className="checkboxes-wrapper">
+                           
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="section-buttons">
+                <div className="container">
+                    <div className="section-inner">
+                        <h3>Buttons:</h3>
+                        <div className="buttons-wrapper">
+                           
+                            {/* Call a button examples
+                            
+                            // As button
+                            <Button onClick={handleAdd}>Add to cart</Button>
+
+                            // As link
+                            <Button as={Link} to="/checkout">Proceed to Checkout</Button>
+                            
+                            */}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </>
+    )
+}

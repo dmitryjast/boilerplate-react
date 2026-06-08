@@ -3,13 +3,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
-
 import Home from "./pages/HomePage/Home";
 import About from "./pages/AboutPage/About";
 import Services from "./pages/ServicesPage/Services";
 import Contact from "./pages/ContactPage/Contact";
 
 import Policy from "./pages/PolicyPages/Policy";
+
+import Elements from "./pages/ElementsPage/Elements";
 
 function App() {
   
@@ -27,6 +28,8 @@ function App() {
       <Route path="/cookies-policy" element={<Policy />} />
       <Route path="/terms-and-conditions" element={<Policy />} />
 
+      {/* Other Pages */}
+      <Route path="/elements" element={<Elements />} />
 
     </Routes>
     <Footer />
