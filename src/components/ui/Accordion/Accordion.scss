@@ -1,0 +1,52 @@
+.accordion {
+    .accordion-inner {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        .accordion-item {
+            .title-wrapper {
+                padding: 18px;
+                display: grid;
+                grid-template-columns: auto 24px;
+                column-gap: 10px;
+                align-items: center;
+                background: var(--color-background-2);
+                transition: 0.3s;
+                cursor: pointer;
+                .arrow {
+                    &::before {
+                        content: url('../../../assets/img/icon-arrow.svg');
+                        height: 24px;
+                        display: block;
+                        transform: rotate(0deg);
+                        transition: transform 0.3s ease;
+                    }
+                }
+            }
+            .content-wrapper {
+                display: grid;
+                grid-template-rows: 0fr;
+                transition: grid-template-rows 0.3s ease;
+                background: #FFFFFF;
+                .content {
+                    overflow: hidden;
+                    padding: 0 18px;
+                    transition: padding 0.3s ease;
+                }
+            }
+            &.active {
+                .content-wrapper {
+                    grid-template-rows: 1fr;
+                }
+                .content {
+                    padding: 18px;
+                }
+                .arrow {
+                    &::before {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+    }
+}

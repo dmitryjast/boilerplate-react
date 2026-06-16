@@ -3,10 +3,12 @@
 
 :root {
     --color-background: #FFF;
-    --color-background-2: #e0e0e0;
-    --color-background-error: #FFE4E1; 
+    --color-background-2: #eeeeee;
+    --color-background-error: #f0f0f0; 
     --color-main-1: #080808;
     --color-main-2: #5E00FF;
+    --color-main-3: #0099ff;
+    --color-main-4: #dfdfdf;
     --font-main: 'Rubik', sans-serif;
     --font-title: 'Rubik', sans-serif;
     --color-text: #080808;
@@ -37,6 +39,62 @@ body {
     @media (max-width: 1360px) {
         padding-left: 10px;
         padding-right: 10px;
+    }
+}
+
+.mt-120 {
+    margin-top: 120px;
+    @media (max-width: 1360px) {
+        margin-top: 60px;
+    }
+}
+
+.mt-60 {
+    margin-top: 60px;
+    @media (max-width: 1360px) {
+       margin-top: 30px;
+    }
+}
+
+.mb-120 {
+   margin-bottom: 120px;
+    @media (max-width: 1360px) {
+       margin-bottom: 60px;
+    }
+}
+
+.mb-60 {
+    margin-bottom: 60px;
+    @media (max-width: 1360px) {
+        margin-bottom: 30px;
+    }
+}
+
+.pt-120 {
+    padding-top: 120px;
+    @media (max-width: 1360px) {
+        padding-top: 60px;
+    }
+}
+
+.pt-60 {
+    padding-top: 60px;
+    @media (max-width: 1360px) {
+        padding-top: 30px;
+    }
+}
+
+.pb-120 {
+    padding-bottom: 120px;
+    @media (max-width: 1360px) {
+        padding-bottom: 60px;
+    }
+}
+
+.pb-60 {
+    padding-bottom: 60px;
+    @media (max-width: 1360px) {
+        padding-bottom: 30px;
     }
 }
 

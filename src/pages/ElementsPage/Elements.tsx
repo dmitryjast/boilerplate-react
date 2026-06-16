@@ -1,5 +1,8 @@
 import HeroPage from "../../components/Hero/HeroPage"
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs"
+import Input from "../../components/ui/Input/Input"
+import Accordion from "../../components/ui/Accordion/Accordion"
+import { accordionData } from "../../data/accordionData"
 
 import "./Elements.scss"
 
@@ -18,38 +21,20 @@ export default function Elements() {
                     {label: title},
                 ]} 
              />
-             <section className="section-modal">
-                <div className="container">
-                    <div className="section-inner">
-                        <div className="heading-wrapper">
-                            <h1>Hading H1</h1>
-                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
-                            <h2>Hading H2</h2>
-                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
-                            <h3>Hading H3</h3>
-                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
-                            <h4>Hading H4</h4>
-                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
-                            <h5>Hading H5</h5>
-                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
-                            <h6>Hading H6</h6>
-                            <p>Welcome to our wonderful world. We sincerely hope that each and every user entering <a href="#">hyperlink text</a> our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="section-colors">
+            <section className="section-colors pt-120">
                 <div className="container">
                     <div className="section-inner">
                         <h3>Main colors:</h3>
                         <div className="colors-wrapper">
                             <div></div>
                             <div></div>
+                            <div></div>
+                            <div></div>
                         </div>
                     </div>
                 </div>
             </section>
-            <section className="section-headings">
+            <section className="section-headings pt-120">
                 <div className="container">
                     <div className="section-inner">
                         <h3>Headings:</h3>
@@ -70,7 +55,7 @@ export default function Elements() {
                     </div>
                 </div>
             </section>
-            <section className="section-lists">
+            <section className="section-lists pt-120">
                 <div className="container">
                     <div className="section-inner">
                         <h3>Lists:</h3>
@@ -93,15 +78,18 @@ export default function Elements() {
                     </div>
                 </div>
             </section>
-            <section className="section-forms">
+            <section className="section-forms pt-120">
                 <div className="container">
                     <div className="section-inner">
                         <h3>Forms:</h3>
-                      
+                        <div className="forms-wrapper">
+                            <Input/>
+                            <Input />
+                        </div>
                     </div>
                 </div>
             </section>
-            <section className="section-checkboxes">
+            <section className="section-checkboxes pt-120">
                 <div className="container">
                     <div className="section-inner">
                         <h3>Checkboxes:</h3>
@@ -111,7 +99,7 @@ export default function Elements() {
                     </div>
                 </div>
             </section>
-            <section className="section-buttons">
+            <section className="section-buttons pt-120">
                 <div className="container">
                     <div className="section-inner">
                         <h3>Buttons:</h3>
@@ -127,6 +115,14 @@ export default function Elements() {
                             
                             */}
                         </div>
+                    </div>
+                </div>
+            </section>
+            <section className="section-accordion pt-120 pb-120">
+                <div className="container">
+                    <div className="section-inner">
+                        <h3>Accordion:</h3>
+                        <Accordion items={accordionData} />
                     </div>
                 </div>
             </section>
