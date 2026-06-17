@@ -385,8 +385,12 @@ ul, ol {
     display: flex;
     align-items: center;
     gap: 6px;
+    border: none;
     border-radius: 24px;
+    font-size: 16px;
+    font-style: normal;
     font-weight: 500;
+    line-height: 150%;
     cursor: pointer;
     &:disabled {
         opacity: 0.5;
@@ -394,6 +398,9 @@ ul, ol {
     }
     &.btn-primary {
         background: var(--color-main-2);
+    }
+    &.btn-secondary {
+        background: var(--color-main-3);
     }
 }
 

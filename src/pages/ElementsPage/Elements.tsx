@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom"
+
 import HeroPage from "../../components/Hero/HeroPage"
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs"
 import Input from "../../components/ui/Input/Input"
+import Button from "../../components/ui/Button/Button"
 import Accordion from "../../components/ui/Accordion/Accordion"
+
 import { accordionData } from "../../data/accordionData"
 
 import "./Elements.scss"
@@ -104,7 +108,10 @@ export default function Elements() {
                     <div className="section-inner">
                         <h3>Buttons:</h3>
                         <div className="buttons-wrapper">
-                           
+                            <Button>Primary Button</Button>
+                            <Button variant="secondary">Secondary Button</Button>
+                            <Button disabled>Disabled Button</Button>
+
                             {/* Call a button examples
                             
                             // As button
