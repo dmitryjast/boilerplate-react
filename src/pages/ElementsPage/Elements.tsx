@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import HeroPage from "../../components/Hero/HeroPage"
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs"
 import Input from "../../components/ui/Input/Input"
+import DatePicker from "../../components/ui/DatePicker/DatePicker"
 import CheckBox from "../../components/ui/CheckBox/CheckBox"
 import Button from "../../components/ui/Button/Button"
 import Accordion from "../../components/ui/Accordion/Accordion"
@@ -91,6 +92,7 @@ export default function Elements() {
                             <Input type="text" className="input-demo" id="123" label="Demo input" placeholder="..." />
                             <Input disabled={true} label="Demo input disabled" placeholder="..." />
                             <Input label="Demo input error" errorMessage="Username must be between 3 and 20 characters." placeholder="..." />
+                            <DatePicker label="Demo date picker" placeholder="MM/DD/YYYY" />
                         </div>
                     </div>
                 </div>
