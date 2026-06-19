@@ -3,7 +3,7 @@
 
 :root {
     --color-background: #FFF;
-    --color-background-2: #eeeeee;
+    --color-background-2: #eee;
     --color-background-error: #f0f0f0; 
     --color-main-1: #080808;
     --color-main-2: #5E00FF;
@@ -343,11 +343,8 @@ ul, ol {
     }
 }
 
-.checkbox-wrapper   {
-    display: flex;
-    gap: 12px;
-    .checkbox-label {
-        margin-top: 2px;
+.checkbox-wrapper {
+    label {
         span {
             color: #B1B1B1;
             a {
@@ -357,9 +354,9 @@ ul, ol {
             }
         }
     }
-    .checkbox-box {
-        position: relative;
-        &::before {
+
+    .checkmark-wrapper {
+        &:before {
             content: url('../../assets/img/checkbox.svg');
             position: relative;
             display: flex;
@@ -370,10 +367,15 @@ ul, ol {
         }
     }
 
-    input:checked + .checkbox-box::before {
-        content: url('../../assets/img/checkbox-enabled.svg');
+    label input:checked + .checkmark-wrapper:before {
+        content: url('../../assets/img/checkbox-on.svg');
+        background: transparent;
         opacity: 1;
         border: none;
+    }
+
+    .error-wrapper {
+        padding: 12px 18px;
     }
 
 }

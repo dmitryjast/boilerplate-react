@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import HeroPage from "../../components/Hero/HeroPage"
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs"
 import Input from "../../components/ui/Input/Input"
+import CheckBox from "../../components/ui/CheckBox/CheckBox"
 import Button from "../../components/ui/Button/Button"
 import Accordion from "../../components/ui/Accordion/Accordion"
 
@@ -87,8 +88,9 @@ export default function Elements() {
                     <div className="section-inner">
                         <h3>Forms:</h3>
                         <div className="forms-wrapper">
-                            <Input/>
-                            <Input />
+                            <Input type="text" className="input-demo" id="123" label="Demo input" placeholder="..." />
+                            <Input disabled={true} label="Demo input disabled" placeholder="..." />
+                            <Input label="Demo input error" errorMessage="Username must be between 3 and 20 characters." placeholder="..." />
                         </div>
                     </div>
                 </div>
@@ -98,7 +100,13 @@ export default function Elements() {
                     <div className="section-inner">
                         <h3>Checkboxes:</h3>
                         <div className="checkboxes-wrapper">
-                           
+                            <CheckBox
+                                label={<span>I agree to the <Link to="/terms-and-conditions">Terms of Service</Link> and <Link to="/privacy-policy">Privacy Policy</Link>.</span>}
+                            />
+                            <CheckBox
+                                label={<span>I agree to the <Link to="/terms-and-conditions">Terms of Service</Link> and <Link to="/privacy-policy">Privacy Policy</Link>.</span>}
+                                errorMessage="You must accept the terms and conditions to continue"
+                            />
                         </div>
                     </div>
                 </div>
