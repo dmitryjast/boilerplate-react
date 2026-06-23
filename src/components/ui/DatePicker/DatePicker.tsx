@@ -10,6 +10,7 @@ import "./DatePicker.scss"
 interface DatePickerProps {
     id?: string;
     label?: string;
+    dateFormat?: string;
     placeholder?: string;
     className?: string;
     onChange?: (value: Date | null) => void;
@@ -17,7 +18,7 @@ interface DatePickerProps {
     [key: string]: any;
 }
 
-export default function DatePicker({ id, label, placeholder, className, onChange, errorMessage, ...props }: DatePickerProps) {
+export default function DatePicker({ id, label, dateFormat = "MM/dd/yyyy", placeholder, className, onChange, errorMessage, ...props }: DatePickerProps) {
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 
@@ -34,6 +35,7 @@ export default function DatePicker({ id, label, placeholder, className, onChange
             <ReactDatePicker
                 id={id}
                 selected={selectedDate}
+                dateFormat={dateFormat}
                 onChange={handleChange}
                 placeholderText={placeholder}
                 className={`input ${className}`}

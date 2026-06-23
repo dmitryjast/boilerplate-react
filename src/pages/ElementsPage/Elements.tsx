@@ -4,11 +4,13 @@ import HeroPage from "../../components/Hero/HeroPage"
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs"
 import Input from "../../components/ui/Input/Input"
 import DatePicker from "../../components/ui/DatePicker/DatePicker"
+import Select from "../../components/ui/Select/Select"
 import CheckBox from "../../components/ui/CheckBox/CheckBox"
 import Button from "../../components/ui/Button/Button"
 import Accordion from "../../components/ui/Accordion/Accordion"
 
-import { accordionData } from "../../data/accordionData"
+import { demoAccordionData } from "../../data/accordionData"
+import { COUNTRIES } from "../../data/constants"
 
 import "./Elements.scss"
 
@@ -93,6 +95,9 @@ export default function Elements() {
                             <Input disabled={true} label="Demo input disabled" placeholder="..." />
                             <Input label="Demo input error" errorMessage="Username must be between 3 and 20 characters." placeholder="..." />
                             <DatePicker label="Demo date picker" placeholder="MM/DD/YYYY" />
+                            <Select items={COUNTRIES} value="" label="Demo select" />
+                            <Select items={COUNTRIES} value="" disabled={true} label="Demo select disabled" />
+                            <Select items={COUNTRIES} value="" label="Demo select error" errorMessage="Please select a country" />
                         </div>
                     </div>
                 </div>
@@ -139,7 +144,7 @@ export default function Elements() {
                 <div className="container">
                     <div className="section-inner">
                         <h3>Accordion:</h3>
-                        <Accordion items={accordionData} />
+                        <Accordion items={demoAccordionData} />
                     </div>
                 </div>
             </section>

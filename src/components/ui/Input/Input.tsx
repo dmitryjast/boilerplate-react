@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 
 import "./Input.scss"
