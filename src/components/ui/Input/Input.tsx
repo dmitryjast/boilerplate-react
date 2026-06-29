@@ -1,8 +1,6 @@
-import type { ReactNode } from "react";
-
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 
-import "./Input.scss"
+import "./Input.scss";
 
 interface InputProps {
     type?: 'text';

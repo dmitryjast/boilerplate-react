@@ -1,0 +1,18 @@
+.input-wrapper {
+    label {
+        padding: 10px 18px;
+        display: block;
+        color: var(--color-label);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%;
+    }
+    textarea {
+        height: 250px;
+        padding: 18px 18px;
+        &:disabled {
+            opacity: 0.3;
+        }
+    }
+}

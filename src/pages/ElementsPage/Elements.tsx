@@ -5,6 +5,7 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs"
 import Input from "../../components/ui/Input/Input"
 import DatePicker from "../../components/ui/DatePicker/DatePicker"
 import Select from "../../components/ui/Select/Select"
+import TextArea from "../../components/ui/TextArea/TextArea"
 import CheckBox from "../../components/ui/CheckBox/CheckBox"
 import Button from "../../components/ui/Button/Button"
 import Accordion from "../../components/ui/Accordion/Accordion"
@@ -22,7 +23,10 @@ export default function Elements() {
 
     return(
         <>
-             <HeroPage title={title} background={heroBackground} />
+             <HeroPage 
+                title={title} 
+                background={heroBackground} 
+            />
              <Breadcrumbs 
                 items={[
                     {label: "Home", link: "/"},
@@ -91,13 +95,61 @@ export default function Elements() {
                     <div className="section-inner">
                         <h3>Forms:</h3>
                         <div className="forms-wrapper">
-                            <Input type="text" className="input-demo" id="123" label="Demo input" placeholder="..." />
-                            <Input disabled={true} label="Demo input disabled" placeholder="..." />
-                            <Input label="Demo input error" errorMessage="Username must be between 3 and 20 characters." placeholder="..." />
-                            <DatePicker label="Demo date picker" placeholder="MM/DD/YYYY" />
-                            <Select items={COUNTRIES} value="" label="Demo select" />
-                            <Select items={COUNTRIES} value="" disabled={true} label="Demo select disabled" />
-                            <Select items={COUNTRIES} value="" label="Demo select error" errorMessage="Please select a country" />
+                            <Input 
+                                type="text" 
+                                className="input-demo" 
+                                id="123" 
+                                label="Demo 
+                                input" 
+                                placeholder="..." 
+                            />
+                            <Input 
+                                disabled={true} 
+                                label="Demo input disabled" 
+                                placeholder="..." 
+                            />
+                            <Input 
+                                label="Demo input error" 
+                                errorMessage="Username must be between 3 and 20 characters." 
+                                placeholder="..." 
+                            />
+                            <DatePicker 
+                                label="Demo date picker" 
+                                placeholder="MM/DD/YYYY" 
+                            />
+                            <Select 
+                                items={COUNTRIES} 
+                                value="" 
+                                label="Demo select" 
+                            />
+                            <Select 
+                                items={COUNTRIES} 
+                                value="" 
+                                disabled={true} 
+                                label="Demo select disabled" 
+                            />
+                            <Select 
+                                items={COUNTRIES} 
+                                value="" 
+                                label="Demo select error" 
+                                errorMessage="Please select a country" 
+                            />
+                            <TextArea 
+                                label="Demo textarea" 
+                                placeholder="..." 
+                                resize="none"  
+                            />
+                            <TextArea 
+                                label="Demo textarea disabled" 
+                                disabled={true} 
+                                placeholder="..." resize="none"  
+                            />
+                            <TextArea 
+                                label="Demo textarea error" 
+                                placeholder="..." 
+                                resize="none" 
+                                errorMessage="Message must be at least 10 characters"  
+                            />
                         </div>
                     </div>
                 </div>

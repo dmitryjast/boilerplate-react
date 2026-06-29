@@ -1,13 +1,13 @@
-import HeroPage from "../../components/Hero/HeroPage";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import HeroPage from "../../../components/Hero/HeroPage";
+import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
 
-import "./Policy.scss";
+import "./Register.scss"
 
-import heroBackground from "../../assets/img/demo-background.jpg"
+import heroBackground from "../../../assets/img/demo-background.jpg"
 
-export default function Policy() {
+export default function Register() {
 
-    const title = "Policy page";
+    const title = "Register";
 
     return(
         <>

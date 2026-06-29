@@ -1,9 +1,26 @@
+import HeroPage from "../../components/Hero/HeroPage";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+
 import "./Services.scss";
 
+import heroBackground from "../../assets/img/demo-background.jpg"
+
 export default function Services() {
+
+    const title = "Services";
+
     return(
-        <>
-            <h1>Services</h1>
+       <>
+            <HeroPage 
+                title={title}
+                background={heroBackground}    
+            />
+            <Breadcrumbs 
+            items={[
+                {label: "Home", link: "/"},
+                {label: title},
+            ]} 
+            />
         </>
     )
 }
