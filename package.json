@@ -19,6 +19,7 @@
     "react-hook-form": "^7.76.1",
     "react-router-dom": "^7.16.0",
     "sass": "^1.100.0",
+    "swiper": "^14.0.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
