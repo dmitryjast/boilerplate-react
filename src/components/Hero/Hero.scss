@@ -1,3 +1,35 @@
+.home-hero-section {
+    .swiper {
+        .swiper-wrapper {
+            .swiper-slide {
+                .slide-wrapper {
+                    min-height: 700px;
+                    display: flex;
+                    align-items: center;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    .container {
+                        width: 100%;
+                        .slide-inner {
+                            .content-wrapper {
+                                max-width: 800px;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 24px;
+                                .actions-wrapper {
+                                    display: flex;
+                                    gap: 24px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 .page-hero-section {
     min-height: 350px;
     display: flex;

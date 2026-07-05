@@ -22,29 +22,35 @@ interface SliderProps {
 
 export default function HeroHome({items, autoplay, autoplayTiming, pagination}:SliderProps) {
     return(
-        <Swiper
-            modules={[Autoplay, Pagination]}
-            autoplay={autoplay ? { delay: autoplayTiming } : false}
-            pagination={pagination ? { clickable: true } : false}
-        >
-            {items?.map((item, index) => (
-                <SwiperSlide key={index}>
-                    <div 
-                        className="slide-wrapper"
-                        style={item.background ? { backgroundImage: `url(${item.background})` } : undefined}
-                    >
-                        <div className="content-wrapper">
-                            {item.title && (
-                                <h1>{item.title}</h1>
-                            )}
-                            {item.description && (
-                                <p>{item.description}</p>
-                            )}
-                            {item.actions}
+        <div className="home-hero-section">
+            <Swiper
+                modules={[Autoplay, Pagination]}
+                autoplay={autoplay ? { delay: autoplayTiming } : false}
+                pagination={pagination ? { clickable: true } : false}
+            >
+                {items?.map((item, index) => (
+                    <SwiperSlide key={index}>
+                        <div 
+                            className="slide-wrapper"
+                            style={item.background ? { backgroundImage: `url(${item.background})` } : undefined}
+                        >
+                            <div className="container">
+                                <div className="slide-inner">
+                                    <div className="content-wrapper">
+                                        {item.title && (
+                                            <h1>{item.title}</h1>
+                                        )}
+                                        {item.description && (
+                                            <p>{item.description}</p>
+                                        )}
+                                        {item.actions}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </SwiperSlide>
-            ))}
-        </Swiper>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
     )
 }
