@@ -1,4 +1,4 @@
-import "./InputMasked.scss"
+import './InputMasked.scss'
 
 export default function InputMasked() {
     return(

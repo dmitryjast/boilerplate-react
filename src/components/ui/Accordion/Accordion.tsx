@@ -1,7 +1,7 @@
-import { useState } from "react";
-import type { ReactNode } from "react"
+import { useState } from 'react';
+import type { ReactNode } from 'react'
 
-import "./Accordion.scss"
+import './Accordion.scss'
 
 interface AccordionItem {
     label: string;
@@ -22,16 +22,16 @@ export default function Accordion({ items }: AccordionItems) {
 
     return(
         <>
-            <div className="accordion">
+            <div className='accordion'>
                 <div className='accordion-inner'>
                     {items.map((item, index) => 
                         <div className={`accordion-item ${activeItem === index ? 'active' : ''}`} key={index}>
-                            <div className="title-wrapper" onClick={() => clickTrigger(index)}>
+                            <div className='title-wrapper' onClick={() => clickTrigger(index)}>
                                 <h5>{item.label}</h5>
-                                <div className="arrow"></div>
+                                <div className='arrow'></div>
                             </div>
-                            <div className="content-wrapper">
-                                <div className="content">{item.content}</div>
+                            <div className='content-wrapper'>
+                                <div className='content'>{item.content}</div>
                             </div>
                         </div>
                     )}

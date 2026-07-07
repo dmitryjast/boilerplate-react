@@ -1,11 +1,11 @@
-import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
-import "./DatePicker.scss"
+import './DatePicker.scss'
 
 interface DatePickerProps {
     id?: string;
@@ -18,7 +18,7 @@ interface DatePickerProps {
     [key: string]: any;
 }
 
-export default function DatePicker({ id, label, dateFormat = "MM/dd/yyyy", placeholder, className, onChange, errorMessage, ...props }: DatePickerProps) {
+export default function DatePicker({ id, label, dateFormat = 'MM/dd/yyyy', placeholder, className, onChange, errorMessage, ...props }: DatePickerProps) {
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 
@@ -28,9 +28,9 @@ export default function DatePicker({ id, label, dateFormat = "MM/dd/yyyy", place
     }
 
     return(
-        <div className={`input-wrapper ${errorMessage ? "error" : ""}`}>
+        <div className={`input-wrapper ${errorMessage ? 'error' : ''}`}>
             {label && (
-                <label htmlFor={id} className="input-label">{label}</label>  
+                <label htmlFor={id} className='input-label'>{label}</label>  
             )}
             <ReactDatePicker
                 id={id}

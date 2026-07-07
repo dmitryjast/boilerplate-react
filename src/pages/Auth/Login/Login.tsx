@@ -1,13 +1,13 @@
-import HeroPage from "../../../components/Hero/HeroPage";
-import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
+import HeroPage from '../../../components/Hero/HeroPage';
+import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
 
-import "./Login.scss"
+import './Login.scss'
 
-import heroBackground from "../../../assets/img/demo-background.jpg"
+import heroBackground from '../../../assets/img/demo-background.jpg'
 
 export default function Login() {
 
-    const title = "Login";
+    const title = 'Login';
 
     return(
         <>
@@ -17,7 +17,7 @@ export default function Login() {
             />
             <Breadcrumbs 
             items={[
-                {label: "Home", link: "/"},
+                {label: 'Home', link: '/'},
                 {label: title},
             ]} 
             />

@@ -1,6 +1,6 @@
-import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
-import "./TextArea.scss";
+import './TextArea.scss';
 
 interface TextareaProps {
     disabled?: boolean;
@@ -14,11 +14,11 @@ interface TextareaProps {
 }
 
 
-export default function TextArea({ disabled, className, id, label, placeholder, resize = "none", errorMessage, ...props }: TextareaProps ) {
+export default function TextArea({ disabled, className, id, label, placeholder, resize = 'none', errorMessage, ...props }: TextareaProps ) {
     return(
-        <div className={`input-wrapper ${errorMessage ? "error" : ""}`}>
+        <div className={`input-wrapper ${errorMessage ? 'error' : ''}`}>
             {label && (
-                <label htmlFor={id} className="input-label">{label}</label>  
+                <label htmlFor={id} className='input-label'>{label}</label>  
             )}
             <textarea 
                 id={id}

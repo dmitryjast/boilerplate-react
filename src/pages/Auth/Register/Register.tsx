@@ -1,13 +1,13 @@
-import HeroPage from "../../../components/Hero/HeroPage";
-import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
+import HeroPage from '../../../components/Hero/HeroPage';
+import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
 
-import "./Register.scss"
+import './Register.scss'
 
-import heroBackground from "../../../assets/img/demo-background.jpg"
+import heroBackground from '../../../assets/img/demo-background.jpg'
 
 export default function Register() {
 
-    const title = "Register";
+    const title = 'Register';
 
     return(
         <>
@@ -17,7 +17,7 @@ export default function Register() {
             />
             <Breadcrumbs 
             items={[
-                {label: "Home", link: "/"},
+                {label: 'Home', link: '/'},
                 {label: title},
             ]} 
             />

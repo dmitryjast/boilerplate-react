@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
-import "./Breadcrumbs.scss"
+import './Breadcrumbs.scss'
 
 interface BreadCrumbstItem {
     label: string;
@@ -14,9 +14,9 @@ interface BreadcrumbsListProps {
 
 export default function Breadcrumbs({ items }: BreadcrumbsListProps) {
     return (
-        <section className="breadrumbs-section">
-            <div className="container">
-                <div className="section-inner">
+        <section className='breadrumbs-section'>
+            <div className='container'>
+                <div className='section-inner'>
                     <ul>
                         {items?.map((item, index) => (
                             <li key={index}>

@@ -43,7 +43,7 @@ export default function CookiesPopup() {
                     <Button type='button' onClick={handleAccept}>Accept</Button>
                 </div>
                 <Button type='button' className='deny' onClick={handleClose}>
-                    <X size={24} color="#000" />
+                    <X size={24} color='#000' />
                 </Button>
             </div>
         </Modal>

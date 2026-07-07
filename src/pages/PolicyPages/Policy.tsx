@@ -1,13 +1,13 @@
-import HeroPage from "../../components/Hero/HeroPage";
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import HeroPage from '../../components/Hero/HeroPage';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
-import "./Policy.scss";
+import './Policy.scss';
 
-import heroBackground from "../../assets/img/demo-background.jpg"
+import heroBackground from '../../assets/img/demo-background.jpg'
 
 export default function Policy() {
 
-    const title = "Policy page";
+    const title = 'Policy page';
 
     return(
         <>
@@ -17,7 +17,7 @@ export default function Policy() {
             />
             <Breadcrumbs 
             items={[
-                {label: "Home", link: "/"},
+                {label: 'Home', link: '/'},
                 {label: title},
             ]} 
             />

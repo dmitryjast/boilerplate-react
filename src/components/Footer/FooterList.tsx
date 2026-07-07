@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 interface FooterListItem {
     label: string;
@@ -14,7 +14,7 @@ interface FooterListProps {
 export default function FooterList({ title, items }: FooterListProps) {
 
     return(
-        <div className="footer-list">
+        <div className='footer-list'>
             <h5>{title}</h5>
             <div>
                 <ul>

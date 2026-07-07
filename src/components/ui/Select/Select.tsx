@@ -1,8 +1,8 @@
-import type { ChangeEventHandler } from "react";
+import type { ChangeEventHandler } from 'react';
 
-import ErrorMessage from "../../ErrorMessage/ErrorMessage"
+import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
-import "./Select.scss"
+import './Select.scss'
 
 interface SelectItem {
     label: string;
@@ -23,9 +23,9 @@ interface SelectProps {
 
 export default function Select({ items, value, disabled, className, id, label, onChange, errorMessage, ...props }: SelectProps) {
     return(
-        <div className={`input-wrapper ${errorMessage ? "error" : ""}`}>
+        <div className={`input-wrapper ${errorMessage ? 'error' : ''}`}>
             {label && (
-                <label htmlFor={id} className="input-label">{label}</label>  
+                <label htmlFor={id} className='input-label'>{label}</label>  
             )}
             <select 
                 value={value}

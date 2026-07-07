@@ -1,6 +1,6 @@
-import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
-import "./Input.scss";
+import './Input.scss';
 
 interface InputProps {
     type?: 'text';
@@ -15,9 +15,9 @@ interface InputProps {
 
 export default function Input({ type, disabled, className, id, label, placeholder, errorMessage, ...props }: InputProps) {
     return(
-        <div className={`input-wrapper ${errorMessage ? "error" : ""}`}>
+        <div className={`input-wrapper ${errorMessage ? 'error' : ''}`}>
             {label && (
-                <label htmlFor={id} className="input-label">{label}</label>  
+                <label htmlFor={id} className='input-label'>{label}</label>  
             )}
             <input
                 id={id}

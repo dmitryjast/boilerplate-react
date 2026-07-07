@@ -1,12 +1,12 @@
-import type { ElementType, MouseEventHandler, ReactNode } from "react";
+import type { ElementType, MouseEventHandler, ReactNode } from 'react';
 
-import "./Button.scss"
+import './Button.scss'
 
 interface ButtonProps {
     children: ReactNode;
     as?: ElementType;
     to?: string;
-    type?: "button" | "submit" | "reset";
+    type?: 'button' | 'submit' | 'reset';
     className?: string;
     variant?: string;
     disabled?: boolean;
@@ -18,14 +18,14 @@ export default function Button({
     children, 
     as: Element = 'button', 
     to, 
-    type="submit", 
-    className="button", 
-    variant="primary", 
+    type='submit', 
+    className='button', 
+    variant='primary', 
     disabled=false, 
     onClick, 
     ...props }: ButtonProps) {
 
-    const isButton = Element === "button"
+    const isButton = Element === 'button'
 
     return(
         <Element 
