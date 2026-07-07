@@ -15,14 +15,17 @@
         display: flex;
         flex-direction: column;
         gap: 24px;
-        button.deny {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            width: fit-content;
-            height: 24px;
-            padding: 0;
-            border: none;
+        button {
+            cursor: pointer;
+            &.deny {
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                width: fit-content;
+                height: 24px;
+                padding: 0;
+                border: none;
+            }
         }
         .row-bottom {
             display: flex;

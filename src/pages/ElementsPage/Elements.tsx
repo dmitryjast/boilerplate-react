@@ -9,6 +9,7 @@ import TextArea from "../../components/ui/TextArea/TextArea"
 import CheckBox from "../../components/ui/CheckBox/CheckBox"
 import Button from "../../components/ui/Button/Button"
 import Accordion from "../../components/ui/Accordion/Accordion"
+import Slider from "../../components/ui/Slider/Slider"
 
 import { demoAccordionData } from "../../data/accordionData"
 import { COUNTRIES } from "../../data/constants"
@@ -192,11 +193,49 @@ export default function Elements() {
                     </div>
                 </div>
             </section>
-            <section className="section-accordion pt-120 pb-120">
+            <section className="section-accordion pt-120">
                 <div className="container">
                     <div className="section-inner">
                         <h3>Accordion:</h3>
                         <Accordion items={demoAccordionData} />
+                    </div>
+                </div>
+            </section>
+            <section className="section-slider pt-120 pb-120">
+                <div className="container">
+                    <div className="section-inner">
+                        <h3>Slider:</h3>
+                        <Slider 
+                            items={[
+                                    {
+                                        content: 
+                                            <>
+                                                <h4>Slide title 1</h4>
+                                                <p>Slide text.</p>
+                                            </>,
+                                        background: heroBackground,
+                                    },
+                                    {
+                                        content: 
+                                            <>
+                                                <h4>Slide title 2</h4>
+                                                <p>Slide text.</p>
+                                            </>,
+                                        background: heroBackground,
+                                    },
+                                    {
+                                        content: 
+                                            <>
+                                                <h4>Slide title 3</h4>
+                                                <p>Slide text.</p>
+                                            </>,
+                                        background: heroBackground,
+                                    },
+                                ]}
+                            autoplay={false}
+                            autoplayTiming={3000}
+                            pagination={true}
+                        />
                     </div>
                 </div>
             </section>

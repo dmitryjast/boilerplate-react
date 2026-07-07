@@ -155,3 +155,19 @@
     }
   }
 }
+
+.section-slider {
+    .container {
+    .section-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      h3 {
+        font-size: 22px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: #aeb1be;
+      }
+    }
+  }
+}

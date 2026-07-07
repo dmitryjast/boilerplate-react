@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import { Autoplay, Pagination } from 'swiper/modules'
 
-import "./Hero.scss";
+import './Hero.scss';
 
 interface SliderItem {
     title?: string;
@@ -22,7 +22,7 @@ interface SliderProps {
 
 export default function HeroHome({items, autoplay, autoplayTiming, pagination}:SliderProps) {
     return(
-        <div className="home-hero-section">
+        <div className='home-hero-section'>
             <Swiper
                 modules={[Autoplay, Pagination]}
                 autoplay={autoplay ? { delay: autoplayTiming } : false}
@@ -31,12 +31,12 @@ export default function HeroHome({items, autoplay, autoplayTiming, pagination}:S
                 {items?.map((item, index) => (
                     <SwiperSlide key={index}>
                         <div 
-                            className="slide-wrapper"
+                            className='slide-wrapper'
                             style={item.background ? { backgroundImage: `url(${item.background})` } : undefined}
                         >
-                            <div className="container">
-                                <div className="slide-inner">
-                                    <div className="content-wrapper">
+                            <div className='container'>
+                                <div className='slide-inner'>
+                                    <div className='content-wrapper'>
                                         {item.title && (
                                             <h1>{item.title}</h1>
                                         )}
