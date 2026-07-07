@@ -16,34 +16,40 @@ import Policy from "./pages/PolicyPages/Policy";
 
 import Elements from "./pages/ElementsPage/Elements";
 
+import CookiesPopup from "./components/CookiesPopup/CookiesPopup";
+
 function App() {
   
   return (
     <BrowserRouter>
-    <Header />
-    <Routes>
+      <Header />
+      <Routes>
 
-      {/* Auth Routes */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/forgot" element={<Forgot />} />
+        {/* Auth Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot" element={<Forgot />} />
 
-      {/* Main Routes */}
-      <Route path="/" element={<Home />} />
-      <Route path="/about-us" element={<About />} />
-      <Route path="/services" element={<Services />} />
-      <Route path="/contacts" element={<Contact />} />
+        {/* Main Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contacts" element={<Contact />} />
 
-      {/* Policy Routes */}
-      <Route path="/privacy-policy" element={<Policy />} />
-      <Route path="/cookies-policy" element={<Policy />} />
-      <Route path="/terms-and-conditions" element={<Policy />} />
+        {/* Policy Routes */}
+        <Route path="/privacy-policy" element={<Policy />} />
+        <Route path="/cookies-policy" element={<Policy />} />
+        <Route path="/terms-and-conditions" element={<Policy />} />
 
-      {/* Other Routes */}
-      <Route path="/elements" element={<Elements />} />
+        {/* Other Routes */}
+        <Route path="/elements" element={<Elements />} />
 
-    </Routes>
-    <Footer />
+      </Routes>
+      <Footer />
+
+      {/* Modals */}
+      <CookiesPopup />
+      
     </BrowserRouter>
   )
 }

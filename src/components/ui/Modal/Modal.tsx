@@ -1,9 +1,18 @@
-import "./Modal.scss"
+import type { ReactNode } from 'react'
+import './Modal.scss'
 
-export default function Modal() {
+interface ModalProps {
+    children?: ReactNode;
+    className?: string;
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export default function Modal({children, className}: ModalProps) {
+
     return(
-        <>
-
-        </>
+        <div className={`modal ${className}`}>
+            {children}
+        </div>
     )
 }

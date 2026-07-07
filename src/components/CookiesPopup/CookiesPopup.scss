@@ -1,0 +1,32 @@
+.cookies-popup {
+    max-width: 680px;
+    padding: 30px;
+    background: var(--color-background-2);
+    border-radius: 24px;
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
+    &.isopen {
+        opacity: 1;
+        transition: 0.3s;
+        pointer-events: initial;
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        button.deny {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: fit-content;
+            height: 24px;
+            padding: 0;
+            border: none;
+        }
+        .row-bottom {
+            display: flex;
+            gap: 24px;
+        }
+    }
+}
