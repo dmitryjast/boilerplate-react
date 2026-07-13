@@ -1,0 +1,22 @@
+.scroll-to-top {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-background-2);
+    border: none;
+    border-radius: 12px;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    transition: 0.3s;
+    &.is-visible {
+        opacity: 1;
+        pointer-events: initial;
+        transition: 0.3s;
+    }
+}

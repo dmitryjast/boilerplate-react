@@ -17,6 +17,7 @@ import Policy from "./pages/PolicyPages/Policy";
 import Elements from "./pages/ElementsPage/Elements";
 
 import CookiesPopup from "./components/CookiesPopup/CookiesPopup";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
   
@@ -49,6 +50,7 @@ function App() {
 
       {/* Modals */}
       <CookiesPopup />
+      <ScrollToTop />
       
     </BrowserRouter>
   )
