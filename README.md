@@ -1,3 +1,10 @@
+# Base commands:
+
+npm run setup    — Fill in environment variables
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
