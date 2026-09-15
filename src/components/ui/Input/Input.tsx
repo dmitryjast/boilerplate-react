@@ -3,7 +3,7 @@ import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import './Input.scss';
 
 interface InputProps {
-    type?: 'text';
+    type?: 'text' | 'email' | 'password' | 'number' | 'tel';
     disabled?: boolean;
     className?: string;
     id?: string;
