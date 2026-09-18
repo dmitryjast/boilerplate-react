@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import Logo from './Logo';
 import HeaderMenu from './HeaderMenu';
-import HeaderActions from './HeaderActions';
+import HeaderActions from './HeaderProfile';
 
 import './Header.scss';
 

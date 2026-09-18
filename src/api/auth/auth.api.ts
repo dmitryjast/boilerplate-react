@@ -26,6 +26,9 @@ export const authApi = { // Group in one object with functions and methods
     me: () => 
         api.get<MeResponse>('/auth/me'),
 
+    sendVerification: () =>
+    api.post('/auth/send-verification'),
+
     verifyEmail: (data: VerifyEmailRequest) => 
         api.post('/auth/verify-email', data),
 

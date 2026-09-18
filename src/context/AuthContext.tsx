@@ -4,7 +4,7 @@ import type { MeResponse } from '../api/auth/auth.types'
 
 interface AuthContextType {
     user: MeResponse | null
-    acessToken: string | null
+    accessToken: string | null
     isLoading: boolean
     login: (token: string) => void
     logout: () => void
@@ -15,7 +15,7 @@ const AuthContext = createContext<AuthContextType | null>(null)
 export function AuthProvider({ children }: { children: ReactNode }) {
 
     const [user, setUser] = useState<MeResponse | null>(null)
-    const [acessToken, setAccesssToken] = useState<string | null>(null)
+    const [accessToken, setAccessToken] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(true)
 
     // Check if user is logged in on app start
@@ -33,17 +33,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         initAuth()
     }, [])
 
-    const login = (token: string) => {
-        setAccesssToken(token)
+    const login = async (token: string) => {
+        setAccessToken(token)
+        localStorage.setItem('accessToken', token)
+        
+        try {
+            const response = await authApi.me()
+            setUser(response.data)
+        } catch (err) {
+            console.error(err)
+        }
     }
 
-    const logout = () => {
-        setAccesssToken(null)
-        setUser(null)
+    const logout = async () => {
+        try {
+            await authApi.logout()
+        } catch (err) {
+            console.error(err)
+        } finally {
+            setAccessToken(null)
+            setUser(null)
+            localStorage.removeItem('accessToken')
+        }
     }
 
     return (
-        <AuthContext.Provider value={{ user, acessToken, isLoading, login, logout }}>
+        <AuthContext.Provider value={{ user, accessToken, isLoading, login, logout }}>
             {children}
         </AuthContext.Provider>
     )

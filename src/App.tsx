@@ -11,11 +11,13 @@ import Contact from "./pages/ContactPage/Contact";
 import Login from "./pages/Auth/Login/Login";
 import Register from "./pages/Auth/Register/Register";
 import Forgot from "./pages/Auth/Forgot/Forgot";
+import VerifyEmail from "./pages/Auth/VerifyEmail/VerifyEmail";
 
 import Policy from "./pages/PolicyPages/Policy";
 
 import Elements from "./pages/ElementsPage/Elements";
 
+import VerificationBanner from "./components/ Verification/VerificationBanner/VerificationBanner";
 import CookiesPopup from "./components/CookiesPopup/CookiesPopup";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
@@ -30,6 +32,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot" element={<Forgot />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
 
         {/* Main Routes */}
         <Route path="/" element={<Home />} />
@@ -49,6 +52,7 @@ function App() {
       <Footer />
 
       {/* Modals */}
+      <VerificationBanner />
       <CookiesPopup />
       <ScrollToTop />
       
