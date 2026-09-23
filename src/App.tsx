@@ -11,6 +11,7 @@ import Contact from "./pages/ContactPage/Contact";
 import Login from "./pages/Auth/Login/Login";
 import Register from "./pages/Auth/Register/Register";
 import Forgot from "./pages/Auth/Forgot/Forgot";
+import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
 import VerifyEmail from "./pages/Auth/VerifyEmail/VerifyEmail";
 
 import Policy from "./pages/PolicyPages/Policy";
@@ -32,6 +33,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot" element={<Forgot />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
 
         {/* Main Routes */}

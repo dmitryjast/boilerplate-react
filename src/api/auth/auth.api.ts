@@ -36,7 +36,6 @@ export const authApi = { // Group in one object with functions and methods
         api.post('/auth/forgot-password', data),
 
     resetPassword: (data: ResetPasswordRequest) => 
-        api.post('/reset-password', data),
-
+        api.post('/auth/reset-password', data),
 }
 

@@ -12,7 +12,7 @@ export default function HeaderActions() {
     const dropDownAuthItems = [
         { label: "Sign In", to: "/login" },
         { label: "Sign Up", to: "/register" },
-        { label: "Forgot Password", to: "/reset-password" },
+        { label: "Forgot Password", to: "/forgot" },
     ];
 
     const dropDownProfileItems = [

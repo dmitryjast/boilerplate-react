@@ -21,7 +21,7 @@ api.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config // Save request for repeat after token update
 
-        if(error.response?.status === 401 && !originalRequest._retry) { // Protection against infinite loops
+        if(error.response?.status === 401 && !originalRequest._retry && !originalRequest.url?.includes('/auth/refresh')) {
             originalRequest._retry = true // Mark request as retried to prevent infinite loop. Objects are passed by reference, so this change will be visible on next interceptor call
 
             try {
@@ -30,9 +30,12 @@ api.interceptors.response.use(
                 localStorage.setItem('accessToken', newToken)
                 originalRequest.headers.Authorization = `Bearer ${newToken}` // Update request titl with new token
                 return api(originalRequest)
-            } catch { // If refresh token has expired or does not exist - remove from local storage and redirect to login
+            } catch {
                 localStorage.removeItem('accessToken')
-                window.location.href = '/login'
+                const publicRoutes = ['/login', '/register', '/forgot', '/reset-password', '/verify-email']
+                if(!publicRoutes.includes(window.location.pathname)) {
+                    window.location.href = '/login'
+                }
             }
         }
 
