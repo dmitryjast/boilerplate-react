@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
@@ -18,18 +19,24 @@ export default function Login() {
     const title = 'Login'
     const navigate = useNavigate()
     const { login } = useAuth()
+    const [serverError, setServerError] = useState<string | null>(null)
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema)
     })
 
     const onSubmit = async (data: LoginFormData) => {
+        setServerError(null)
         try {
             const response = await authApi.login(data)
-            login(response.data.accessToken)
+            await login(response.data.accessToken)
             navigate('/')
-        } catch (error) {
-            console.log('Login failed:', error)
+        } catch (error: any) {
+            if(error.response?.status === 401) {
+                setServerError('Invalid email or password.')
+            } else {
+                setServerError('Something went wrong. Please try again.')
+            }
         }
     }
 
@@ -60,6 +67,7 @@ export default function Login() {
                                 errorMessage={errors.password?.message}
                                 {...register('password')}
                             />
+                            {serverError && <p className='error-message'>{serverError}</p>}
                             <Button type="submit" disabled={isSubmitting}>
                                 {isSubmitting ? 'Logging in...' : 'Login'}
                             </Button>

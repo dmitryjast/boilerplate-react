@@ -7,7 +7,7 @@ interface AuthContextType {
     accessToken: string | null
     isLoading: boolean
     refreshUser: () => Promise<void>
-    login: (token: string) => void
+    login: (token: string) => Promise<void>
     logout: () => void
 }
 

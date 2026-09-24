@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AuthRoute from "./components/Routing/AuthRoute";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -29,14 +30,20 @@ function App() {
       <Header />
       <Routes>
 
-        {/* Auth Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot" element={<Forgot />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/verify-email" element={<VerifyEmail />} />
+        {/* Guest only Routes — redirect to / if logged in */}
+        <Route element={<AuthRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        </Route>
 
-        {/* Main Routes */}
+        {/* Protected Routes — redirect to /login if not logged in */}
+        <Route element={<AuthRoute requireAuth />}>
+          <Route path="/verify-email" element={<VerifyEmail />} />
+        </Route>
+
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<About />} />
         <Route path="/services" element={<Services />} />
@@ -53,7 +60,7 @@ function App() {
       </Routes>
       <Footer />
 
-      {/* Modals */}
+      {/* Global Components */}
       <VerificationBanner />
       <CookiesPopup />
       <ScrollToTop />

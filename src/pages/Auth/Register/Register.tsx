@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
@@ -18,22 +19,28 @@ export default function Register() {
     const title = 'Register'
     const navigate = useNavigate()
     const { login } = useAuth()
+    const [serverError, setServerError] = useState<string | null>(null)
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<RegisterFormData>({
         resolver: zodResolver(registerSchema)
     })
 
     const onSubmit = async (data: RegisterFormData) => {
+        setServerError(null)
         try {
             const response = await authApi.register({
                 name: data.name,
                 email: data.email,
                 password: data.password,
             })
-            login(response.data.accessToken)
+            await login(response.data.accessToken)
             navigate('/')
-        } catch (error) {
-            console.log('Register failed:', error)
+        } catch (error: any) {
+            if(error.response?.status === 409) {
+                setServerError('User with this email already exists.')
+            } else {
+                setServerError('Something went wrong. Please try again.')
+            }
         }
     }
 
@@ -81,6 +88,7 @@ export default function Register() {
                                 errorMessage={errors.confirmPassword?.message}
                                 {...register('confirmPassword')}
                             />
+                            {serverError && <p className='error-message'>{serverError}</p>}
                             <Button type="submit" disabled={isSubmitting}>
                                 {isSubmitting ? 'Registering...' : 'Register'}
                             </Button>

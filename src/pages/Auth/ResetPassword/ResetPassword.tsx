@@ -18,6 +18,7 @@ export default function ResetPassword() {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
     const [success, setSuccess] = useState(false)
+    const [serverError, setServerError] = useState<string | null>(null)
 
     const token = searchParams.get('token')
     const userId = searchParams.get('userId')
@@ -28,6 +29,7 @@ export default function ResetPassword() {
 
     const onSubmit = async (data: ResetPasswordFormData) => {
         if(!token || !userId) return
+        setServerError(null)
 
         try {
             await authApi.resetPassword({
@@ -37,8 +39,12 @@ export default function ResetPassword() {
             })
             setSuccess(true)
             setTimeout(() => navigate('/login'), 3000)
-        } catch (error) {
-            console.error('Reset password failed:', error)
+        } catch (error: any) {
+            if(error.response?.status === 401) {
+                setServerError('Reset link expired or invalid. Please request a new one.')
+            } else {
+                setServerError('Something went wrong. Please try again.')
+            }
         }
     }
 
@@ -65,6 +71,7 @@ export default function ResetPassword() {
                                     label="New Password"
                                     type="password"
                                     placeholder="Enter new password"
+                                    autoComplete="new-password"
                                     errorMessage={errors.password?.message}
                                     {...register('password')}
                                 />
@@ -72,9 +79,11 @@ export default function ResetPassword() {
                                     label="Confirm Password"
                                     type="password"
                                     placeholder="Confirm new password"
+                                    autoComplete="new-password"
                                     errorMessage={errors.confirmPassword?.message}
                                     {...register('confirmPassword')}
                                 />
+                                {serverError && <p className='error-message'>{serverError}</p>}
                                 <Button type="submit" disabled={isSubmitting}>
                                     {isSubmitting ? 'Resetting...' : 'Reset Password'}
                                 </Button>
