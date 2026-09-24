@@ -1,3 +1,5 @@
+import VerificationForm from '../../../components/Verification/VerificationForm/VerificationForm'
+
 import HeroPage from '../../../components/Hero/HeroPage'
 import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
 import heroBackground from '../../../assets/img/demo-background.jpg'
@@ -17,7 +19,7 @@ export default function VerifyEmail() {
             <section>
                 <div className="container">
                     <div className="section-inner">
-                        <p>Please check your email and verify your account.</p>
+                        <VerificationForm />
                     </div>
                 </div>
             </section>

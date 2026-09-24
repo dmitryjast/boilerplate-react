@@ -5,8 +5,8 @@ import { useAuth } from '../../../context/AuthContext'
 import { authApi } from '../../../api/auth/auth.api'
 import { loginSchema, type LoginFormData } from '../../../schemas/login.schema'
 
-import HeroPage from '../../../components/Hero/HeroPage';
-import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
+import HeroPage from '../../../components/Hero/HeroPage'
+import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
 import Input from '../../../components/ui/Input/Input'
 import Button from '../../../components/ui/Button/Button'
 
@@ -15,7 +15,7 @@ import './Login.scss'
 
 export default function Login() {
 
-    const title = 'Login';
+    const title = 'Login'
     const navigate = useNavigate()
     const { login } = useAuth()
 
@@ -35,31 +35,28 @@ export default function Login() {
 
     return(
         <>
-            <HeroPage 
-                title={title}
-                background={heroBackground}    
-            />
-            <Breadcrumbs 
-            items={[
-                {label: 'Home', link: '/'},
-                {label: title},
-            ]} 
-            />
+            <HeroPage title={title} background={heroBackground} />
+            <Breadcrumbs items={[
+                { label: 'Home', link: '/' },
+                { label: title },
+            ]} />
             <section>
                 <div className="container">
                     <div className="section-inner">
                         <form onSubmit={handleSubmit(onSubmit)}>
-                             <Input
-                            label="Email"
-                            type="email"
-                            placeholder="Enter your email"
-                            errorMessage={errors.email?.message}
-                            {...register('email')}
+                            <Input
+                                label="Email"
+                                type="email"
+                                placeholder="Enter your email"
+                                autoComplete="email"
+                                errorMessage={errors.email?.message}
+                                {...register('email')}
                             />
                             <Input
                                 label="Password"
                                 type="password"
                                 placeholder="Enter your password"
+                                autoComplete="current-password"
                                 errorMessage={errors.password?.message}
                                 {...register('password')}
                             />

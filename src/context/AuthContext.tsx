@@ -6,6 +6,7 @@ interface AuthContextType {
     user: MeResponse | null
     accessToken: string | null
     isLoading: boolean
+    refreshUser: () => Promise<void>
     login: (token: string) => void
     logout: () => void
 }
@@ -17,6 +18,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<MeResponse | null>(null)
     const [accessToken, setAccessToken] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(true)
+    const refreshUser = async () => {
+        try {
+            const response = await authApi.me()
+            setUser(response.data)
+        } catch {
+            setUser(null)
+        }
+    }
+
 
     // Check if user is logged in on app start
     useEffect(() => {
@@ -58,7 +68,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, accessToken, isLoading, login, logout }}>
+        <AuthContext.Provider value={{ user, accessToken, isLoading, refreshUser, login, logout }}>
             {children}
         </AuthContext.Provider>
     )

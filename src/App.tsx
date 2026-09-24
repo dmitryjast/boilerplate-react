@@ -18,7 +18,7 @@ import Policy from "./pages/PolicyPages/Policy";
 
 import Elements from "./pages/ElementsPage/Elements";
 
-import VerificationBanner from "./components/ Verification/VerificationBanner/VerificationBanner";
+import VerificationBanner from "./components/Verification/VerificationBanner/VerificationBanner";
 import CookiesPopup from "./components/CookiesPopup/CookiesPopup";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 

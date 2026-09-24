@@ -53,6 +53,7 @@ export default function Register() {
                                 label="Name"
                                 type="text"
                                 placeholder="Enter your name"
+                                autoComplete="name"
                                 errorMessage={errors.name?.message}
                                 {...register('name')}
                             />
@@ -60,6 +61,7 @@ export default function Register() {
                                 label="Email"
                                 type="email"
                                 placeholder="Enter your email"
+                                autoComplete="email"
                                 errorMessage={errors.email?.message}
                                 {...register('email')}
                             />
@@ -67,6 +69,7 @@ export default function Register() {
                                 label="Password"
                                 type="password"
                                 placeholder="Enter your password"
+                                autoComplete="new-password"
                                 errorMessage={errors.password?.message}
                                 {...register('password')}
                             />
@@ -74,6 +77,7 @@ export default function Register() {
                                 label="Confirm Password"
                                 type="password"
                                 placeholder="Confirm your password"
+                                autoComplete="new-password"
                                 errorMessage={errors.confirmPassword?.message}
                                 {...register('confirmPassword')}
                             />
