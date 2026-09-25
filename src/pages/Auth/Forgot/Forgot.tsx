@@ -16,17 +16,19 @@ export default function Forgot() {
 
     const title = 'Forgot Password'
     const [sent, setSent] = useState(false)
+    const [serverError, setServerError] = useState<string | null>(null)
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ForgotFormData>({
         resolver: zodResolver(forgotSchema)
     })
 
     const onSubmit = async (data: ForgotFormData) => {
+        setServerError(null)
         try {
             await authApi.forgotPassword(data)
             setSent(true)
-        } catch (error) {
-            console.error('Forgot password failed:', error)
+        } catch {
+            setServerError('Something went wrong. Please try again.')
         }
     }
 
@@ -49,9 +51,11 @@ export default function Forgot() {
                                     label="Email"
                                     type="email"
                                     placeholder="Enter your email"
+                                    autoComplete="email"
                                     errorMessage={errors.email?.message}
                                     {...register('email')}
                                 />
+                                {serverError && <p className='error-message'>{serverError}</p>}
                                 <Button type="submit" disabled={isSubmitting}>
                                     {isSubmitting ? 'Sending...' : 'Send Reset Link'}
                                 </Button>
