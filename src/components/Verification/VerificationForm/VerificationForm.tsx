@@ -179,7 +179,7 @@ export default function VerificationForm() {
                                             onChange={(e) => handleCodeChange(i, e.target.value)}
                                             onKeyDown={(e) => handleCodeKeyDown(i, e)}
                                             onPaste={handleCodePaste}
-                                            ref={(el) => (inputsRef.current[i] = el)}
+                                            ref={(el) => { inputsRef.current[i] = el }}
                                             className='code-input'
                                         />
                                     ))}

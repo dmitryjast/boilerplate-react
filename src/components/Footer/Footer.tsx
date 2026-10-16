@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
 import FooterList from './FooterList';
+import { useCookieConsent } from '../../context/CookieConsentContext';
 
 import './Footer.scss';
 
 export default function Footer() {
+
+    const { openSettings } = useCookieConsent()
 
     return(
         <footer className='footer'>
@@ -49,6 +52,9 @@ export default function Footer() {
                                     </li>
                                     <li>
                                         <Link to='/terms-and-conditions'>Terms and Conditions</Link>
+                                    </li>
+                                    <li>
+                                        <button type='button' onClick={openSettings}>Cookie Settings</button>
                                     </li>
                                 </ul>
                             </div>

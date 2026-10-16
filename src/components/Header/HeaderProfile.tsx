@@ -1,6 +1,5 @@
 import { useAuth } from '../../context/AuthContext'
-import { authApi } from '../../api/auth/auth.api'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import DropDown from '../ui/DropDown/DropDown'
 
