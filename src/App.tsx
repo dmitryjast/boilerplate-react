@@ -1,121 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AuthRoute from "./components/Routing/AuthRoute";
+
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+
+import Home from "./pages/HomePage/Home";
+import About from "./pages/AboutPage/About";
+import Services from "./pages/ServicesPage/Services";
+import Contact from "./pages/ContactPage/Contact";
+
+import Login from "./pages/Auth/Login/Login";
+import Register from "./pages/Auth/Register/Register";
+import Forgot from "./pages/Auth/Forgot/Forgot";
+import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
+import VerifyEmail from "./pages/Auth/VerifyEmail/VerifyEmail";
+
+import Policy from "./pages/PolicyPages/Policy";
+
+import Elements from "./pages/ElementsPage/Elements";
+
+import VerificationBanner from "./components/Verification/VerificationBanner/VerificationBanner";
+import CookiesPopup from "./components/CookiesPopup/CookiesPopup";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <BrowserRouter>
+      <Header />
+      <Routes>
 
-      <div className="ticks"></div>
+        {/* Guest only Routes — redirect to / if logged in */}
+        <Route element={<AuthRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        </Route>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* Protected Routes — redirect to /login if not logged in */}
+        <Route element={<AuthRoute requireAuth />}>
+          <Route path="/verify-email" element={<VerifyEmail />} />
+        </Route>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contacts" element={<Contact />} />
+
+        {/* Policy Routes */}
+        <Route path="/privacy-policy" element={<Policy />} />
+        <Route path="/cookies-policy" element={<Policy />} />
+        <Route path="/terms-and-conditions" element={<Policy />} />
+
+        {/* Other Routes */}
+        <Route path="/elements" element={<Elements />} />
+
+      </Routes>
+      <Footer />
+
+      {/* Global Components */}
+      <VerificationBanner />
+      <CookiesPopup />
+      <ScrollToTop />
+      
+    </BrowserRouter>
   )
 }
 

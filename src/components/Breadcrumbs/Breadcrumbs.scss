@@ -1,0 +1,30 @@
+.breadrumbs-section {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-background-2);
+    .container {
+        .section-inner {
+            ul {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: 6px;
+                list-style: none;
+                li {
+                    display: flex;
+                    gap: 6px;
+                    &:after {
+                        content: "/";
+                    }
+                    &:last-child {
+                        &:after {
+                            display: none;
+                        }
+                    }
+                    p {
+                        opacity: 0.5;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+.checkbox-wrapper {
+    label {
+        display: flex;
+        gap: 12px;
+        cursor: pointer;
+        input {
+            display: none;
+        }
+        .checkbox-label {
+            padding-top: 1px;
+        }
+        &.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.checkmark-wrapper {
+    position: relative;
+    &:before {
+        content: "";
+        display: flex;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        position: relative;
+        transition: 0.2s ease;
+    }
+}
+
+
+label input:checked + .checkmark-wrapper:before {
+    opacity: 1;
+    border: 2px solid #ccc;
+    background: greenyellow;
+}
+
+label input:disabled + .checkmark-wrapper {
+    opacity: 0.3;
+}

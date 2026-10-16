@@ -1,0 +1,59 @@
+.cookies-popup {
+    max-width: 680px;
+    max-height: calc(100vh - 20px);
+    padding: 30px;
+    background: var(--color-background-2);
+    border-radius: 24px;
+    overflow-y: auto;
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
+    &.isopen {
+        opacity: 1;
+        transition: 0.3s;
+        pointer-events: initial;
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        button {
+            cursor: pointer;
+            &.close {
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                width: fit-content;
+                height: 24px;
+                padding: 0;
+                border: none;
+            }
+        }
+        .row-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            .actions {
+                display: flex;
+                gap: 12px;
+                @media (max-width: 860px) {
+                    flex-direction: column;
+                }
+            }
+        }
+        .categories {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            .category {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                p {
+                    padding-left: 34px;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

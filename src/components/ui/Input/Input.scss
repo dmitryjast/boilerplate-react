@@ -1,0 +1,16 @@
+.input-wrapper {
+    label {
+        padding: 10px 18px;
+        display: block;
+        color: var(--color-label);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%;
+    }
+    input {
+        &:disabled {
+            opacity: 0.3;
+        }
+    }
+}

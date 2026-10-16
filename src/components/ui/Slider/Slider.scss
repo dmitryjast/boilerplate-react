@@ -1,0 +1,22 @@
+.slider-section {
+    .swiper {
+        .swiper-wrapper {
+            .swiper-slide {
+                .slide-wrapper {
+                    min-height: 300px;
+                    display: flex;
+                    align-items: center;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    .container {
+                        width: 100%;
+                        .slide-inner {
+                            padding: 60px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
