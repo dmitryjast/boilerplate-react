@@ -3,13 +3,13 @@
 Living document: current work, TODO, open questions, session log.
 **Update at the end of every session** (and when switching tasks). Project architecture lives in [DEVELOPMENT.md](DEVELOPMENT.md).
 
-_Last updated: 2026-10-16_
+_Last updated: 2026-10-17_
 
 ---
 
 ## In progress
 
-- Cookie consent done (context + expiry + validation), waiting for user review / browser check. Next step — **P1: bugs**.
+- Nothing in progress. Cookie consent closed (2026-10-17). Next step — **P1: bugs**.
 
 ## TODO (by priority)
 
@@ -19,14 +19,21 @@ _Last updated: 2026-10-16_
 - [x] `CookiesPopup` — added Deny button (`handleDeny`), close icon class `deny` → `close`
 
 ### P1 — bugs
-- [ ] `HeaderMenu.tsx` — link `/Contacts` → `/contacts`
+- [x] `HeaderMenu.tsx` — link `/Contacts` → `/contacts` (2026-10-17)
 - [ ] `HeaderProfile.tsx` — profile menu links to non-existent `/my-purchases`, `/edit-profile`, `/change-password`, `/billing-info`
-- [ ] No 404 route (`path="*"`)
+- [x] 404 page `pages/NotFoundPage/NotFound.tsx` + route `path="*"` (2026-10-17)
 - [ ] `ResetPassword` — invalid link renders a bare `<p>` without Hero/layout
 - [ ] `Policy` — same "Policy page" title for all three legal routes
 - [ ] `Modal` ignores `isOpen`/`onClose` (no close on overlay/Esc)
-- [ ] Check `CookiesPopup` layout in the browser (desktop + ≤860px, Manage panel open)
 - [ ] Bundle > 500 kB — Vite warning, consider code-splitting pages
+
+### Cookie consent ✅ (2026-10-17)
+- [x] Accept / Deny / Manage, categories, footer "Cookie Settings", 12-month expiry, data validation — checked in the browser
+
+### Styles (later, by user's decision)
+- [ ] `CookiesPopup` mobile: stacked Accept / Deny / Manage have different widths (fit content)
+- [ ] Checkbox labels are grey (`#B1B1B1`, global `.checkbox-wrapper label span` in `main.scss:350`) and look disabled
+- [ ] `CheckBox` adds `undefined` to class when no `className` is passed
 
 ### P2 — code quality (ESLint: 13 problems)
 - [ ] Remove `any` in UI components (`Input`, `TextArea`, `Select`, `CheckBox`, …) — type via `InputHTMLAttributes` etc.
@@ -38,6 +45,7 @@ _Last updated: 2026-10-16_
 - [ ] `InputMasked` — implement or remove
 
 ### P3 — new features
+- [ ] Page meta (separate task): `<title>`/`<meta>` per page via React 19 hoisting; `<meta name="robots" content="noindex" />` on the 404 page
 - [ ] Profile pages: Edit Profile, Change Password, Billing & Shipping, My Purchases (+ backend API?)
 - [ ] Content for About / Services / Contacts (contact form on Contacts)
 - [ ] Legal pages content
@@ -69,6 +77,20 @@ _Last updated: 2026-10-16_
   - decision: close icon only hides the popup (not a refusal); Deny stores the refusal. Note: CNIL (France) treats closing as refusal — revisit if a project targets the EU.
   - storage stays in `localStorage` (no SSR, single domain).
 - Blank page on the running dev server (started before the context file renames): stale Vite module graph, code is fine — verified on a fresh server (port 5179). Fix: restart `npm run dev`.
+
+### 2026-10-17
+- Browser check of the cookie popup (temporary dev server on port 5179, user's server untouched):
+  - first visit — popup shown; Manage opens categories, nothing pre-ticked except Essential;
+  - Save my choice → `{ analytics: true, marketing: false, at }`, popup hidden, stays hidden after reload;
+  - footer "Cookie Settings" reopens the popup with the saved choice prefilled;
+  - Deny → all `false` stored, hidden after reload;
+  - close icon → hidden, nothing stored, shown again after reload;
+  - expired (> 12 months) and malformed values → removed, popup shown;
+  - 390px width (iframe): buttons stack, Manage panel scrolls inside the popup (`max-height` works), no horizontal overflow.
+- IDE error about `CookieConsentProvider.tsx` — stale editor tab of a deleted file, not a code problem.
+- Cookie consent closed; style remarks moved to "Styles (later)".
+- P1: fixed header menu link `/Contacts` → `/contacts`.
+- P1: added 404 page (`NotFoundPage/NotFound.tsx` + empty `.scss`, route `*` last in `App.tsx`); checked in the browser — unknown URL shows it, "Back to Home" works, existing routes unaffected. Meta/noindex moved to P3 as a separate task.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

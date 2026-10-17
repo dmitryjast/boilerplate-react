@@ -18,6 +18,7 @@ import VerifyEmail from "./pages/Auth/VerifyEmail/VerifyEmail";
 import Policy from "./pages/PolicyPages/Policy";
 
 import Elements from "./pages/ElementsPage/Elements";
+import NotFound from "./pages/NotFoundPage/NotFound";
 
 import VerificationBanner from "./components/Verification/VerificationBanner/VerificationBanner";
 import CookiesPopup from "./components/CookiesPopup/CookiesPopup";
@@ -56,6 +57,9 @@ function App() {
 
         {/* Other Routes */}
         <Route path="/elements" element={<Elements />} />
+
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
       <Footer />
