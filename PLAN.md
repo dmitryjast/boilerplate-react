@@ -23,7 +23,7 @@ _Last updated: 2026-10-17_
 - [ ] `HeaderProfile.tsx` — profile menu links to non-existent `/my-purchases`, `/edit-profile`, `/change-password`, `/billing-info`
 - [x] 404 page `pages/NotFoundPage/NotFound.tsx` + route `path="*"` (2026-10-17)
 - [ ] `ResetPassword` — invalid link renders a bare `<p>` without Hero/layout
-- [ ] `Policy` — same "Policy page" title for all three legal routes
+- [x] `Policy` — title passed as a prop from `App.tsx` (2026-10-17)
 - [ ] `Modal` ignores `isOpen`/`onClose` (no close on overlay/Esc)
 - [ ] Bundle > 500 kB — Vite warning, consider code-splitting pages
 
@@ -48,7 +48,7 @@ _Last updated: 2026-10-17_
 - [ ] Page meta (separate task): `<title>`/`<meta>` per page via React 19 hoisting; `<meta name="robots" content="noindex" />` on the 404 page
 - [ ] Profile pages: Edit Profile, Change Password, Billing & Shipping, My Purchases (+ backend API?)
 - [ ] Content for About / Services / Contacts (contact form on Contacts)
-- [ ] Legal pages content
+- [ ] Legal pages content — load dynamically from the backend once it has the endpoint (title + content per page instead of the `title` prop in `App.tsx`)
 - [ ] Decide on React Query: add `QueryClientProvider` or drop the dependency
 - [ ] Tests (Vitest + Testing Library) — at least the auth flow
 
@@ -91,6 +91,8 @@ _Last updated: 2026-10-17_
 - Cookie consent closed; style remarks moved to "Styles (later)".
 - P1: fixed header menu link `/Contacts` → `/contacts`.
 - P1: added 404 page (`NotFoundPage/NotFound.tsx` + empty `.scss`, route `*` last in `App.tsx`); checked in the browser — unknown URL shows it, "Back to Home" works, existing routes unaffected. Meta/noindex moved to P3 as a separate task.
+- User committed: `533ca32` Changed cookie popup, `9ed0066` Added 404.
+- P1: `Policy` takes `title` prop; routes pass Privacy Policy / Cookies Policy / Terms and Conditions. Dynamic legal pages from the backend added to P3.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

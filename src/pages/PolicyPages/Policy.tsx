@@ -5,9 +5,11 @@ import './Policy.scss';
 
 import heroBackground from '../../assets/img/demo-background.jpg'
 
-export default function Policy() {
+interface PolicyProps {
+    title: string;
+}
 
-    const title = 'Policy page';
+export default function Policy({ title }: PolicyProps) {
 
     return(
         <>

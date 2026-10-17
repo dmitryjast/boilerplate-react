@@ -51,9 +51,9 @@ function App() {
         <Route path="/contacts" element={<Contact />} />
 
         {/* Policy Routes */}
-        <Route path="/privacy-policy" element={<Policy />} />
-        <Route path="/cookies-policy" element={<Policy />} />
-        <Route path="/terms-and-conditions" element={<Policy />} />
+        <Route path="/privacy-policy" element={<Policy title="Privacy Policy" />} />
+        <Route path="/cookies-policy" element={<Policy title="Cookies Policy" />} />
+        <Route path="/terms-and-conditions" element={<Policy title="Terms and Conditions" />} />
 
         {/* Other Routes */}
         <Route path="/elements" element={<Elements />} />
