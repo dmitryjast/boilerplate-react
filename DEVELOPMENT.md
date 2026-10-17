@@ -80,7 +80,7 @@ src/
 │   └── ui/                  # UI kit: Button, Input, TextArea, Select, CheckBox, DatePicker,
 │                            #         DropDown, Accordion, Modal, Slider, InputMasked
 └── pages/
-    ├── HomePage/  AboutPage/  ServicesPage/  ContactPage/  PolicyPages/  ElementsPage/
+    ├── HomePage/  AboutPage/  ServicesPage/  ContactPage/  PolicyPages/  ElementsPage/  NotFoundPage/
     └── Auth/  Login/  Register/  Forgot/  ResetPassword/  VerifyEmail/
 ```
 
@@ -115,6 +115,7 @@ All routes are in `src/App.tsx`. `Header`, `Footer`, `VerificationBanner`, `Cook
 | Public | `/contacts` | Contact | — |
 | Legal | `/privacy-policy`, `/cookies-policy`, `/terms-and-conditions` | Policy (single component) | — |
 | Utility | `/elements` | Elements (UI kit showcase) | — |
+| 404 | `*` (any unmatched path) | NotFound | — |
 
 `AuthRoute` returns `null` while `isLoading`; supports both `children` and `<Outlet />`.
 
@@ -210,4 +211,5 @@ GDPR/PECR-style consent. Nothing optional (analytics, marketing) may load until 
 - `Modal` ignores `isOpen`/`onClose` props — visibility is set by a CSS class from outside (`CookiesPopup` passes `isopen`).
 - React Query is installed but has no provider — add `QueryClientProvider` in `main.tsx` before using it.
 - After renaming/moving/deleting files restart `npm run dev`: the running server can keep a stale module graph and the page stays blank with no console error (a fresh server works).
+- The 404 page is client-side only: the server returns `index.html` with status 200 for any URL (soft 404). A real 404 status needs hosting config (nginx etc.).
 - Git: working branch `dev`, main — `master`.
