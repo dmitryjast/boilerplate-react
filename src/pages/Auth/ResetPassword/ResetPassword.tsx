@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { authApi } from '../../../api/auth/auth.api'
 import { resetPasswordSchema, type ResetPasswordFormData } from '../../../schemas/reset-password.schema'
 
@@ -48,10 +48,6 @@ export default function ResetPassword() {
         }
     }
 
-    if(!token || !userId) {
-        return <p>Invalid reset link.</p>
-    }
-
     return(
         <>
             <HeroPage title={title} background={heroBackground} />
@@ -63,7 +59,9 @@ export default function ResetPassword() {
             <section>
                 <div className="container">
                     <div className="section-inner">
-                        {success ? (
+                        {!token || !userId ? (
+                            <p>Invalid reset link. <Link to='/forgot'>Request a new one</Link></p>
+                        ) : success ? (
                             <p>Password successfully reset! Redirecting to login...</p>
                         ) : (
                             <form onSubmit={handleSubmit(onSubmit)}>

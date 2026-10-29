@@ -22,10 +22,11 @@ _Last updated: 2026-10-17_
 - [x] `HeaderMenu.tsx` — link `/Contacts` → `/contacts` (2026-10-17)
 - [ ] `HeaderProfile.tsx` — profile menu links to non-existent `/my-purchases`, `/edit-profile`, `/change-password`, `/billing-info`
 - [x] 404 page `pages/NotFoundPage/NotFound.tsx` + route `path="*"` (2026-10-17)
-- [ ] `ResetPassword` — invalid link renders a bare `<p>` without Hero/layout
+- [x] `ResetPassword` — link without `token`/`userId` now shows the normal page layout + link to `/forgot` (2026-10-17)
 - [x] `Policy` — title passed as a prop from `App.tsx` (2026-10-17)
 - [ ] `Modal` ignores `isOpen`/`onClose` (no close on overlay/Esc)
 - [ ] Bundle > 500 kB — Vite warning, consider code-splitting pages
+- [ ] `ResetPassword` — treat non-numeric `userId` in the link as an invalid link (optional)
 
 ### Cookie consent ✅ (2026-10-17)
 - [x] Accept / Deny / Manage, categories, footer "Cookie Settings", 12-month expiry, data validation — checked in the browser
@@ -45,6 +46,7 @@ _Last updated: 2026-10-17_
 - [ ] `InputMasked` — implement or remove
 
 ### P3 — new features
+- [ ] Reset password: validate the link on page open — backend `POST /auth/reset-password/validate` `{ userId, token }` (doesn't consume the token, same response for any failure, rate limit) + frontend "Checking link…" → form / "expired" with link to `/forgot`. Keep the 401 handling on submit. Workflow: read the backend from here, write a spec, the backend chat implements it
 - [ ] Page meta (separate task): `<title>`/`<meta>` per page via React 19 hoisting; `<meta name="robots" content="noindex" />` on the 404 page
 - [ ] Profile pages: Edit Profile, Change Password, Billing & Shipping, My Purchases (+ backend API?)
 - [ ] Content for About / Services / Contacts (contact form on Contacts)
@@ -93,6 +95,8 @@ _Last updated: 2026-10-17_
 - P1: added 404 page (`NotFoundPage/NotFound.tsx` + empty `.scss`, route `*` last in `App.tsx`); checked in the browser — unknown URL shows it, "Back to Home" works, existing routes unaffected. Meta/noindex moved to P3 as a separate task.
 - User committed: `533ca32` Changed cookie popup, `9ed0066` Added 404.
 - P1: `Policy` takes `title` prop; routes pass Privacy Policy / Cookies Policy / Terms and Conditions. Dynamic legal pages from the backend added to P3.
+- P1: `ResetPassword` without `token`/`userId` — message inside the page layout (Hero + breadcrumbs) with a link to `/forgot` instead of a bare `<p>`.
+- Backend note (userId must be a number, ValidationPipe `transform`/`whitelist`): checked — frontend already sends `Number(userId)` / `user.id` and no extra fields; nothing to change. Edge case `?userId=abc` → `NaN` → 400 shows "Something went wrong" on reset (not fixed, optional).
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form
