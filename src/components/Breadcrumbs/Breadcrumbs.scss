@@ -1,17 +1,20 @@
 .breadrumbs-section {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--color-background-2);
+    padding: 0 0 24px;
+    background: var(--color-background-2);
+    border-bottom: 1px solid var(--color-border);
     .container {
         .section-inner {
             ul {
                 margin: 0;
                 padding: 0;
                 display: flex;
-                gap: 6px;
+                gap: 8px;
                 list-style: none;
                 li {
                     display: flex;
-                    gap: 6px;
+                    gap: 8px;
+                    font-size: 14px;
+                    color: var(--color-placeholder);
                     &:after {
                         content: "/";
                     }
@@ -20,8 +23,17 @@
                             display: none;
                         }
                     }
+                    a {
+                        font-size: 14px;
+                        color: var(--color-text-secondary);
+                        text-decoration: none;
+                        &:hover {
+                            color: var(--color-text);
+                        }
+                    }
                     p {
-                        opacity: 0.5;
+                        font-size: 14px;
+                        color: var(--color-text);
                     }
                 }
             }

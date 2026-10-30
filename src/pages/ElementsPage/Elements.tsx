@@ -24,9 +24,8 @@ export default function Elements() {
 
     return(
         <>
-             <HeroPage 
-                title={title} 
-                background={heroBackground} 
+             <HeroPage
+                title={title}
             />
              <Breadcrumbs 
                 items={[

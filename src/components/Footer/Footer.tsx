@@ -18,14 +18,16 @@ export default function Footer() {
                             <Link to='/' className='logo'>
                                 <img src={logo} alt='Logo' />
                             </Link>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div className='footer-description'>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
                         </div>
                         <div className='column'>
                             <FooterList title='Navigation' items={[
-                                {label: 'Home', to: '/'},
-                                {label: 'About Us', to: '/about-us' },
-                                {label: 'Services', to: '/services' },
-                                {label: 'Contacts', to: '/contacts' }
+                                {label: 'Features', to: '/features' },
+                                {label: 'Pricing', to: '/pricing' },
+                                {label: 'About', to: '/about-us' },
+                                {label: 'Contact', to: '/contact' }
                             ]}/>
                         </div>
                         <div className='column'>

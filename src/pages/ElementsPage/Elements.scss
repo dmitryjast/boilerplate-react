@@ -5,10 +5,11 @@
       flex-direction: column;
       gap: 24px;
       h3 {
-        font-size: 22px;
-        font-weight: 400;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #aeb1be;
+        color: var(--color-text-secondary);
       }
       .colors-wrapper {
         display: flex;
@@ -16,8 +17,8 @@
         div {
           width: 50px;
           height: 50px;
-          border: 1px solid #000;
-          border-radius: 12px;
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius);
           &:nth-child(1) {
             background: var(--color-main-1);
           }
@@ -43,10 +44,11 @@
       flex-direction: column;
       gap: 24px;
       > h3 {
-        font-size: 22px;
-        font-weight: 400;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #aeb1be;
+        color: var(--color-text-secondary);
       }
       .heading-wrapper {
         display: flex;
@@ -64,10 +66,11 @@
       flex-direction: column;
       gap: 24px;
       h3 {
-        font-size: 22px;
-        font-weight: 400;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #aeb1be;
+        color: var(--color-text-secondary);
       }
       .lists-wrapper {
         display: flex;
@@ -85,10 +88,11 @@
       flex-direction: column;
       gap: 24px;
       h3 {
-        font-size: 22px;
-        font-weight: 400;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #aeb1be;
+        color: var(--color-text-secondary);
       }
       .forms-wrapper {
         display: flex;
@@ -106,10 +110,11 @@
       flex-direction: column;
       gap: 24px;
       h3 {
-        font-size: 22px;
-        font-weight: 400;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #aeb1be;
+        color: var(--color-text-secondary);
       }
       .checkboxes-wrapper {
         display: flex;
@@ -127,10 +132,11 @@
       flex-direction: column;
       gap: 24px;
       h3 {
-        font-size: 22px;
-        font-weight: 400;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #aeb1be;
+        color: var(--color-text-secondary);
       }
       .buttons-wrapper {
         display: flex;
@@ -147,10 +153,11 @@
       flex-direction: column;
       gap: 24px;
       h3 {
-        font-size: 22px;
-        font-weight: 400;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #aeb1be;
+        color: var(--color-text-secondary);
       }
     }
   }
@@ -163,10 +170,11 @@
       flex-direction: column;
       gap: 24px;
       h3 {
-        font-size: 22px;
-        font-weight: 400;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #aeb1be;
+        color: var(--color-text-secondary);
       }
     }
   }

@@ -19,7 +19,7 @@ Done: site skeleton (header, footer, hero, breadcrumbs), UI kit, full auth flow 
 | Routing | react-router-dom 7 (`BrowserRouter`, declarative `<Routes>`) |
 | HTTP | axios (single instance with interceptors) |
 | Forms | react-hook-form + zod (`@hookform/resolvers/zod`) |
-| Styles | SCSS (sass), CSS variables, style file next to its component |
+| Styles | SCSS (sass), CSS variables (design tokens in `main.scss` `:root`), style file next to its component; font Inter |
 | Sliders | swiper |
 | Dates | react-datepicker |
 | Icons | lucide-react |
@@ -68,9 +68,9 @@ src/
 │   ├── img/                 # logo, icons, demo backgrounds
 │   └── styles/              # main.scss (variables, utilities), zeroing.scss (reset)
 ├── components/
-│   ├── Header/              # Header, Logo, HeaderMenu, HeaderProfile (guest: "Sign In" link + "Sign Up" button; logged in: "Go to Dashboard" button)
+│   ├── Header/              # Header, Logo, HeaderMenu (links, single source), HeaderActions (guest: "Sign In" + "Sign Up"; logged in: "Go to Dashboard"; desktop block + passes buttons to HeaderMobileMenu), HeaderMobileMenu (burger ≤1024px, slide-in panel with HeaderMenu + buttons)
 │   ├── Footer/              # Footer, FooterList
-│   ├── Hero/                # HeroHome (Swiper slider), HeroPage (page title)
+│   ├── Hero/                # HeroHome (Swiper slider), HeroPage (compact page title, no background image)
 │   ├── Breadcrumbs/
 │   ├── Routing/AuthRoute.tsx
 │   ├── Verification/        # VerificationBanner (global), VerificationForm
@@ -80,7 +80,7 @@ src/
 │   └── ui/                  # UI kit: Button, Input, TextArea, Select, CheckBox, DatePicker,
 │                            #         DropDown, Accordion, Modal, Slider, InputMasked
 └── pages/
-    ├── HomePage/  AboutPage/  ServicesPage/  ContactPage/  PolicyPages/  ElementsPage/  NotFoundPage/  DashboardPage/
+    ├── HomePage/  AboutPage/  FeaturesPage/  PricingPage/  ContactPage/  PolicyPages/  ElementsPage/  NotFoundPage/  DashboardPage/
     └── Auth/  Login/  Register/  Forgot/  ResetPassword/  VerifyEmail/
 ```
 
@@ -91,7 +91,7 @@ src/
 - Each component/page is a folder `Name/Name.tsx` + `Name.scss`; styles are imported inside the component.
 - Components use `export default function`.
 - Relative imports (no aliases).
-- Page template: `<HeroPage title background />` → `<Breadcrumbs items />` → `<section><div className="container"><div className="section-inner">…`.
+- Page template: `<HeroPage title />` → `<Breadcrumbs items />` → `<section className='section-<page> pt-60 pb-120'><div className="container"><div className="section-inner">…`. Auth pages limit `.section-inner` to 480px in their own `.scss`.
 - Forms: `useForm({ resolver: zodResolver(schema) })`; field errors via the UI component's `errorMessage` prop; server error via local `serverError` + `<p className="error-message">`.
 - UI fields (`Input`, `TextArea`, `Select`, `CheckBox`) spread `...props` onto the native element — compatible with `{...register('field')}`.
 - Links in lists (`FooterList`, `Breadcrumbs`, `DropDown`): `to` — internal `<Link>`, `link` — external `<a href>`, neither — plain text.
@@ -112,10 +112,11 @@ All routes are in `src/App.tsx`. `Header`, `Footer`, `VerificationBanner`, `Cook
 | Protected | `/dashboard` | Dashboard | `<AuthRoute requireAuth />`; stub with Logout (Edit Profile / Change Password / Logout will live in the dashboard user menu) |
 | Public | `/` | Home | — |
 | Public | `/about-us` | About | — |
-| Public | `/services` | Services | — |
-| Public | `/contacts` | Contact | — |
+| Public | `/features` | Features | — |
+| Public | `/pricing` | Pricing | — |
+| Public | `/contact` | Contact | — |
 | Legal | `/privacy-policy`, `/cookies-policy`, `/terms-and-conditions` | Policy (single component) | — |
-| Utility | `/elements` | Elements (UI kit showcase) | — |
+| Utility | `/elements` | Elements (UI kit showcase) | dev only (`import.meta.env.DEV`), not in production build |
 | 404 | `*` (any unmatched path) | NotFound | — |
 
 `AuthRoute` returns `null` while `isLoading`; supports both `children` and `<Outlet />`.
@@ -196,10 +197,10 @@ GDPR/PECR-style consent. Nothing optional (analytics, marketing) may load until 
 
 ## 11. Styles
 
-- Global variables in `:root` (`main.scss`): `--color-background*`, `--color-main-1..4`, `--color-text`, `--color-link`, `--color-label`, `--color-error`, `--font-main`/`--font-title` (Rubik, Google Fonts).
+- Global variables in `:root` (`main.scss`): `--color-background*`, `--color-main-1..4` (dark, accent, accent hover, border), `--color-text`, `--color-text-secondary`, `--color-placeholder`, `--color-link`, `--color-label`, `--color-border*`, `--color-error`, `--radius`/`--radius-lg`, `--shadow*`, `--focus-ring*`, `--font-main`/`--font-title` (Inter, Google Fonts).
 - `.container` — `max-width: 1340px`, 10px side padding below 1360px.
 - Spacing utilities: `mt-120`, `mt-60`, `mb-120`, `pt-120`, etc. (halved at ≤1360px).
-- Breakpoints — nested `@media (max-width: …)` inside the rules.
+- Breakpoints — nested `@media (max-width: …)` inside the rules. Scale: `1360px` (container + 20px) → `1024px` (cover most of mobile here) → `767px` (what 1024 didn't cover) → specific ones (e.g. `400px`) only where needed.
 - `Button` variants add a `btn-<variant>` class, but there are no styles for them yet.
 
 ## 12. Gotchas

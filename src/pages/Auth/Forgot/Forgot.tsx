@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Link } from 'react-router-dom'
 import { authApi } from '../../../api/auth/auth.api'
 import { forgotSchema, type ForgotFormData } from '../../../schemas/forgot.schema'
 
@@ -9,7 +10,6 @@ import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
 import Input from '../../../components/ui/Input/Input'
 import Button from '../../../components/ui/Button/Button'
 
-import heroBackground from '../../../assets/img/demo-background.jpg'
 import './Forgot.scss'
 
 export default function Forgot() {
@@ -34,13 +34,13 @@ export default function Forgot() {
 
     return(
         <>
-            <HeroPage title={title} background={heroBackground} />
+            <HeroPage title={title} />
             <Breadcrumbs items={[
                 { label: 'Home', link: '/' },
                 { label: title },
             ]} />
 
-            <section>
+            <section className='section-forgot pt-60 pb-120'>
                 <div className="container">
                     <div className="section-inner">
                         {sent ? (
@@ -61,6 +61,7 @@ export default function Forgot() {
                                 </Button>
                             </form>
                         )}
+                        <p className='auth-switch'>Remember your password? <Link to='/login'>Sign in</Link></p>
                     </div>
                 </div>
             </section>

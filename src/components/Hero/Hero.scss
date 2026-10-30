@@ -32,19 +32,23 @@
 }
 
 .page-hero-section {
-    min-height: 350px;
     display: flex;
     background: var(--color-background-2);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     .container {
         width: 100%;
         .section-inner {
-            padding: 120px 30px;
+            padding: 56px 0 16px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            h1 {
+                font-size: 40px;
+                @media (max-width: 1200px) {
+                    font-size: 32px;
+                }
+            }
+            @media (max-width: 860px) {
+                padding-top: 40px;
+            }
         }
     }
 }

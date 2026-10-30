@@ -6,8 +6,6 @@ import Button from '../../components/ui/Button/Button';
 
 import './NotFound.scss';
 
-import heroBackground from '../../assets/img/demo-background.jpg'
-
 export default function NotFound() {
 
     const title = 'Page Not Found';
@@ -16,7 +14,6 @@ export default function NotFound() {
         <>
             <HeroPage
                 title={title}
-                background={heroBackground}
             />
             <Breadcrumbs
             items={[
@@ -24,7 +21,7 @@ export default function NotFound() {
                 {label: title},
             ]}
             />
-            <section>
+            <section className='section-not-found pt-60 pb-120'>
                 <div className='container'>
                     <div className='section-inner'>
                         <p>The page you are looking for doesn't exist or has been moved.</p>

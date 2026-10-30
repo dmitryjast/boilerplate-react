@@ -21,14 +21,14 @@ _Last updated: 2026-10-29_
 ### P1 — bugs
 - [x] `HeaderMenu.tsx` — link `/Contacts` → `/contacts` (2026-10-17)
 - [x] `HeaderProfile.tsx` — dead profile menu links removed: logged-in user sees "Go to Dashboard" button (2026-10-29)
-- [ ] Login / Register — add cross-links ("Forgot password?", "Sign up", "Sign in"); header no longer links to `/forgot`
+- [x] Login / Register cross-links: "Forgot password?" (right under the password field) + "Don't have an account? Sign up" on Login, "Already have an account? Sign in" on Register, "Remember your password? Sign in" on Forgot (2026-10-30)
 - [x] 404 page `pages/NotFoundPage/NotFound.tsx` + route `path="*"` (2026-10-17)
 - [x] `ResetPassword` — link without `token`/`userId` now shows the normal page layout + link to `/forgot` (2026-10-17)
 - [x] `Policy` — title passed as a prop from `App.tsx` (2026-10-17)
 - [x] Guest on a public page was redirected to `/login` after failed `/auth/refresh` — `axios.ts` now redirects only from protected paths (`protectedRoutes`: `/dashboard`, `/verify-email`) (2026-10-30)
-- [ ] Header has no mobile layout: at 390px menu + actions overflow (page `scrollWidth` 740px) — burger menu needed
+- [x] Header mobile layout — `HeaderMobileMenu` (burger ≤1024px, slide-in panel from the right) + footer breakpoints (2026-10-30)
 - [ ] `Modal` ignores `isOpen`/`onClose` (no close on overlay/Esc)
-- [ ] Bundle > 500 kB — Vite warning, consider code-splitting pages
+- [x] Bundle > 500 kB — resolved by excluding `/elements` from production (677 → 481 kB, no warning) (2026-10-30); code-splitting pages still possible later
 - [ ] `ResetPassword` — treat non-numeric `userId` in the link as an invalid link (optional)
 
 ### Cookie consent ✅ (2026-10-17)
@@ -36,7 +36,9 @@ _Last updated: 2026-10-29_
 
 ### Styles (later, by user's decision)
 - [ ] `CookiesPopup` mobile: stacked Accept / Deny / Manage have different widths (fit content)
-- [ ] Checkbox labels are grey (`#B1B1B1`, global `.checkbox-wrapper label span` in `main.scss:350`) and look disabled
+- [x] Checkbox labels are grey and look disabled — now `--color-text`, 14px (2026-10-30, SaaS restyle)
+- [x] Page content sections get `section-<page> pt-60 pb-120`; auth forms limited to 480px (2026-10-30)
+- [x] `HeroPage` `background` prop removed from the component and all pages (2026-10-30)
 - [ ] `CheckBox` adds `undefined` to class when no `className` is passed
 
 ### P2 — code quality (ESLint: 13 problems)
@@ -52,7 +54,7 @@ _Last updated: 2026-10-29_
 - [ ] Reset password: validate the link on page open — backend `POST /auth/reset-password/validate` `{ userId, token }` (doesn't consume the token, same response for any failure, rate limit) + frontend "Checking link…" → form / "expired" with link to `/forgot`. Keep the 401 handling on submit. Workflow: read the backend from here, write a spec, the backend chat implements it
 - [ ] Page meta (separate task): `<title>`/`<meta>` per page via React 19 hoisting; `<meta name="robots" content="noindex" />` on the 404 page
 - [ ] Dashboard: layout (sidebar + user menu with Settings and Logout); Edit Profile and Change Password pages inside the dashboard (+ backend API?)
-- [ ] Content for About / Services / Contacts (contact form on Contacts)
+- [ ] Content for Home (SaaS landing), Features, Pricing (plans + FAQ on Accordion), About, Contact (contact form)
 - [ ] Legal pages content — load dynamically from the backend once it has the endpoint (title + content per page instead of the `title` prop in `App.tsx`)
 - [ ] Decide on React Query: add `QueryClientProvider` or drop the dependency
 - [ ] Tests (Vitest + Testing Library) — at least the auth flow
@@ -114,6 +116,21 @@ _Last updated: 2026-10-29_
 ### 2026-10-30
 - P1: `axios.ts` — failed refresh redirects to `/login` only from protected paths (`startsWith` check on `protectedRoutes`); public pages stay. Browser (temp server 5179): `/`, `/about-us`, `/privacy-policy`, unknown URL stay for a guest; `/dashboard` → `/login`.
 - Started fixing all P1 items by mistake (user meant only the first one) — reverted, nothing else changed.
+- SaaS restyle (user chose "strict neutral" + compact page header): Inter font; tokens in `main.scss` `:root` (text `#0F172A`, secondary `#64748B`, background-2 `#F8FAFC`, border `#E2E8F0`, accent `#4F46E5` / hover `#4338CA`, error `#DC2626`, `--radius` 8px, `--radius-lg` 12px, shadows, focus ring); headings h1 56 → h6 18, weight 600; inputs/selects/textarea 44px, 1px border, focus ring; buttons 44px, primary indigo, secondary white with border; global `form` gap 16px. Restyled header, footer, breadcrumbs, compact `HeroPage` (no image, 40px title), DropDown, Accordion, CookiesPopup, ScrollToTop, VerificationBanner, Slider, DatePicker, ErrorMessage, Elements page. New icons `checkbox.svg`, `checkbox-on.svg`, `icon-arrow.svg`; new favicon. Logo untouched (user's request).
+- Browser (temp server 5179): home, login, register, elements, cookie popup checked on desktop. Mobile not re-checked (header overflow is a known P1).
+- SaaS page set agreed: Home, Features, Pricing, About, Contact, Legal (Privacy / Cookies / Terms), 404, auth pages, Dashboard (+ Settings later); no blog/changelog for the demo.
+- `ServicesPage` → `FeaturesPage` (`/features`), new `PricingPage` (`/pricing`, stub), `/contacts` → `/contact`; header menu Features · Pricing · About · Contact; footer columns Navigation (Features, Pricing, About, Contact) / Contact Information.
+- `/elements` route only in dev (`import.meta.env.DEV`).
+- Removed `background` prop from `HeroPage` and all pages; content sections got `section-<page> pt-60 pb-120`; auth pages (Login, Register, Forgot, ResetPassword + new `ResetPassword.scss`, VerifyEmail) limit content to 480px.
+- Browser: login, pricing checked; `/features`, `/contact`, `/about-us`, `/elements` (dev) open; old `/services` → 404.
+- Footer: one "Navigation" column; left column `flex: 2`, text wrapped in `.footer-description` (`max-width: 360px`).
+- Breakpoints agreed: container + 20px (`1360px`) → `1024px` (covers most of mobile) → `767px` (what 1024 didn't cover) → specific (e.g. `400px`).
+- `HeaderProfile.tsx` → `HeaderMobileMenu.tsx` (git mv): desktop auth actions + burger (≤1024px) + slide-in panel (360px, full width ≤767px) that reuses `HeaderMenu` and the auth actions; closes on link click, overlay, Esc, X; locks body scroll. Footer: wraps at ≤1024px (first column full width), single column + stacked bottom row at ≤767px.
+- Browser (iframes 390 / 900px): burger shown, desktop menu hidden, no horizontal overflow; panel opens, link click navigates and closes, Esc and overlay close; footer stacks.
+- Split by user's design: `Header` → `Logo`, `HeaderMenu`, `HeaderActions`. `HeaderActions` (new) owns the auth buttons, renders them in `.header-actions-desktop` and passes the same JSX as `children` to `HeaderMobileMenu` (burger + panel, imports `HeaderMenu`). Desktop vs mobile switch is CSS at 1024px (`.header-actions-desktop` / `.header-mobile-menu`). Re-checked in the browser.
+- Footer bottom row: `column-reverse` at ≤767px (legal links above copyright).
+- Footer bottom row was 83px tall: browser default `ul` margin (16px top/bottom) collapsed through `.legal-pages-menu` into the flex `.column`. Added `ul, ol { margin: 0; }` to `zeroing.scss` — row now 50.6px (24px padding + content); all lists have 0 margin; Elements lists still spaced by wrapper `gap`.
+- Login: `.forgot-link` (right-aligned, 14px, accent) after the password field; `.auth-switch` under the form (top border, secondary text, accent link) on Login, Register and Forgot — styles in each page's `.scss`. Checked in the browser.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

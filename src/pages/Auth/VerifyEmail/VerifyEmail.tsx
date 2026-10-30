@@ -2,7 +2,6 @@ import VerificationForm from '../../../components/Verification/VerificationForm/
 
 import HeroPage from '../../../components/Hero/HeroPage'
 import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
-import heroBackground from '../../../assets/img/demo-background.jpg'
 
 import './VerifyEmail.scss'
 
@@ -11,12 +10,12 @@ export default function VerifyEmail() {
 
     return(
         <>
-            <HeroPage title={title} background={heroBackground} />
+            <HeroPage title={title} />
             <Breadcrumbs items={[
                 { label: 'Home', link: '/' },
                 { label: title },
             ]} />
-            <section>
+            <section className='section-verify-email pt-60 pb-120'>
                 <div className="container">
                     <div className="section-inner">
                         <VerificationForm />

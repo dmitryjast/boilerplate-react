@@ -6,7 +6,8 @@ import Footer from "./components/Footer/Footer";
 
 import Home from "./pages/HomePage/Home";
 import About from "./pages/AboutPage/About";
-import Services from "./pages/ServicesPage/Services";
+import Features from "./pages/FeaturesPage/Features";
+import Pricing from "./pages/PricingPage/Pricing";
 import Contact from "./pages/ContactPage/Contact";
 
 import Login from "./pages/Auth/Login/Login";
@@ -50,8 +51,9 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contacts" element={<Contact />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/contact" element={<Contact />} />
 
         {/* Policy Routes */}
         <Route path="/privacy-policy" element={<Policy title="Privacy Policy" />} />
@@ -59,7 +61,7 @@ function App() {
         <Route path="/terms-and-conditions" element={<Policy title="Terms and Conditions" />} />
 
         {/* Other Routes */}
-        <Route path="/elements" element={<Elements />} />
+        {import.meta.env.DEV && <Route path="/elements" element={<Elements />} />}
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />

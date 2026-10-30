@@ -1,0 +1,32 @@
+.section-login {
+    .container {
+        .section-inner {
+            max-width: 480px;
+            .forgot-link {
+                margin-top: -8px;
+                align-self: flex-end;
+                font-size: 14px;
+                font-weight: 500;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            .auth-switch {
+                margin-top: 24px;
+                padding-top: 24px;
+                border-top: 1px solid var(--color-border);
+                color: var(--color-text-secondary);
+                font-size: 14px;
+                a {
+                    font-size: 14px;
+                    font-weight: 500;
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}

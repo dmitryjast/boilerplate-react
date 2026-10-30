@@ -1,6 +1,6 @@
 import Logo from './Logo';
 import HeaderMenu from './HeaderMenu';
-import HeaderActions from './HeaderProfile';
+import HeaderActions from './HeaderActions';
 
 import './Header.scss';
 

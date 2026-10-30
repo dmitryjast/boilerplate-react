@@ -7,8 +7,6 @@ import Button from '../../components/ui/Button/Button';
 
 import './Dashboard.scss';
 
-import heroBackground from '../../assets/img/demo-background.jpg'
-
 export default function Dashboard() {
 
     const title = 'Dashboard';
@@ -25,7 +23,6 @@ export default function Dashboard() {
         <>
             <HeroPage
                 title={title}
-                background={heroBackground}
             />
             <Breadcrumbs
             items={[
@@ -33,7 +30,7 @@ export default function Dashboard() {
                 {label: title},
             ]}
             />
-            <section>
+            <section className='section-dashboard pt-60 pb-120'>
                 <div className='container'>
                     <div className='section-inner'>
                         <Button type='button' onClick={handleLogout}>Logout</Button>

@@ -3,17 +3,14 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 import './Contact.scss';
 
-import heroBackground from '../../assets/img/demo-background.jpg'
-
 export default function Contact() {
 
-    const title = 'Contacts';
+    const title = 'Contact';
 
     return (
         <>
-            <HeroPage 
+            <HeroPage
                 title={title}
-                background={heroBackground}    
             />
             <Breadcrumbs 
             items={[

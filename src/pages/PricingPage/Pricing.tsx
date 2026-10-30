@@ -1,19 +1,16 @@
 import HeroPage from '../../components/Hero/HeroPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
-import './Services.scss';
+import './Pricing.scss';
 
-import heroBackground from '../../assets/img/demo-background.jpg'
+export default function Pricing() {
 
-export default function Services() {
-
-    const title = 'Services';
+    const title = 'Pricing';
 
     return(
        <>
-            <HeroPage 
+            <HeroPage
                 title={title}
-                background={heroBackground}    
             />
             <Breadcrumbs 
             items={[

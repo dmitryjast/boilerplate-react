@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/AuthContext'
 import { authApi } from '../../../api/auth/auth.api'
 import { loginSchema, type LoginFormData } from '../../../schemas/login.schema'
@@ -11,7 +11,6 @@ import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
 import Input from '../../../components/ui/Input/Input'
 import Button from '../../../components/ui/Button/Button'
 
-import heroBackground from '../../../assets/img/demo-background.jpg'
 import './Login.scss'
 
 export default function Login() {
@@ -42,12 +41,12 @@ export default function Login() {
 
     return(
         <>
-            <HeroPage title={title} background={heroBackground} />
+            <HeroPage title={title} />
             <Breadcrumbs items={[
                 { label: 'Home', link: '/' },
                 { label: title },
             ]} />
-            <section>
+            <section className='section-login pt-60 pb-120'>
                 <div className="container">
                     <div className="section-inner">
                         <form onSubmit={handleSubmit(onSubmit)}>
@@ -67,11 +66,13 @@ export default function Login() {
                                 errorMessage={errors.password?.message}
                                 {...register('password')}
                             />
+                            <Link to='/forgot' className='forgot-link'>Forgot password?</Link>
                             {serverError && <p className='error-message'>{serverError}</p>}
                             <Button type="submit" disabled={isSubmitting}>
                                 {isSubmitting ? 'Logging in...' : 'Login'}
                             </Button>
                         </form>
+                        <p className='auth-switch'>Don't have an account? <Link to='/register'>Sign up</Link></p>
                     </div>
                 </div>
             </section>

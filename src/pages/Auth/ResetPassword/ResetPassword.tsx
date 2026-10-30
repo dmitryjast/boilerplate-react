@@ -10,7 +10,7 @@ import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
 import Input from '../../../components/ui/Input/Input'
 import Button from '../../../components/ui/Button/Button'
 
-import heroBackground from '../../../assets/img/demo-background.jpg'
+import './ResetPassword.scss'
 
 export default function ResetPassword() {
 
@@ -50,13 +50,13 @@ export default function ResetPassword() {
 
     return(
         <>
-            <HeroPage title={title} background={heroBackground} />
+            <HeroPage title={title} />
             <Breadcrumbs items={[
                 { label: 'Home', link: '/' },
                 { label: title },
             ]} />
 
-            <section>
+            <section className='section-reset-password pt-60 pb-120'>
                 <div className="container">
                     <div className="section-inner">
                         {!token || !userId ? (

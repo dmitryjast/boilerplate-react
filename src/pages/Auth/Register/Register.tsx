@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/AuthContext'
 import { authApi } from '../../../api/auth/auth.api'
 import { registerSchema, type RegisterFormData } from '../../../schemas/register.schema'
@@ -11,7 +11,6 @@ import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
 import Input from '../../../components/ui/Input/Input'
 import Button from '../../../components/ui/Button/Button'
 
-import heroBackground from '../../../assets/img/demo-background.jpg'
 import './Register.scss'
 
 export default function Register() {
@@ -46,13 +45,13 @@ export default function Register() {
 
     return(
         <>
-            <HeroPage title={title} background={heroBackground} />
+            <HeroPage title={title} />
             <Breadcrumbs items={[
                 { label: 'Home', link: '/' },
                 { label: title },
             ]} />
 
-            <section>
+            <section className='section-register pt-60 pb-120'>
                 <div className="container">
                     <div className="section-inner">
                         <form onSubmit={handleSubmit(onSubmit)}>
@@ -93,6 +92,7 @@ export default function Register() {
                                 {isSubmitting ? 'Registering...' : 'Register'}
                             </Button>
                         </form>
+                        <p className='auth-switch'>Already have an account? <Link to='/login'>Sign in</Link></p>
                     </div>
                 </div>
             </section>

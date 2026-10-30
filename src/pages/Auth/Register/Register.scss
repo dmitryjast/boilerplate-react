@@ -1,0 +1,22 @@
+.section-register {
+    .container {
+        .section-inner {
+            max-width: 480px;
+            .auth-switch {
+                margin-top: 24px;
+                padding-top: 24px;
+                border-top: 1px solid var(--color-border);
+                color: var(--color-text-secondary);
+                font-size: 14px;
+                a {
+                    font-size: 14px;
+                    font-weight: 500;
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}

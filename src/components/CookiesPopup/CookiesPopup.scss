@@ -1,9 +1,11 @@
 .cookies-popup {
     max-width: 680px;
     max-height: calc(100vh - 20px);
-    padding: 30px;
-    background: var(--color-background-2);
-    border-radius: 24px;
+    padding: 24px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     overflow-y: auto;
     opacity: 0;
     transition: 0.3s;
@@ -21,8 +23,9 @@
             cursor: pointer;
             &.close {
                 position: absolute;
-                top: 30px;
-                right: 30px;
+                top: 24px;
+                right: 24px;
+                background: none;
                 width: fit-content;
                 height: 24px;
                 padding: 0;
