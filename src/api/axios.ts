@@ -32,8 +32,8 @@ api.interceptors.response.use(
                 return api(originalRequest)
             } catch {
                 localStorage.removeItem('accessToken')
-                const publicRoutes = ['/login', '/register', '/forgot', '/reset-password', '/verify-email']
-                if(!publicRoutes.includes(window.location.pathname)) {
+                const protectedRoutes = ['/dashboard', '/verify-email']
+                if(protectedRoutes.some((route) => window.location.pathname.startsWith(route))) {
                     window.location.href = '/login'
                 }
             }

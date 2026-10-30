@@ -3,13 +3,13 @@
 Living document: current work, TODO, open questions, session log.
 **Update at the end of every session** (and when switching tasks). Project architecture lives in [DEVELOPMENT.md](DEVELOPMENT.md).
 
-_Last updated: 2026-10-17_
+_Last updated: 2026-10-29_
 
 ---
 
 ## In progress
 
-- Nothing in progress. Cookie consent closed (2026-10-17). Next step — **P1: bugs**.
+- Nothing in progress. Boilerplate is SaaS-only; header shows "Go to Dashboard" for logged-in users, `/dashboard` is a stub with Logout. Next step — remaining **P1** (`Modal`, bundle size).
 
 ## TODO (by priority)
 
@@ -20,10 +20,13 @@ _Last updated: 2026-10-17_
 
 ### P1 — bugs
 - [x] `HeaderMenu.tsx` — link `/Contacts` → `/contacts` (2026-10-17)
-- [ ] `HeaderProfile.tsx` — profile menu links to non-existent `/my-purchases`, `/edit-profile`, `/change-password`, `/billing-info`
+- [x] `HeaderProfile.tsx` — dead profile menu links removed: logged-in user sees "Go to Dashboard" button (2026-10-29)
+- [ ] Login / Register — add cross-links ("Forgot password?", "Sign up", "Sign in"); header no longer links to `/forgot`
 - [x] 404 page `pages/NotFoundPage/NotFound.tsx` + route `path="*"` (2026-10-17)
 - [x] `ResetPassword` — link without `token`/`userId` now shows the normal page layout + link to `/forgot` (2026-10-17)
 - [x] `Policy` — title passed as a prop from `App.tsx` (2026-10-17)
+- [x] Guest on a public page was redirected to `/login` after failed `/auth/refresh` — `axios.ts` now redirects only from protected paths (`protectedRoutes`: `/dashboard`, `/verify-email`) (2026-10-30)
+- [ ] Header has no mobile layout: at 390px menu + actions overflow (page `scrollWidth` 740px) — burger menu needed
 - [ ] `Modal` ignores `isOpen`/`onClose` (no close on overlay/Esc)
 - [ ] Bundle > 500 kB — Vite warning, consider code-splitting pages
 - [ ] `ResetPassword` — treat non-numeric `userId` in the link as an invalid link (optional)
@@ -48,7 +51,7 @@ _Last updated: 2026-10-17_
 ### P3 — new features
 - [ ] Reset password: validate the link on page open — backend `POST /auth/reset-password/validate` `{ userId, token }` (doesn't consume the token, same response for any failure, rate limit) + frontend "Checking link…" → form / "expired" with link to `/forgot`. Keep the 401 handling on submit. Workflow: read the backend from here, write a spec, the backend chat implements it
 - [ ] Page meta (separate task): `<title>`/`<meta>` per page via React 19 hoisting; `<meta name="robots" content="noindex" />` on the 404 page
-- [ ] Profile pages: Edit Profile, Change Password, Billing & Shipping, My Purchases (+ backend API?)
+- [ ] Dashboard: layout (sidebar + user menu with Settings and Logout); Edit Profile and Change Password pages inside the dashboard (+ backend API?)
 - [ ] Content for About / Services / Contacts (contact form on Contacts)
 - [ ] Legal pages content — load dynamically from the backend once it has the endpoint (title + content per page instead of the `title` prop in `App.tsx`)
 - [ ] Decide on React Query: add `QueryClientProvider` or drop the dependency
@@ -57,6 +60,8 @@ _Last updated: 2026-10-17_
 ## Open questions
 
 - Profile pages: which endpoints already exist on the backend (NestJS)?
+- SEO for SaaS public pages (landing, pricing): separate landing (Next/Astro) + SPA app on `app.` subdomain, or prerender public pages in Vite?
+- NestJS backend: shared core (auth, users) + optional modules (`subscriptions` for SaaS, `orders`/`products` for a future Next.js e-commerce frontend)?
 - React Query — use for all requests or keep plain axios?
 - Import aliases (`@/…`) instead of relative paths?
 
@@ -97,6 +102,18 @@ _Last updated: 2026-10-17_
 - P1: `Policy` takes `title` prop; routes pass Privacy Policy / Cookies Policy / Terms and Conditions. Dynamic legal pages from the backend added to P3.
 - P1: `ResetPassword` without `token`/`userId` — message inside the page layout (Hero + breadcrumbs) with a link to `/forgot` instead of a bare `<p>`.
 - Backend note (userId must be a number, ValidationPipe `transform`/`whitelist`): checked — frontend already sends `Number(userId)` / `user.id` and no extra fields; nothing to change. Edge case `?userId=abc` → `NaN` → 400 shows "Something went wrong" on reset (not fixed, optional).
+
+### 2026-10-29
+- Discussed boilerplate reuse for SaaS / Ecom projects. First idea: core + optional `ecom`/`saas` modules removed at setup (folders `src/modules/*` created) — then dropped: e-commerce needs SSR/SEO → separate Next.js boilerplate. This repo is **SaaS-only**; `src/modules` removed.
+- `HeaderProfile`: logged-in user sees a "Go to Dashboard" button instead of the profile DropDown (My Purchases / Billing & Shipping removed). Logout is not on the public site — it lives in the dashboard (common SaaS practice).
+- Added `pages/DashboardPage/Dashboard.tsx` (+ empty `.scss`), protected route `/dashboard`, stub with a Logout button.
+- `tsc -b` and eslint on changed files pass.
+- Header for guests: `DropDown` replaced with a "Sign In" text link + "Sign Up" button (`/register`); "Forgot Password" removed from the header. `DropDown` component untouched. Wrapper class `profile-wrapper` → `header-actions` (styles in `Header.scss` already targeted it); added `align-items`, `gap: 24px`, `.button { width: fit-content }` inside `.header-actions`.
+- Browser (temp server 5179): desktop header OK (Sign In 51px, Sign Up 131px). Found: guest redirected from `/` to `/login`, header overflows at 390px — added to P1. Logged-in state ("Go to Dashboard", `/dashboard`, Logout) not checked — no test account.
+
+### 2026-10-30
+- P1: `axios.ts` — failed refresh redirects to `/login` only from protected paths (`startsWith` check on `protectedRoutes`); public pages stay. Browser (temp server 5179): `/`, `/about-us`, `/privacy-policy`, unknown URL stay for a guest; `/dashboard` → `/login`.
+- Started fixing all P1 items by mistake (user meant only the first one) — reverted, nothing else changed.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

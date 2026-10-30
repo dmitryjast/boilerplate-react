@@ -17,6 +17,8 @@ import VerifyEmail from "./pages/Auth/VerifyEmail/VerifyEmail";
 
 import Policy from "./pages/PolicyPages/Policy";
 
+import Dashboard from "./pages/DashboardPage/Dashboard";
+
 import Elements from "./pages/ElementsPage/Elements";
 import NotFound from "./pages/NotFoundPage/NotFound";
 
@@ -42,6 +44,7 @@ function App() {
         {/* Protected Routes — redirect to /login if not logged in */}
         <Route element={<AuthRoute requireAuth />}>
           <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Route>
 
         {/* Public Routes */}

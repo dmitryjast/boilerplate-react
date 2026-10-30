@@ -1,48 +1,22 @@
 import { useAuth } from '../../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import DropDown from '../ui/DropDown/DropDown'
+import Button from '../ui/Button/Button'
 
 export default function HeaderActions() {
 
-    const { user, logout } = useAuth()
-    const navigate = useNavigate()
+    const { user } = useAuth()
 
-    const dropDownAuthItems = [
-        { label: "Sign In", to: "/login" },
-        { label: "Sign Up", to: "/register" },
-        { label: "Forgot Password", to: "/forgot" },
-    ];
 
-    const dropDownProfileItems = [
-        { label: "My Purchases", to: "/my-purchases" },
-        { label: "Edit Profile", to: "/edit-profile" },
-        { label: "Change Password", to: "/change-password" },
-        { label: "Billing & Shipping info",to: "/billing-info" },
-        {
-        label: "Logout",
-            onClick: () => {
-                logout();
-                navigate("/");
-            },
-        },
-    ];
-
-    
     return(
-        <div className='profile-wrapper'>
+        <div className='header-actions'>
             {user ? (
-                <DropDown 
-                    label={'Profile'} 
-                    align='right' 
-                    items={dropDownProfileItems}
-                />
+                <Button as={Link} to='/dashboard'>Go to Dashboard</Button>
             ) : (
-                <DropDown 
-                    label={'Sign In / Sign Up'} 
-                    align='right' 
-                    items={dropDownAuthItems}
-                />
+                <>
+                    <Link to='/login'>Sign In</Link>
+                    <Button as={Link} to='/register'>Sign Up</Button>
+                </>
             )}
         </div>
     )

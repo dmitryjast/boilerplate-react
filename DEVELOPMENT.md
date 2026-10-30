@@ -7,7 +7,7 @@ Changes only when the architecture changes. Current tasks and log — in [PLAN.m
 
 ## 1. Purpose
 
-React frontend boilerplate for websites with authentication. Backend is a separate **NestJS** project (default `http://localhost:3000`).
+React frontend boilerplate for **SaaS** projects (public site + dashboard) with authentication. E-commerce is out of scope — a separate Next.js boilerplate (SSR/SEO). Backend is a separate **NestJS** project (default `http://localhost:3000`).
 Done: site skeleton (header, footer, hero, breadcrumbs), UI kit, full auth flow (login, registration, password recovery, email verification).
 
 ## 2. Stack
@@ -68,7 +68,7 @@ src/
 │   ├── img/                 # logo, icons, demo backgrounds
 │   └── styles/              # main.scss (variables, utilities), zeroing.scss (reset)
 ├── components/
-│   ├── Header/              # Header, Logo, HeaderMenu, HeaderProfile (DropDown guest/profile)
+│   ├── Header/              # Header, Logo, HeaderMenu, HeaderProfile (guest: "Sign In" link + "Sign Up" button; logged in: "Go to Dashboard" button)
 │   ├── Footer/              # Footer, FooterList
 │   ├── Hero/                # HeroHome (Swiper slider), HeroPage (page title)
 │   ├── Breadcrumbs/
@@ -80,7 +80,7 @@ src/
 │   └── ui/                  # UI kit: Button, Input, TextArea, Select, CheckBox, DatePicker,
 │                            #         DropDown, Accordion, Modal, Slider, InputMasked
 └── pages/
-    ├── HomePage/  AboutPage/  ServicesPage/  ContactPage/  PolicyPages/  ElementsPage/  NotFoundPage/
+    ├── HomePage/  AboutPage/  ServicesPage/  ContactPage/  PolicyPages/  ElementsPage/  NotFoundPage/  DashboardPage/
     └── Auth/  Login/  Register/  Forgot/  ResetPassword/  VerifyEmail/
 ```
 
@@ -109,6 +109,7 @@ All routes are in `src/App.tsx`. `Header`, `Footer`, `VerificationBanner`, `Cook
 | Guest | `/forgot` | Forgot | same |
 | Guest | `/reset-password?token&userId` | ResetPassword | same |
 | Protected | `/verify-email[?token&userId]` | VerifyEmail | `<AuthRoute requireAuth />` — guest → `/login` (with `state.from`) |
+| Protected | `/dashboard` | Dashboard | `<AuthRoute requireAuth />`; stub with Logout (Edit Profile / Change Password / Logout will live in the dashboard user menu) |
 | Public | `/` | Home | — |
 | Public | `/about-us` | About | — |
 | Public | `/services` | Services | — |
@@ -128,7 +129,7 @@ All routes are in `src/App.tsx`. `Header`, `Footer`, `VerificationBanner`, `Cook
 ### Response interceptor (`src/api/axios.ts`)
 1. On `401` (if the request hasn't been retried and isn't `/auth/refresh`) → sets `_retry = true`, calls `POST /auth/refresh`.
 2. Success → stores the new token, retries the original request.
-3. Failure → removes the token; if the current path is not in the public list (`/login`, `/register`, `/forgot`, `/reset-password`, `/verify-email`) → `window.location.href = '/login'` (full reload).
+3. Failure → removes the token; if the current path starts with a protected route (`/dashboard`, `/verify-email`) → `window.location.href = '/login'` (full reload); public pages stay.
 
 ### AuthContext (`src/context/AuthContext.tsx`)
 - On start: `GET /auth/me` → `user` or `null`, then `isLoading = false`.
@@ -204,7 +205,7 @@ GDPR/PECR-style consent. Nothing optional (analytics, marketing) may load until 
 ## 12. Gotchas
 
 - `npm run build` runs `tsc -b` with strict `noUnusedLocals/Parameters` — any unused import breaks the build.
-- Public routes are hardcoded as a separate list in the interceptor — update `axios.ts` when adding guest pages.
+- Protected routes are hardcoded as a separate list in the interceptor — update `protectedRoutes` in `axios.ts` when adding pages under `<AuthRoute requireAuth />`.
 - Redirect on failed refresh uses `window.location`, not the router (full reload).
 - `AuthRoute` renders nothing while `me` is loading — protected pages appear with a delay.
 - `accessToken` in context state is `null` after reload (source of truth is `localStorage`).
