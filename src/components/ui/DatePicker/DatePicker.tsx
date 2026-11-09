@@ -15,10 +15,9 @@ interface DatePickerProps {
     className?: string;
     onChange?: (value: Date | null) => void;
     errorMessage?: string;
-    [key: string]: any;
 }
 
-export default function DatePicker({ id, label, dateFormat = 'MM/dd/yyyy', placeholder, className, onChange, errorMessage, ...props }: DatePickerProps) {
+export default function DatePicker({ id, label, dateFormat = 'MM/dd/yyyy', placeholder, className, onChange, errorMessage }: DatePickerProps) {
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 
@@ -39,7 +38,6 @@ export default function DatePicker({ id, label, dateFormat = 'MM/dd/yyyy', place
                 onChange={handleChange}
                 placeholderText={placeholder}
                 className={`input ${className ?? ''}`}
-                {...props}
             />
             <ErrorMessage message={errorMessage} />
         </div>

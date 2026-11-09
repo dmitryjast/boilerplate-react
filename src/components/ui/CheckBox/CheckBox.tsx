@@ -1,16 +1,12 @@
-import type { ReactNode } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
 import './CheckBox.scss'
 
-interface CheckBoxProps {
+interface CheckBoxProps extends Omit<ComponentProps<'input'>, 'type'> {
     label: ReactNode;
-    className?: string;
-    disabled?: boolean;
     errorMessage?: string;
-    message?: string;
-    [key: string]: any;
 }
 
 export default function CheckBox({ label, className, disabled, errorMessage, ...props }: CheckBoxProps) {

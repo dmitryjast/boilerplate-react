@@ -1,4 +1,4 @@
-import type { ChangeEventHandler } from 'react';
+import type { ComponentProps } from 'react';
 
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
@@ -9,16 +9,10 @@ interface SelectItem {
     value: string;
 }
 
-interface SelectProps {
-    value?: string;
+interface SelectProps extends Omit<ComponentProps<'select'>, 'children'> {
     items: SelectItem[];
-    disabled?: boolean;
-    id?: string;
-    className?: string;
     label?: string;
-    onChange?: ChangeEventHandler <HTMLSelectElement>;
     errorMessage?: string;
-    [key: string]: any;
 }
 
 export default function Select({ items, value, disabled, className, id, label, onChange, errorMessage, ...props }: SelectProps) {

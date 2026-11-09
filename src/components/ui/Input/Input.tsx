@@ -1,16 +1,13 @@
+import type { ComponentProps } from 'react';
+
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
 import './Input.scss';
 
-interface InputProps {
+interface InputProps extends Omit<ComponentProps<'input'>, 'type'> {
     type?: 'text' | 'email' | 'password' | 'number' | 'tel';
-    disabled?: boolean;
-    className?: string;
-    id?: string;
     label?: string;
-    placeholder?: string;
     errorMessage?: string;
-    [key: string]: any;
 }
 
 export default function Input({ type, disabled, className, id, label, placeholder, errorMessage, ...props }: InputProps) {

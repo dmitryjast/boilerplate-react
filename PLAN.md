@@ -42,7 +42,8 @@ _Last updated: 2026-11-09_
 - [x] `CheckBox` adds `undefined` to class when no `className` is passed — fixed in all UI components (2026-11-09)
 
 ### P2 — code quality (ESLint: 13 problems)
-- [ ] Remove `any` in UI components (`Input`, `TextArea`, `Select`, `CheckBox`, …) — type via `InputHTMLAttributes` etc.
+- [x] Remove `any` in UI components (`Input`, `TextArea`, `Select`, `CheckBox`, `DatePicker`, `Button`) (2026-11-09)
+- [ ] `VerificationForm` uses `<Button variant='checkout'>` — no `.btn-checkout` styles (e-commerce leftover); pick `primary` or a banner-specific variant
 - [ ] `catch (error: any)` in Login/Register/ResetPassword → `AxiosError` / `isAxiosError`
 - [ ] `AuthContext.tsx`, `CookieConsentContext.tsx` — react-refresh lint error (provider + hook in one file); accepted for now, project convention
 - [ ] `VerificationForm.tsx` — `handleVerifyByToken` used in `useEffect` before declaration + missing deps (react-hooks)
@@ -148,6 +149,11 @@ _Last updated: 2026-11-09_
 - `className` fallback `${className ?? ''}` in `CheckBox`, `Input`, `TextArea`, `Select`, `DatePicker`, `Slider` (same as `Modal` / `Banner`) — no more `undefined` class; `Button` unchanged (default `className='button'`).
 - Tried moving `.auth-switch` into a `components/AuthSwitch` component — reverted by user's decision (used rarely, not worth a component); markup and styles stay in Login / Register / Forgot.
 - Browser (temp server 5179): no `undefined` classes on /login, /register, /forgot, /elements.
+
+- P2: `[key: string]: any` removed — `Input` / `CheckBox` extend `Omit<ComponentProps<'input'>, 'type'>`, `TextArea` extends `ComponentProps<'textarea'>`, `Select` extends `Omit<ComponentProps<'select'>, 'children'>` (own `type` union, `label`, `errorMessage`, `items`, `resize` kept; duplicated `disabled` / `className` / `id` / `placeholder` / `value` / `onChange` removed). `CheckBox` unused `message` prop removed. `DatePicker`: no index signature and no `{...props}` spread (nobody passed extra props). `ComponentProps` includes `ref` in React 19 → `register()` works. Browser: Register validation errors, Elements checkbox / select / datepicker / textarea OK.
+
+- P2: `Button` typed as polymorphic: `ButtonProps<T extends ElementType = 'button'>` = own props (`children`, `as`, `className`, `variant`) & `Omit<ComponentProps<T>, 'as' | 'children' | 'className'>`. `to`, `type`, `disabled`, `onClick` come from the element's own props (`<Link>` requires `to`, plain button rejects `to`); default `type='submit'` only for `<button>`, overridable. `variant` stays `string` — `VerificationBanner` uses its own `verify` / `sent` variants. Checked with a temp type-test file (valid usages pass, `<Button to>`, `<Button as={Link}>` without `to`, unknown prop fail) and in the browser (header Sign Up → `<a href="/register">`, form submit `type="submit"`, cookie buttons `type="button"`, disabled works).
+- Found: `VerificationForm` `variant='checkout'` has no styles — added to P2, not changed.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

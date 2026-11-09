@@ -1,39 +1,28 @@
-import type { ElementType, MouseEventHandler, ReactNode } from 'react';
+import type { ComponentProps, ElementType, ReactNode } from 'react';
 
 import './Button.scss'
 
-interface ButtonProps {
+type ButtonProps<T extends ElementType = 'button'> = {
     children: ReactNode;
-    as?: ElementType;
-    to?: string;
-    type?: 'button' | 'submit' | 'reset';
+    as?: T;
     className?: string;
     variant?: string;
-    disabled?: boolean;
-    onClick?: MouseEventHandler;
-    [key: string]: any;
-}
+} & Omit<ComponentProps<T>, 'as' | 'children' | 'className'>
 
-export default function Button({ 
+export default function Button<T extends ElementType = 'button'>({ 
     children, 
-    as: Element = 'button', 
-    to, 
-    type='submit', 
+    as, 
     className='button', 
     variant='primary', 
-    disabled=false, 
-    onClick, 
-    ...props }: ButtonProps) {
+    ...props }: ButtonProps<T>) {
 
+    const Element: ElementType = as ?? 'button'
     const isButton = Element === 'button'
 
     return(
         <Element 
-            type={isButton ? type : undefined}
-            disabled={isButton ? disabled : undefined}
-            to={!isButton ? to : undefined}
+            type={isButton ? 'submit' : undefined}
             className={`${className} btn-${variant}`}
-            onClick={onClick}
             {...props}
         >
             {children}

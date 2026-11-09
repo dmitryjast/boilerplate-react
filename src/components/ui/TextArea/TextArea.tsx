@@ -1,16 +1,13 @@
+import type { ComponentProps } from 'react';
+
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
 import './TextArea.scss';
 
-interface TextareaProps {
-    disabled?: boolean;
-    className?: string;
-    id?: string;
+interface TextareaProps extends ComponentProps<'textarea'> {
     label?: string;
-    placeholder?: string;
     resize?: 'none' | 'vertical' | 'horizontal' | 'both';
     errorMessage?: string;
-    [key: string]: any;
 }
 
 
