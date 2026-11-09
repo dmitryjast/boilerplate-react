@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from 'react-router-dom'
+import { isAxiosError } from 'axios'
 import { useAuth } from '../../../context/AuthContext'
 import { authApi } from '../../../api/auth/auth.api'
 import { loginSchema, type LoginFormData } from '../../../schemas/login.schema'
@@ -30,8 +31,8 @@ export default function Login() {
             const response = await authApi.login(data)
             await login(response.data.accessToken)
             navigate('/')
-        } catch (error: any) {
-            if(error.response?.status === 401) {
+        } catch (error) {
+            if(isAxiosError(error) && error.response?.status === 401) {
                 setServerError('Invalid email or password.')
             } else {
                 setServerError('Something went wrong. Please try again.')

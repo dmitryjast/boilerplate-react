@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from 'react-router-dom'
+import { isAxiosError } from 'axios'
 import { useAuth } from '../../../context/AuthContext'
 import { authApi } from '../../../api/auth/auth.api'
 import { registerSchema, type RegisterFormData } from '../../../schemas/register.schema'
@@ -34,8 +35,8 @@ export default function Register() {
             })
             await login(response.data.accessToken)
             navigate('/')
-        } catch (error: any) {
-            if(error.response?.status === 409) {
+        } catch (error) {
+            if(isAxiosError(error) && error.response?.status === 409) {
                 setServerError('User with this email already exists.')
             } else {
                 setServerError('Something went wrong. Please try again.')

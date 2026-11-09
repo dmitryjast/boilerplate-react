@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { isAxiosError } from 'axios'
 import { authApi } from '../../../api/auth/auth.api'
 import { resetPasswordSchema, type ResetPasswordFormData } from '../../../schemas/reset-password.schema'
 
@@ -40,8 +41,8 @@ export default function ResetPassword() {
             })
             setSuccess(true)
             setTimeout(() => navigate('/login'), 3000)
-        } catch (error: any) {
-            if(error.response?.status === 401) {
+        } catch (error) {
+            if(isAxiosError(error) && error.response?.status === 401) {
                 setServerError('Reset link expired or invalid. Please request a new one.')
             } else {
                 setServerError('Something went wrong. Please try again.')
