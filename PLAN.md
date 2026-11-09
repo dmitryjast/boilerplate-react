@@ -41,15 +41,15 @@ _Last updated: 2026-11-09_
 - [x] `HeroPage` `background` prop removed from the component and all pages (2026-10-30)
 - [x] `CheckBox` adds `undefined` to class when no `className` is passed — fixed in all UI components (2026-11-09)
 
-### P2 — code quality (ESLint: 13 problems)
+### P2 — code quality (ESLint: 0 problems ✅ 2026-11-09)
 - [x] Remove `any` in UI components (`Input`, `TextArea`, `Select`, `CheckBox`, `DatePicker`, `Button`) (2026-11-09)
 - [x] `VerificationForm` `variant='checkout'` had no styles — kept (form will be reused at the payment step: shown only for unverified users), base `.btn-checkout` styles added to `VerificationForm.scss` (2026-11-09)
 - [x] `catch (error: any)` in Login/Register/ResetPassword → `isAxiosError` (2026-11-09)
-- [ ] `AuthContext.tsx`, `CookieConsentContext.tsx` — react-refresh lint error (provider + hook in one file); accepted for now, project convention
+- [x] `AuthContext.tsx`, `CookieConsentContext.tsx` — react-refresh lint error (provider + hook in one file): rule turned off for `src/context/*.tsx` in `eslint.config.js`, one file per context kept (2026-11-09)
 - [x] `VerificationForm.tsx` — `handleVerifyByToken` used in `useEffect` before declaration + missing deps (react-hooks) (2026-11-09)
 - [ ] Remove duplicated `accessToken` state in context or sync it with `localStorage` — on hold (user thinks it may be needed). Facts: nobody reads `accessToken` from `useAuth()`; axios uses `localStorage` only; state is `null` after reload and stale after `/auth/refresh`
 - [x] Removed template leftovers `assets/react.svg`, `vite.svg`, `hero.png`, `public/icons.svg` and the Vite template text from README (2026-11-09), then `App.css` / `index.css` too (not imported anywhere)
-- [ ] `InputMasked` — implement or remove
+- [ ] `InputMasked` — implement later, together with the first feature that needs a masked field (user's decision)
 
 ### P3 — new features
 - [ ] Reset password: validate the link on page open — backend `POST /auth/reset-password/validate` `{ userId, token }` (doesn't consume the token, same response for any failure, rate limit) + frontend "Checking link…" → form / "expired" with link to `/forgot`. Keep the 401 handling on submit. Workflow: read the backend from here, write a spec, the backend chat implements it
@@ -162,6 +162,8 @@ _Last updated: 2026-11-09_
 - P2: `VerificationForm` — link verification moved into the `useEffect` (`verifyByToken`, same body; `token!` no longer needed), deps `[token, userId, navigate, refreshUser]`, `verifyStartedRef` guard so it runs once (`refreshUser` is not memoized in `AuthContext`, StrictMode runs effects twice in dev). eslint: only the 2 accepted react-refresh errors in contexts left. Not checked in the browser — needs a logged-in user and a real token from the email.
 
 - P2: deleted unused `src/assets/react.svg`, `vite.svg`, `hero.png`, `public/icons.svg`; README trimmed to the project's own part (lines 1–25, Vite template block removed). Then also deleted `App.css` / `index.css` (not imported; global styles load from `assets/styles/main.scss` + `zeroing.scss` in `main.tsx`). Build OK.
+
+- P2: `eslint.config.js` — `react-refresh/only-export-components` off for `src/context/*.tsx` (provider + hook in one file is the project convention; only effect: editing a context file does a full reload in dev instead of hot update). `eslint src` is clean (0 problems).
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form
