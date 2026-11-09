@@ -30,7 +30,7 @@ export default function Select({ items, value, disabled, className, id, label, o
             <select 
                 value={value}
                 disabled={disabled}
-                className={`select ${className}`}
+                className={`select ${className ?? ''}`}
                 id={id}
                 onChange={onChange}
                 {...props}

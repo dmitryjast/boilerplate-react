@@ -21,7 +21,7 @@ interface SliderProps {
 
 export default function Slider({items, autoplay, autoplayTiming, pagination, className} :SliderProps) {
     return(
-        <div className={`slider-section ${className}`}>
+        <div className={`slider-section ${className ?? ''}`}>
             <Swiper
                 modules={[Autoplay, Pagination]}
                 autoplay={autoplay ? { delay: autoplayTiming } : false}

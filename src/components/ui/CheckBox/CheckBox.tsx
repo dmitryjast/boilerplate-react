@@ -15,7 +15,7 @@ interface CheckBoxProps {
 
 export default function CheckBox({ label, className, disabled, errorMessage, ...props }: CheckBoxProps) {
     return(
-        <div className={`checkbox-wrapper ${className} ${disabled ? 'disabled' : ''} ${errorMessage ? 'error' : ''}`}>
+        <div className={`checkbox-wrapper ${className ?? ''} ${disabled ? 'disabled' : ''} ${errorMessage ? 'error' : ''}`}>
             <label>
                 <input
                     type='checkbox'            

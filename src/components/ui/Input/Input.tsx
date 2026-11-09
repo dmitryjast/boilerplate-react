@@ -24,7 +24,7 @@ export default function Input({ type, disabled, className, id, label, placeholde
                 type={type}
                 placeholder={placeholder}
                 disabled={disabled}
-                className={`input ${className}`} 
+                className={`input ${className ?? ''}`} 
                 {...props}
             />
             <ErrorMessage message={errorMessage} />

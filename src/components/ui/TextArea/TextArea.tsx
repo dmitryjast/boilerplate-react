@@ -24,7 +24,7 @@ export default function TextArea({ disabled, className, id, label, placeholder, 
                 id={id}
                 placeholder={placeholder}
                 disabled={disabled}
-                className={`input ${className}`} 
+                className={`input ${className ?? ''}`} 
                 style={{resize}}
                 {...props}
                 />

@@ -38,7 +38,7 @@ export default function DatePicker({ id, label, dateFormat = 'MM/dd/yyyy', place
                 dateFormat={dateFormat}
                 onChange={handleChange}
                 placeholderText={placeholder}
-                className={`input ${className}`}
+                className={`input ${className ?? ''}`}
                 {...props}
             />
             <ErrorMessage message={errorMessage} />

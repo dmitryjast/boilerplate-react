@@ -39,7 +39,7 @@ _Last updated: 2026-11-09_
 - [x] Checkbox labels are grey and look disabled — now `--color-text`, 14px (2026-10-30, SaaS restyle)
 - [x] Page content sections get `section-<page> pt-60 pb-120`; auth forms limited to 480px (2026-10-30)
 - [x] `HeroPage` `background` prop removed from the component and all pages (2026-10-30)
-- [ ] `CheckBox` adds `undefined` to class when no `className` is passed
+- [x] `CheckBox` adds `undefined` to class when no `className` is passed — fixed in all UI components (2026-11-09)
 
 ### P2 — code quality (ESLint: 13 problems)
 - [ ] Remove `any` in UI components (`Input`, `TextArea`, `Select`, `CheckBox`, …) — type via `InputHTMLAttributes` etc.
@@ -144,6 +144,10 @@ _Last updated: 2026-11-09_
 
 - `CookiesPopup` restyle + responsive: icon 32px in accent color (was 60px black), text 14px secondary (links inherit size), Deny / Manage → `variant='secondary'`, `max-width: 640px`; options block separated by a top border, "Save my choice" fit-content. ≤767px: padding 20px, Accept + Deny in one row (equal width), Manage full width below, "Save my choice" full width; removed the non-standard 860px breakpoint. Browser: 900px and 390px, closed and with Manage open, no horizontal overflow (consent restored after the test).
 - Elements: horizontal scroll at ≤~520px — `.buttons-wrapper` (3 buttons in a row, ~503px) had no wrap; added `flex-wrap: wrap; gap: 12px 20px`. Swiper slides outside the viewport are clipped by Swiper, not a cause.
+
+- `className` fallback `${className ?? ''}` in `CheckBox`, `Input`, `TextArea`, `Select`, `DatePicker`, `Slider` (same as `Modal` / `Banner`) — no more `undefined` class; `Button` unchanged (default `className='button'`).
+- Tried moving `.auth-switch` into a `components/AuthSwitch` component — reverted by user's decision (used rarely, not worth a component); markup and styles stay in Login / Register / Forgot.
+- Browser (temp server 5179): no `undefined` classes on /login, /register, /forgot, /elements.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form
