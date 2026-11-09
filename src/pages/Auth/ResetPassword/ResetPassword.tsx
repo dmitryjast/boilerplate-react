@@ -22,6 +22,7 @@ export default function ResetPassword() {
 
     const token = searchParams.get('token')
     const userId = searchParams.get('userId')
+    const isValidLink = !!token && /^\d+$/.test(userId ?? '')
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ResetPasswordFormData>({
         resolver: zodResolver(resetPasswordSchema)
@@ -59,7 +60,7 @@ export default function ResetPassword() {
             <section className='section-reset-password pt-60 pb-120'>
                 <div className="container">
                     <div className="section-inner">
-                        {!token || !userId ? (
+                        {!isValidLink ? (
                             <p>Invalid reset link. <Link to='/forgot'>Request a new one</Link></p>
                         ) : success ? (
                             <p>Password successfully reset! Redirecting to login...</p>
