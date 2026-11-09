@@ -22,13 +22,33 @@ export default function VerificationForm() {
     const [resendCooldown, setResendCooldown] = useState(0)
     const [checking, setChecking] = useState(false)
     const inputsRef = useRef<(HTMLInputElement | null)[]>([])
+    const verifyStartedRef = useRef(false)
 
     // Auto verify by link
     useEffect(() => {
-        if(token && userId) {
-            handleVerifyByToken()
+        if(!token || !userId || verifyStartedRef.current) return
+        verifyStartedRef.current = true
+
+        const verifyByToken = async () => {
+            setChecking(true)
+            setError(null)
+            try {
+                await authApi.verifyEmail({
+                    userId: Number(userId),
+                    tokenOrCode: token,
+                })
+                setVerified(true)
+                await refreshUser()
+                setTimeout(() => navigate('/'), 3000)
+            } catch {
+                setError('Link expired or invalid. Please request a new verification email.')
+            } finally {
+                setChecking(false)
+            }
         }
-    }, [])
+
+        verifyByToken()
+    }, [token, userId, navigate, refreshUser])
 
     // Focus first input when form appears
     useEffect(() => {
@@ -48,24 +68,6 @@ export default function VerificationForm() {
         const minutes = Math.floor(totalSeconds / 60)
         const seconds = totalSeconds % 60
         return `${minutes}:${seconds.toString().padStart(2, '0')}`
-    }
-
-    const handleVerifyByToken = async () => {
-        setChecking(true)
-        setError(null)
-        try {
-            await authApi.verifyEmail({
-                userId: Number(userId),
-                tokenOrCode: token!,
-            })
-            setVerified(true)
-            await refreshUser()
-            setTimeout(() => navigate('/'), 3000)
-        } catch {
-            setError('Link expired or invalid. Please request a new verification email.')
-        } finally {
-            setChecking(false)
-        }
     }
 
     const handleSend = async () => {

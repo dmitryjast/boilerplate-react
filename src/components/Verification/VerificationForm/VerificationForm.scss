@@ -1,0 +1,9 @@
+.verification-form {
+    .btn-checkout {
+        background: var(--color-main-2);
+        color: #FFF;
+        &:hover {
+            background: var(--color-main-3);
+        }
+    }
+}

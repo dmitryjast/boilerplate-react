@@ -84,8 +84,6 @@ src/
     └── Auth/  Login/  Register/  Forgot/  ResetPassword/  VerifyEmail/
 ```
 
-`src/App.css` and `src/index.css` are Vite template leftovers, not imported anywhere.
-
 ## 6. Conventions
 
 - Each component/page is a folder `Name/Name.tsx` + `Name.scss`; styles are imported inside the component.

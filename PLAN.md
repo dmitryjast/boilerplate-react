@@ -43,12 +43,12 @@ _Last updated: 2026-11-09_
 
 ### P2 — code quality (ESLint: 13 problems)
 - [x] Remove `any` in UI components (`Input`, `TextArea`, `Select`, `CheckBox`, `DatePicker`, `Button`) (2026-11-09)
-- [ ] `VerificationForm` uses `<Button variant='checkout'>` — no `.btn-checkout` styles (e-commerce leftover); pick `primary` or a banner-specific variant
+- [x] `VerificationForm` `variant='checkout'` had no styles — kept (form will be reused at the payment step: shown only for unverified users), base `.btn-checkout` styles added to `VerificationForm.scss` (2026-11-09)
 - [x] `catch (error: any)` in Login/Register/ResetPassword → `isAxiosError` (2026-11-09)
 - [ ] `AuthContext.tsx`, `CookieConsentContext.tsx` — react-refresh lint error (provider + hook in one file); accepted for now, project convention
-- [ ] `VerificationForm.tsx` — `handleVerifyByToken` used in `useEffect` before declaration + missing deps (react-hooks)
-- [ ] Remove duplicated `accessToken` state in context or sync it with `localStorage`
-- [ ] Remove template leftovers: `App.css`, `index.css`, `assets/react.svg`, `vite.svg`, `hero.png` (check usage); clean Vite template text from README
+- [x] `VerificationForm.tsx` — `handleVerifyByToken` used in `useEffect` before declaration + missing deps (react-hooks) (2026-11-09)
+- [ ] Remove duplicated `accessToken` state in context or sync it with `localStorage` — on hold (user thinks it may be needed). Facts: nobody reads `accessToken` from `useAuth()`; axios uses `localStorage` only; state is `null` after reload and stale after `/auth/refresh`
+- [x] Removed template leftovers `assets/react.svg`, `vite.svg`, `hero.png`, `public/icons.svg` and the Vite template text from README (2026-11-09), then `App.css` / `index.css` too (not imported anywhere)
 - [ ] `InputMasked` — implement or remove
 
 ### P3 — new features
@@ -156,6 +156,12 @@ _Last updated: 2026-11-09_
 - Found: `VerificationForm` `variant='checkout'` has no styles — added to P2, not changed.
 
 - P2: `catch (error: any)` → `catch (error)` + `isAxiosError(error) && error.response?.status === …` in Login (401), Register (409), ResetPassword (401). No `any` left in `src`. Browser: Login with a non-existent test account → "Invalid email or password." (backend 401).
+
+- `VerificationForm.scss` (was empty): `.verification-form .btn-checkout` — accent background, white text, hover `--color-main-3`. Variant kept by user's decision (payment-step form for unverified users). Not checked in the browser (page needs a logged-in unverified user).
+
+- P2: `VerificationForm` — link verification moved into the `useEffect` (`verifyByToken`, same body; `token!` no longer needed), deps `[token, userId, navigate, refreshUser]`, `verifyStartedRef` guard so it runs once (`refreshUser` is not memoized in `AuthContext`, StrictMode runs effects twice in dev). eslint: only the 2 accepted react-refresh errors in contexts left. Not checked in the browser — needs a logged-in user and a real token from the email.
+
+- P2: deleted unused `src/assets/react.svg`, `vite.svg`, `hero.png`, `public/icons.svg`; README trimmed to the project's own part (lines 1–25, Vite template block removed). Then also deleted `App.css` / `index.css` (not imported; global styles load from `assets/styles/main.scss` + `zeroing.scss` in `main.tsx`). Build OK.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form
