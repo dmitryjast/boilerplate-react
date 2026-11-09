@@ -140,7 +140,8 @@
       }
       .buttons-wrapper {
         display: flex;
-        column-gap: 20px;
+        flex-wrap: wrap;
+        gap: 12px 20px;
       }
     }
   }

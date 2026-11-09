@@ -26,7 +26,7 @@ export default function CookiesPopup() {
         <Banner isOpen={isOpen} onClose={closePopup} position='bottom-left' className='cookies-popup'>
             <div className='content'>
                 <div className='row-top'>
-                    <Cookie size={60} color='#000' />
+                    <Cookie size={32} />
                 </div>
                 <div className='row-bottom'>
                     <p>
@@ -35,8 +35,8 @@ export default function CookiesPopup() {
                     </p>
                     <div className='actions'>
                         <Button type='button' onClick={handleAccept}>Accept</Button>
-                        <Button type='button' onClick={handleDeny}>Deny</Button>
-                        <Button type='button' onClick={toggleManage}>
+                        <Button type='button' variant='secondary' onClick={handleDeny}>Deny</Button>
+                        <Button type='button' variant='secondary' onClick={toggleManage}>
                             {isManageOpen ? 'Hide options' : 'Manage'}
                         </Button>
                     </div>

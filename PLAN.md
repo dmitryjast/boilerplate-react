@@ -35,7 +35,7 @@ _Last updated: 2026-11-09_
 - [x] Accept / Deny / Manage, categories, footer "Cookie Settings", 12-month expiry, data validation — checked in the browser
 
 ### Styles (later, by user's decision)
-- [ ] `CookiesPopup` mobile: stacked Accept / Deny / Manage have different widths (fit content)
+- [x] `CookiesPopup` mobile: stacked Accept / Deny / Manage have different widths — reworked tablet/mobile layout (2026-11-09)
 - [x] Checkbox labels are grey and look disabled — now `--color-text`, 14px (2026-10-30, SaaS restyle)
 - [x] Page content sections get `section-<page> pt-60 pb-120`; auth forms limited to 480px (2026-10-30)
 - [x] `HeroPage` `background` prop removed from the component and all pages (2026-10-30)
@@ -141,6 +141,9 @@ _Last updated: 2026-11-09_
 - P1: `ResetPassword` — `isValidLink` (`token` present and `userId` digits only, `/^\d+$/`); otherwise "Invalid reset link" + link to `/forgot` instead of the form.
 - `CookiesPopup` moved onto `<Banner position='bottom-left' onClose={closePopup} className='cookies-popup'>`; its own close button and container styles removed, `CookiesPopup.scss` keeps only `max-width: 680px` and content styles.
 - Browser (temp server 5179): all 6 positions placed correctly; 390px — banner full width, no horizontal overflow; X hides without storing consent, popup shown again after reload (consent restored after the test).
+
+- `CookiesPopup` restyle + responsive: icon 32px in accent color (was 60px black), text 14px secondary (links inherit size), Deny / Manage → `variant='secondary'`, `max-width: 640px`; options block separated by a top border, "Save my choice" fit-content. ≤767px: padding 20px, Accept + Deny in one row (equal width), Manage full width below, "Save my choice" full width; removed the non-standard 860px breakpoint. Browser: 900px and 390px, closed and with Manage open, no horizontal overflow (consent restored after the test).
+- Elements: horizontal scroll at ≤~520px — `.buttons-wrapper` (3 buttons in a row, ~503px) had no wrap; added `flex-wrap: wrap; gap: 12px 20px`. Swiper slides outside the viewport are clipped by Swiper, not a cause.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form
