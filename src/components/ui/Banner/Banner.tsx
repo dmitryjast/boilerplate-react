@@ -3,21 +3,18 @@ import './Banner.scss'
 
 import { X } from 'lucide-react'
 
-type BannerVertical = 'top' | 'bottom'
-type BannerHorizontal = 'left' | 'center' | 'right'
-
 interface BannerProps {
     children?: ReactNode;
     className?: string;
     isOpen: boolean;
     onClose?: () => void;
-    position?: `${BannerVertical}-${BannerHorizontal}`;
 }
 
-export default function Banner({children, className, isOpen, onClose, position = 'bottom-left'}: BannerProps) {
+// Positioned by BannerStack, which places banners in a screen corner
+export default function Banner({children, className, isOpen, onClose}: BannerProps) {
 
     return(
-        <div className={`banner banner-${position} ${isOpen ? 'isopen' : ''} ${className ?? ''}`}>
+        <div className={`banner ${isOpen ? 'isopen' : ''} ${className ?? ''}`}>
             {onClose && (
                 <button
                     type='button'

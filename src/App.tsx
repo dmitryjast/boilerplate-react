@@ -26,6 +26,7 @@ import NotFound from "./pages/NotFoundPage/NotFound";
 import VerificationBanner from "./components/Verification/VerificationBanner/VerificationBanner";
 import CookiesPopup from "./components/CookiesPopup/CookiesPopup";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import BannerStack from "./components/ui/BannerStack/BannerStack";
 
 function App() {
   
@@ -70,8 +71,10 @@ function App() {
       <Footer />
 
       {/* Global Components */}
-      <VerificationBanner />
-      <CookiesPopup />
+      <BannerStack position="bottom-left">
+        <VerificationBanner />
+        <CookiesPopup />
+      </BannerStack>
       <ScrollToTop />
       
     </BrowserRouter>

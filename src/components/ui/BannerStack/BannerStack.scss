@@ -1,0 +1,37 @@
+.banner-stack {
+    position: fixed;
+    z-index: 20;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    pointer-events: none;
+    &.banner-stack-top-left,
+    &.banner-stack-top-right {
+        top: 10px;
+    }
+    &.banner-stack-bottom-left,
+    &.banner-stack-bottom-right {
+        bottom: 10px;
+    }
+    &.banner-stack-top-left,
+    &.banner-stack-bottom-left {
+        left: 10px;
+        align-items: flex-start;
+    }
+    &.banner-stack-top-right,
+    &.banner-stack-bottom-right {
+        right: 10px;
+        align-items: flex-end;
+    }
+    @media (max-width: 767px) {
+        left: 10px;
+        right: 10px;
+        align-items: stretch;
+    }
+    .banner {
+        flex-shrink: 0;
+    }
+}

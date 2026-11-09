@@ -23,7 +23,7 @@ export default function CookiesPopup() {
     }
 
     return(
-        <Banner isOpen={isOpen} onClose={closePopup} position='bottom-left' className='cookies-popup'>
+        <Banner isOpen={isOpen} onClose={closePopup} className='cookies-popup'>
             <div className='content'>
                 <div className='row-top'>
                     <Cookie size={32} />

@@ -78,7 +78,7 @@ src/
 │   ├── ScrollToTop/         # global "back to top" button
 │   ├── ErrorMessage/        # error text under a field
 │   └── ui/                  # UI kit: Button, Input, TextArea, Select, CheckBox, DatePicker,
-│                            #         DropDown, Accordion, Modal, Banner, Slider, InputMasked
+│                            #         DropDown, Accordion, Modal, Banner, BannerStack, Slider, InputMasked
 └── pages/
     ├── HomePage/  AboutPage/  FeaturesPage/  PricingPage/  ContactPage/  PolicyPages/  ElementsPage/  NotFoundPage/  DashboardPage/
     └── Auth/  Login/  Register/  Forgot/  ResetPassword/  VerifyEmail/
@@ -98,7 +98,7 @@ src/
 
 ## 7. Routing
 
-All routes are in `src/App.tsx`. `Header`, `Footer`, `VerificationBanner`, `CookiesPopup`, `ScrollToTop` sit outside `<Routes>` and are visible on every page.
+All routes are in `src/App.tsx`. `Header`, `Footer`, `VerificationBanner` and `CookiesPopup` (inside `BannerStack`), `ScrollToTop` sit outside `<Routes>` and are visible on every page.
 
 | Group | Path | Component | Access |
 |---|---|---|---|
@@ -208,7 +208,7 @@ GDPR/PECR-style consent. Nothing optional (analytics, marketing) may load until 
 - Redirect on failed refresh uses `window.location`, not the router (full reload).
 - `AuthRoute` renders nothing while `me` is loading — protected pages appear with a delay.
 - `accessToken` in context state is `null` after reload (source of truth is `localStorage`).
-- `Modal` — centered dialog: shown by `isOpen`, closes via `onClose` on overlay / Esc / X, locks body scroll. `Banner` — non-blocking floating block (`position` `top|bottom-left|center|right`, optional `onClose` adds X); `CookiesPopup` uses it.
+- `Modal` — centered dialog: shown by `isOpen`, closes via `onClose` on overlay / Esc / X, locks body scroll. `Banner` — non-blocking card shown by `isOpen` (optional `onClose` adds X); it has no position of its own. `BannerStack` — fixed container in a screen corner (`position` `top|bottom-left|right`) that stacks banners in a column; a closed banner takes no space, so the rest move into its place. `VerificationBanner` and `CookiesPopup` sit in one `BannerStack` in `App.tsx`.
 - React Query is installed but has no provider — add `QueryClientProvider` in `main.tsx` before using it.
 - After renaming/moving/deleting files restart `npm run dev`: the running server can keep a stale module graph and the page stays blank with no console error (a fresh server works).
 - The 404 page is client-side only: the server returns `index.html` with status 200 for any URL (soft 404). A real 404 status needs hosting config (nginx etc.).
