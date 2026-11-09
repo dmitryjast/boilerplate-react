@@ -55,7 +55,8 @@ _Last updated: 2026-11-09_
 - [ ] Reset password: validate the link on page open — backend `POST /auth/reset-password/validate` `{ userId, token }` (doesn't consume the token, same response for any failure, rate limit) + frontend "Checking link…" → form / "expired" with link to `/forgot`. Keep the 401 handling on submit. Workflow: read the backend from here, write a spec, the backend chat implements it
 - [ ] Page meta (separate task): `<title>`/`<meta>` per page via React 19 hoisting; `<meta name="robots" content="noindex" />` on the 404 page
 - [ ] Dashboard: layout (sidebar + user menu with Settings and Logout); Edit Profile and Change Password pages inside the dashboard (+ backend API?)
-- [ ] Content for Home (SaaS landing), Features, Pricing (plans + FAQ on Accordion), About, Contact (contact form)
+- [x] Home — base SaaS landing (2026-11-09)
+- [ ] Content for Features, Pricing (plans + FAQ on Accordion), About, Contact (contact form)
 - [ ] Legal pages content — load dynamically from the backend once it has the endpoint (title + content per page instead of the `title` prop in `App.tsx`)
 - [ ] Decide on React Query: add `QueryClientProvider` or drop the dependency
 - [ ] Tests (Vitest + Testing Library) — at least the auth flow
@@ -171,6 +172,13 @@ _Last updated: 2026-11-09_
 - "Send verification email" did nothing: `POST /auth/send-verification` waits for SMTP (Mailtrap sandbox) and never answered; Chrome had 6 pending connections to `localhost:3000` (per-host limit) so even `/auth/me` queued. Backend alive (`curl` 401 in ~1ms). Likely SMTP hang (nodemailer default timeouts up to minutes) — not confirmed, backend not changed. Backend side to do: short nodemailer timeouts / don't block the response on sending.
 - Cause found (after backend restart): `send-verification` still hangs (no answer after 2+ min, other endpoints fine). From this machine Mailtrap `sandbox.smtp.mailtrap.io` port 587 (backend `SMTP_PORT`) doesn't connect, 25 / 465 neither, **2525 answers** `220 smtp.mailtrap.io ESMTP ready` → fix in backend `.env`: `SMTP_PORT=2525` (user's call). Registration still works because it sends the email without `await`.
 - Frontend: `VerificationBanner` — `sending` state ("Sending...", button disabled), `error` shown under the button (`.error-message`, red); `axios.create` `timeout: 15000` (all requests; timed-out request → generic error). Checked in the browser: "Sending..." for ~15s, then the error text, button active again.
+
+- Home rebuilt as a base SaaS landing (slider in hero dropped — users see only the first slide, one message converts better):
+  - `HeroHome` is now a static hero (props `badge`, `title`, `description`, `actions`, `children` for the preview), no Swiper; styles in `Hero.scss` (`background-2` + soft indigo radial glow at the top + bottom border to separate it from the sections, centered, 760px text, buttons wrap / full width ≤400px). `ui/Slider` untouched (still on `/elements`).
+  - `Home.tsx`: hero with "Get started" (`/register`) + "View pricing" (`/pricing`); CSS-only app preview under the hero was added, then removed by user's decision (`HeroHome` `children` slot kept for a real screenshot); Features (6 cards, lucide icons; 3 → 2 cols ≤1024px → 1 col ≤767px); How it works (3 steps → 1 col ≤767px); FAQ on `Accordion` (max 800px); dark CTA card (`--color-main-1`) with "Get started" + "Contact us".
+  - Data: `data/homeData.ts` (`homeFeaturesData`, `homeStepsData`), `homeFaqData` in `data/accordionData.ts`.
+  - `demo-background-2.jpg` / `-3.jpg` now unused (kept); `demo-background.jpg` still used on `/elements`.
+  - Browser (temp server 5179): 1564px, 900px, 390px — no horizontal overflow, FAQ opens.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

@@ -70,7 +70,7 @@ src/
 ├── components/
 │   ├── Header/              # Header, Logo, HeaderMenu (links, single source), HeaderActions (guest: "Sign In" + "Sign Up"; logged in: "Go to Dashboard"; desktop block + passes buttons to HeaderMobileMenu), HeaderMobileMenu (burger ≤1024px, slide-in panel with HeaderMenu + buttons)
 │   ├── Footer/              # Footer, FooterList
-│   ├── Hero/                # HeroHome (Swiper slider), HeroPage (compact page title, no background image)
+│   ├── Hero/                # HeroHome (static landing hero: badge, title, description, actions, preview), HeroPage (compact page title, no background image)
 │   ├── Breadcrumbs/
 │   ├── Routing/AuthRoute.tsx
 │   ├── Verification/        # VerificationBanner (global), VerificationForm
