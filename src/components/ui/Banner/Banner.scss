@@ -1,0 +1,69 @@
+.banner {
+    position: fixed;
+    z-index: 20;
+    width: fit-content;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+    padding: 24px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    &.isopen {
+        opacity: 1;
+        pointer-events: initial;
+    }
+    &.banner-top-left,
+    &.banner-top-center,
+    &.banner-top-right {
+        top: 10px;
+    }
+    &.banner-bottom-left,
+    &.banner-bottom-center,
+    &.banner-bottom-right {
+        bottom: 10px;
+    }
+    &.banner-top-left,
+    &.banner-bottom-left {
+        left: 10px;
+    }
+    &.banner-top-right,
+    &.banner-bottom-right {
+        right: 10px;
+    }
+    &.banner-top-center,
+    &.banner-bottom-center {
+        left: 10px;
+        right: 10px;
+        margin: 0 auto;
+    }
+    @media (max-width: 767px) {
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+    .banner-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        border-radius: var(--radius);
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        &:hover {
+            background: var(--color-background-2);
+            color: var(--color-text);
+        }
+    }
+}

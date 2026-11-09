@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import HeroPage from '../../components/Hero/HeroPage'
@@ -10,6 +11,7 @@ import CheckBox from '../../components/ui/CheckBox/CheckBox'
 import Button from '../../components/ui/Button/Button'
 import Accordion from '../../components/ui/Accordion/Accordion'
 import Slider from '../../components/ui/Slider/Slider'
+import Modal from '../../components/ui/Modal/Modal'
 
 import { demoAccordionData } from '../../data/accordionData'
 import { COUNTRIES } from '../../data/constants'
@@ -21,6 +23,8 @@ import heroBackground from '../../assets/img/demo-background.jpg'
 export default function Elements() {
 
     const title = 'UI Elements';
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     return(
         <>
@@ -200,7 +204,7 @@ export default function Elements() {
                     </div>
                 </div>
             </section>
-            <section className='section-slider pt-120 pb-120'>
+            <section className='section-slider pt-120'>
                 <div className='container'>
                     <div className='section-inner'>
                         <h3>Slider:</h3>
@@ -235,6 +239,23 @@ export default function Elements() {
                             autoplayTiming={3000}
                             pagination={true}
                         />
+                    </div>
+                </div>
+            </section>
+            <section className='section-modal pt-120 pb-120'>
+                <div className='container'>
+                    <div className='section-inner'>
+                        <h3>Modal:</h3>
+                        <div className='modal-wrapper'>
+                            <Button onClick={() => setIsModalOpen(true)}>Open test modal</Button>
+                        </div>
+                        <Modal
+                            isOpen={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                        >
+                            <h4>Test modal</h4>
+                            <p>Modal text.</p>
+                        </Modal>
                     </div>
                 </div>
             </section>

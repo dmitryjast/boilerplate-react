@@ -3,13 +3,13 @@
 Living document: current work, TODO, open questions, session log.
 **Update at the end of every session** (and when switching tasks). Project architecture lives in [DEVELOPMENT.md](DEVELOPMENT.md).
 
-_Last updated: 2026-10-29_
+_Last updated: 2026-11-09_
 
 ---
 
 ## In progress
 
-- Nothing in progress. Boilerplate is SaaS-only; header shows "Go to Dashboard" for logged-in users, `/dashboard` is a stub with Logout. Next step — remaining **P1** (`Modal`, bundle size).
+- Nothing in progress. Boilerplate is SaaS-only; header shows "Go to Dashboard" for logged-in users, `/dashboard` is a stub with Logout. Remaining P1 — optional `ResetPassword` `userId` check.
 
 ## TODO (by priority)
 
@@ -27,7 +27,7 @@ _Last updated: 2026-10-29_
 - [x] `Policy` — title passed as a prop from `App.tsx` (2026-10-17)
 - [x] Guest on a public page was redirected to `/login` after failed `/auth/refresh` — `axios.ts` now redirects only from protected paths (`protectedRoutes`: `/dashboard`, `/verify-email`) (2026-10-30)
 - [x] Header mobile layout — `HeaderMobileMenu` (burger ≤1024px, slide-in panel from the right) + footer breakpoints (2026-10-30)
-- [ ] `Modal` ignores `isOpen`/`onClose` (no close on overlay/Esc)
+- [x] `Modal` ignores `isOpen`/`onClose` — now a centered dialog with overlay, closes on overlay / Esc / X, locks body scroll; `CookiesPopup` no longer uses it (2026-11-09)
 - [x] Bundle > 500 kB — resolved by excluding `/elements` from production (677 → 481 kB, no warning) (2026-10-30); code-splitting pages still possible later
 - [ ] `ResetPassword` — treat non-numeric `userId` in the link as an invalid link (optional)
 
@@ -131,6 +131,15 @@ _Last updated: 2026-10-29_
 - Footer bottom row: `column-reverse` at ≤767px (legal links above copyright).
 - Footer bottom row was 83px tall: browser default `ul` margin (16px top/bottom) collapsed through `.legal-pages-menu` into the flex `.column`. Added `ul, ol { margin: 0; }` to `zeroing.scss` — row now 50.6px (24px padding + content); all lists have 0 margin; Elements lists still spaced by wrapper `gap`.
 - Login: `.forgot-link` (right-aligned, 14px, accent) after the password field; `.auth-switch` under the form (top border, secondary text, accent link) on Login, Register and Forgot — styles in each page's `.scss`. Checked in the browser.
+
+### 2026-11-09
+- Elements page: new last section `section-modal` ("Open test modal" button in `.modal-wrapper`, styles like other sections).
+- P1: `Modal` rewritten — `isopen` class (visibility + opacity/translate transition like the mobile menu), `.modal-overlay` (click closes), `.modal-dialog` (520px, `--radius-lg`, `--shadow-lg`, 24px padding ≤767px), `.modal-close` (lucide `X`), Esc + body scroll lock in `useEffect`, z-index 110 (above `VerificationBanner` 100).
+- `CookiesPopup` used `Modal` as a non-blocking bottom-left banner — by user's decision it now renders its own `div.cookies-popup` (position/z-index moved from `Modal.scss` to `CookiesPopup.scss`); behaviour unchanged.
+- Browser (temp server 5179): modal hidden by default, opens on the button, closes on Esc / overlay / X, click inside keeps it open, body scroll locked while open; cookie banner shows bottom-left as before (consent restored after the test).
+- New `ui/Banner` (non-blocking floating block): props `isOpen`, `className`, `children`, optional `onClose` (renders the X button), `position` = `top|bottom` + `-` + `left|center|right` (default `bottom-left`); 10px offsets, full width with 10px sides at ≤767px; no overlay / scroll lock / Esc. Not used for `VerificationBanner` (in-flow strip) or future toasts (stacking, auto-dismiss — separate component).
+- `CookiesPopup` moved onto `<Banner position='bottom-left' onClose={closePopup} className='cookies-popup'>`; its own close button and container styles removed, `CookiesPopup.scss` keeps only `max-width: 680px` and content styles.
+- Browser (temp server 5179): all 6 positions placed correctly; 390px — banner full width, no horizontal overflow; X hides without storing consent, popup shown again after reload (consent restored after the test).
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

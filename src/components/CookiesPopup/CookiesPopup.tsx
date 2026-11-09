@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import Modal from '../ui/Modal/Modal'
+import Banner from '../ui/Banner/Banner'
 import Button from '../ui/Button/Button'
 import CookiesOptions from './CookiesOptions'
 
@@ -8,7 +8,7 @@ import { useCookieConsent } from '../../context/CookieConsentContext'
 
 import './CookiesPopup.scss'
 
-import { Cookie, X } from 'lucide-react'
+import { Cookie } from 'lucide-react'
 
 export default function CookiesPopup() {
 
@@ -23,7 +23,7 @@ export default function CookiesPopup() {
     }
 
     return(
-        <Modal isOpen={isOpen} onClose={closePopup} className={`cookies-popup ${isOpen ? 'isopen' : ''}`}>
+        <Banner isOpen={isOpen} onClose={closePopup} position='bottom-left' className='cookies-popup'>
             <div className='content'>
                 <div className='row-top'>
                     <Cookie size={60} color='#000' />
@@ -42,10 +42,7 @@ export default function CookiesPopup() {
                     </div>
                 </div>
                 {isManageOpen && <CookiesOptions />}
-                <Button type='button' className='close' onClick={closePopup}>
-                    <X size={24} color='#000' />
-                </Button>
             </div>
-        </Modal>
+        </Banner>
     )
 }
