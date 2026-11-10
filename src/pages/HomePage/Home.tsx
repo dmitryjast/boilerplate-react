@@ -4,12 +4,80 @@ import HeroHome from '../../components/Hero/HeroHome';
 import Button from '../../components/ui/Button/Button';
 import Accordion from '../../components/ui/Accordion/Accordion';
 
-import { homeFeaturesData, homeStepsData } from '../../data/homeData';
-import { homeFaqData } from '../../data/accordionData';
-
 import './Home.scss';
 
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BarChart3, Bell, Lock, Users, Workflow, Zap } from 'lucide-react';
+
+const features = [
+    {
+        icon: Zap,
+        title: 'Fast setup',
+        text: 'Create an account and start working in minutes. No complex configuration required.'
+    },
+    {
+        icon: BarChart3,
+        title: 'Real-time analytics',
+        text: 'Track key metrics on a clear dashboard and make decisions based on live data.'
+    },
+    {
+        icon: Users,
+        title: 'Team collaboration',
+        text: 'Invite your team, share work and keep everyone on the same page.'
+    },
+    {
+        icon: Workflow,
+        title: 'Automation',
+        text: 'Automate routine tasks and focus on the work that actually matters.'
+    },
+    {
+        icon: Lock,
+        title: 'Secure by default',
+        text: 'Encrypted data, secure sessions and email verification out of the box.'
+    },
+    {
+        icon: Bell,
+        title: 'Smart notifications',
+        text: 'Get notified about important events by email or right in the app.'
+    }
+]
+
+const steps = [
+    {
+        title: 'Create an account',
+        text: 'Sign up with your email and verify it in one click.'
+    },
+    {
+        title: 'Set up your workspace',
+        text: 'Invite your team and connect the tools you already use.'
+    },
+    {
+        title: 'Grow your business',
+        text: 'Track results on the dashboard and scale as you grow.'
+    }
+]
+
+const faqItems = [
+    {
+        label: 'Is there a free trial?',
+        content: 'Yes. Every plan starts with a 14-day free trial. No credit card is required to sign up.'
+    },
+    {
+        label: 'Can I change my plan later?',
+        content: 'You can upgrade or downgrade at any time from the dashboard. Changes are applied immediately and billed pro rata.'
+    },
+    {
+        label: 'How secure is my data?',
+        content: 'All data is encrypted in transit and at rest. Access is protected with secure sessions and email verification.'
+    },
+    {
+        label: 'Can I invite my team?',
+        content: 'Yes. Invite teammates by email and manage their roles and permissions from the settings page.'
+    },
+    {
+        label: 'How do I cancel my subscription?',
+        content: 'You can cancel at any time from the billing settings. Your account stays active until the end of the paid period.'
+    }
+]
 
 export default function Home() {
     return(
@@ -34,7 +102,7 @@ export default function Home() {
                             <p>All the tools your team needs, in one simple and secure platform.</p>
                         </div>
                         <div className='features-wrapper'>
-                            {homeFeaturesData.map((item) => (
+                            {features.map((item) => (
                                 <div className='feature-item' key={item.title}>
                                     <div className='icon-wrapper'>
                                         <item.icon size={22} />
@@ -55,7 +123,7 @@ export default function Home() {
                             <h2>Get started in three simple steps</h2>
                         </div>
                         <div className='steps-wrapper'>
-                            {homeStepsData.map((item, index) => (
+                            {steps.map((item, index) => (
                                 <div className='step-item' key={item.title}>
                                     <span className='step-number'>{index + 1}</span>
                                     <h5>{item.title}</h5>
@@ -73,7 +141,7 @@ export default function Home() {
                             <span className='eyebrow'>FAQ</span>
                             <h2>Frequently asked questions</h2>
                         </div>
-                        <Accordion items={homeFaqData} />
+                        <Accordion items={faqItems} />
                     </div>
                 </div>
             </section>

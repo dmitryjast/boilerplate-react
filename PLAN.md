@@ -56,7 +56,11 @@ _Last updated: 2026-11-09_
 - [ ] Page meta (separate task): `<title>`/`<meta>` per page via React 19 hoisting; `<meta name="robots" content="noindex" />` on the 404 page
 - [ ] Dashboard: layout (sidebar + user menu with Settings and Logout); Edit Profile and Change Password pages inside the dashboard (+ backend API?)
 - [x] Home — base SaaS landing (2026-11-09)
-- [ ] Content for Features, Pricing (plans + FAQ on Accordion), About, Contact (contact form)
+- [x] Features — demo sections (2026-11-10)
+- [x] Pricing, About — basic demo content (2026-11-10)
+- [x] Contact page — frontend (2026-11-10)
+- [ ] Backend `POST /contact` — spec: body `{ name, email, subject, message }` (DTO: name 2+, email, subject 3–150, message 10–2000, `whitelist`); send an email to the team address (new env e.g. `CONTACT_EMAIL`) via `MailService` with a new `contact.hbs` template, `replyTo` = sender email; respond `200 { message }` without waiting for SMTP (or with short nodemailer timeouts); rate limit (`@nestjs/throttler`, e.g. 5 / 10 min per IP); optional: store messages in DB, honeypot field against spam
+- [ ] Pricing plans from the backend once billing exists (prices must match what billing charges)
 - [ ] Legal pages content — load dynamically from the backend once it has the endpoint (title + content per page instead of the `title` prop in `App.tsx`)
 - [ ] Decide on React Query: add `QueryClientProvider` or drop the dependency
 - [ ] Tests (Vitest + Testing Library) — at least the auth flow
@@ -176,9 +180,27 @@ _Last updated: 2026-11-09_
 - Home rebuilt as a base SaaS landing (slider in hero dropped — users see only the first slide, one message converts better):
   - `HeroHome` is now a static hero (props `badge`, `title`, `description`, `actions`, `children` for the preview), no Swiper; styles in `Hero.scss` (`background-2` + soft indigo radial glow at the top + bottom border to separate it from the sections, centered, 760px text, buttons wrap / full width ≤400px). `ui/Slider` untouched (still on `/elements`).
   - `Home.tsx`: hero with "Get started" (`/register`) + "View pricing" (`/pricing`); CSS-only app preview under the hero was added, then removed by user's decision (`HeroHome` `children` slot kept for a real screenshot); Features (6 cards, lucide icons; 3 → 2 cols ≤1024px → 1 col ≤767px); How it works (3 steps → 1 col ≤767px); FAQ on `Accordion` (max 800px); dark CTA card (`--color-main-1`) with "Get started" + "Contact us".
-  - Data: `data/homeData.ts` (`homeFeaturesData`, `homeStepsData`), `homeFaqData` in `data/accordionData.ts`.
+  - Data: first in `data/homeData.ts` + `homeFaqData` in `data/accordionData.ts`, then moved into `Home.tsx` (see rule below).
   - `demo-background-2.jpg` / `-3.jpg` now unused (kept); `demo-background.jpg` still used on `/elements`.
   - Browser (temp server 5179): 1564px, 900px, 390px — no horizontal overflow, FAQ opens.
+
+### 2026-11-10
+- 404: `NotFound.scss` was empty — text and "Back to Home" button stuck together; `.section-inner` is now a column with `gap: 24px`.
+
+- Pages decision: keep all four (Features, Pricing, About, Contact) as separate pages, no anchors.
+- Features page: one "Core features" section — 4 cards (icon, title, text, checklist with lucide `Check`; 2 cols → 1 ≤767px). Stats strip and Integrations grid were added, then removed (user: keep it basic). No fake images. Data: `features` const in `Features.tsx`.
+
+- Rule agreed: `data/` only for shared data and app settings (`COUNTRIES`, `COOKIE_CATEGORIES`, …); content of a single page lives in that page's file as a const above the component. Moved: `features`, `steps`, `faqItems` → `Home.tsx`, `features` → `Features.tsx`; deleted `data/homeData.ts`, `data/featuresData.ts`, `homeFaqData` removed from `accordionData.ts` (`demoAccordionData` for `/elements` stays).
+
+- Pricing: head + 3 plan cards (Starter $0 / Pro $29 "Most popular" / Business $99; name, description, price "/ month", full-width "Get started" → `/register` — primary on Pro, secondary on others; checklist). 3 cols → 1 col max 480px centered ≤1024px. No monthly/yearly toggle, no FAQ (basic). `plans` const in `Pricing.tsx`. Browser: 1564 / 900 / 390px OK.
+- About: "Our story" (h2 + 2 paragraphs, max 760px) + "Our values" (3 cards icon + title + text; 3 cols → 1 ≤767px). `values` const in `About.tsx`. Browser: 1564 / 900 / 390px OK.
+
+- Contact page: left "Get in touch" + contacts list (email / phone / office with lucide icons, same demo data as the footer), right form card (Name, Email, Subject, Message; react-hook-form + zod `schemas/contact.schema.ts`; `api/contact/contact.api.ts` + `contact.types.ts` → `POST /contact`; success state "Thank you!"; button "Sending..."). 2 cols → 1 ≤1024px. Server error style added locally (`form > .error-message`). Browser: validation errors OK, submit → backend 404 (no endpoint yet) → error shown in red; 1564 / 900 / 390px no overflow.
+- Fixed: global `.error-message` in `main.scss` was scoped to `.input-wrapper` / `.select` only → form-level server errors (Login / Register / Forgot / ResetPassword / Contact) were plain text color. Added `form > .error-message { color: var(--color-error); font-size: 14px }` to the global `form` rule; local rule removed from `Contact.scss`.
+
+- zod `.trim()` (edges only, inner spaces / line breaks kept) on text and email fields, suggested by the backend chat (backend trims before length checks): `contact` (name, email, subject, message), `register` (name, email), `login` (email), `forgot` (email). Passwords untouched. `zodResolver` passes trimmed values to `onSubmit`. Checked with zod directly: `"  a  "` → min-length error, `"  John  Smith  "` → `"John  Smith"`.
+
+- Contact form extracted into `components/ContactForm` (`ContactForm.tsx` + `.scss`: state, react-hook-form + zod, `contactApi`, success state, card styles) so it can be dropped on any page (e.g. Home) without the Contact page; `Contact.tsx` keeps only the info column + `<ContactForm />`. Browser: same look, validation errors OK.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

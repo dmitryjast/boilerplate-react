@@ -220,6 +220,10 @@ form {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    > .error-message {
+        color: var(--color-error);
+        font-size: 14px;
+    }
 }
 
 .input-wrapper {

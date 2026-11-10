@@ -63,7 +63,7 @@ src/
 │   ├── AuthContext.tsx           # AuthProvider + useAuth()
 │   └── CookieConsentContext.tsx  # CookieConsentProvider + useCookieConsent()
 ├── schemas/                 # zod form schemas + inferred types (*FormData)
-├── data/                    # static data: constants.ts (SORT_OPTIONS, COUNTRIES, COOKIE_CATEGORIES), accordionData.ts
+├── data/                    # shared data and app settings only: constants.ts (SORT_OPTIONS, COUNTRIES, COOKIE_CATEGORIES), accordionData.ts (demo for /elements); content of a single page lives in the page file as a const above the component
 ├── assets/
 │   ├── img/                 # logo, icons, demo backgrounds
 │   └── styles/              # main.scss (variables, utilities), zeroing.scss (reset)
@@ -77,6 +77,7 @@ src/
 │   ├── CookiesPopup/        # global cookie consent popup (Accept / Deny / Manage) + CookiesOptions panel
 │   ├── ScrollToTop/         # global "back to top" button
 │   ├── ErrorMessage/        # error text under a field
+│   ├── ContactForm/         # contact form (Name, Email, Subject, Message → POST /contact), usable on any page
 │   └── ui/                  # UI kit: Button, Input, TextArea, Select, CheckBox, DatePicker,
 │                            #         DropDown, Accordion, Modal, Banner, BannerStack, Slider, InputMasked
 └── pages/
