@@ -1,6 +1,8 @@
 import HeroPage from '../../components/Hero/HeroPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
+import { SITE_NAME } from '../../data/constants';
+
 import './Features.scss';
 
 import { Check, LayoutDashboard, ShieldCheck, Users, Workflow } from 'lucide-react';
@@ -38,6 +40,7 @@ export default function Features() {
 
     return(
        <>
+            <title>{`${title} | ${SITE_NAME}`}</title>
             <HeroPage
                 title={title}
             />

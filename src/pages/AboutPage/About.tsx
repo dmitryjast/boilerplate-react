@@ -1,6 +1,8 @@
 import HeroPage from '../../components/Hero/HeroPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
+import { SITE_NAME } from '../../data/constants';
+
 import './About.scss';
 
 import { Handshake, Lightbulb, Target } from 'lucide-react';
@@ -29,6 +31,7 @@ export default function About() {
 
     return (
         <>
+            <title>{`${title} | ${SITE_NAME}`}</title>
             <HeroPage
                 title={title}
             />

@@ -3,6 +3,8 @@ import VerificationForm from '../../../components/Verification/VerificationForm/
 import HeroPage from '../../../components/Hero/HeroPage'
 import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
 
+import { SITE_NAME } from '../../../data/constants'
+
 import './VerifyEmail.scss'
 
 export default function VerifyEmail() {
@@ -10,6 +12,7 @@ export default function VerifyEmail() {
 
     return(
         <>
+            <title>{`${title} | ${SITE_NAME}`}</title>
             <HeroPage title={title} />
             <Breadcrumbs items={[
                 { label: 'Home', link: '/' },

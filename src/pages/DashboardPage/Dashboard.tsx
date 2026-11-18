@@ -5,6 +5,8 @@ import HeroPage from '../../components/Hero/HeroPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Button from '../../components/ui/Button/Button';
 
+import { SITE_NAME } from '../../data/constants';
+
 import './Dashboard.scss';
 
 export default function Dashboard() {
@@ -21,6 +23,7 @@ export default function Dashboard() {
 
     return (
         <>
+            <title>{`${title} | ${SITE_NAME}`}</title>
             <HeroPage
                 title={title}
             />

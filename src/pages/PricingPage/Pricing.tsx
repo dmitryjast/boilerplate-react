@@ -4,6 +4,8 @@ import HeroPage from '../../components/Hero/HeroPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Button from '../../components/ui/Button/Button';
 
+import { SITE_NAME } from '../../data/constants';
+
 import './Pricing.scss';
 
 import { Check } from 'lucide-react';
@@ -38,6 +40,7 @@ export default function Pricing() {
 
     return(
        <>
+            <title>{`${title} | ${SITE_NAME}`}</title>
             <HeroPage
                 title={title}
             />

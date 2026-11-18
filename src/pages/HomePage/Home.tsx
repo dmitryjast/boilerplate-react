@@ -4,6 +4,8 @@ import HeroHome from '../../components/Hero/HeroHome';
 import Button from '../../components/ui/Button/Button';
 import Accordion from '../../components/ui/Accordion/Accordion';
 
+import { SITE_NAME } from '../../data/constants';
+
 import './Home.scss';
 
 import { ArrowRight, BarChart3, Bell, Lock, Users, Workflow, Zap } from 'lucide-react';
@@ -82,6 +84,7 @@ const faqItems = [
 export default function Home() {
     return(
         <>
+            <title>{SITE_NAME}</title>
             <HeroHome
                 badge='New: team workspaces'
                 title='The all-in-one platform to run your business'

@@ -3,7 +3,7 @@
 Living document: current work, TODO, open questions, session log.
 **Update at the end of every session** (and when switching tasks). Project architecture lives in [DEVELOPMENT.md](DEVELOPMENT.md).
 
-_Last updated: 2026-11-09_
+_Last updated: 2026-11-18_
 
 ---
 
@@ -53,7 +53,8 @@ _Last updated: 2026-11-09_
 
 ### P3 — new features
 - [ ] Reset password: validate the link on page open — backend `POST /auth/reset-password/validate` `{ userId, token }` (doesn't consume the token, same response for any failure, rate limit) + frontend "Checking link…" → form / "expired" with link to `/forgot`. Keep the 401 handling on submit. Workflow: read the backend from here, write a spec, the backend chat implements it
-- [ ] Page meta (separate task): `<title>`/`<meta>` per page via React 19 hoisting; `<meta name="robots" content="noindex" />` on the 404 page
+- [x] Page titles — `<title>` per page via React 19 hoisting (2026-11-18)
+- [ ] Page meta: `<meta name="description">` per page; `<meta name="robots" content="noindex" />` on the 404 page
 - [ ] Dashboard: layout (sidebar + user menu with Settings and Logout); Edit Profile and Change Password pages inside the dashboard (+ backend API?)
 - [x] Home — base SaaS landing (2026-11-09)
 - [x] Features — demo sections (2026-11-10)
@@ -203,6 +204,9 @@ _Last updated: 2026-11-09_
 - Contact form extracted into `components/ContactForm` (`ContactForm.tsx` + `.scss`: state, react-hook-form + zod, `contactApi`, success state, card styles) so it can be dropped on any page (e.g. Home) without the Contact page; `Contact.tsx` keeps only the info column + `<ContactForm />`. Browser: same look, validation errors OK.
 
 - 429 handling (backend is adding `@nestjs/throttler`): "Too many attempts. Please try again later." — inline check `isAxiosError(error) && error.response?.status === 429` in each place (no shared helper, user's call): Login, Register, ResetPassword (before the generic else), Forgot, ContactForm, VerificationBanner, VerificationForm (link verify, code check, send, resend — send/resend previously only logged to console, now set `error` on 429). Not checked in the browser — backend doesn't return 429 yet.
+
+### 2026-11-18
+- Page titles: `SITE_NAME = 'React Boilerplate'` in `data/constants.ts` (same name as the footer copyright); each page renders `<title>{`${title} | ${SITE_NAME}`}</title>` first in its fragment (React 19 hoists it to `<head>`), Home — just `SITE_NAME`. `index.html` fallback `frontend` → `React Boilerplate`. Browser (temp server 5179, logged in): public, policy, `/elements`, 404, `/dashboard` titles OK; guest-only auth pages redirected to `/` (logged in) — not checked, same pattern.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

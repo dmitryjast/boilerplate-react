@@ -261,3 +261,5 @@ export const COOKIE_CATEGORIES = [
     { key: 'analytics', label: 'Analytics', description: 'Help us understand how visitors use the website, so we can improve it.' },
     { key: 'marketing', label: 'Marketing', description: 'Used to show relevant ads and measure the effectiveness of our campaigns.' },
 ] as const
+
+export const SITE_NAME = 'React Boilerplate'

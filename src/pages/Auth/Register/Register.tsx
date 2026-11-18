@@ -12,6 +12,8 @@ import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs'
 import Input from '../../../components/ui/Input/Input'
 import Button from '../../../components/ui/Button/Button'
 
+import { SITE_NAME } from '../../../data/constants'
+
 import './Register.scss'
 
 export default function Register() {
@@ -48,6 +50,7 @@ export default function Register() {
 
     return(
         <>
+            <title>{`${title} | ${SITE_NAME}`}</title>
             <HeroPage title={title} />
             <Breadcrumbs items={[
                 { label: 'Home', link: '/' },

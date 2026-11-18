@@ -2,6 +2,8 @@ import HeroPage from '../../components/Hero/HeroPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ContactForm from '../../components/ContactForm/ContactForm';
 
+import { SITE_NAME } from '../../data/constants';
+
 import './Contact.scss';
 
 import { Mail, MapPin, Phone } from 'lucide-react';
@@ -18,6 +20,7 @@ export default function Contact() {
 
     return (
         <>
+            <title>{`${title} | ${SITE_NAME}`}</title>
             <HeroPage
                 title={title}
             />

@@ -14,7 +14,7 @@ import Slider from '../../components/ui/Slider/Slider'
 import Modal from '../../components/ui/Modal/Modal'
 
 import { demoAccordionData } from '../../data/accordionData'
-import { COUNTRIES } from '../../data/constants'
+import { COUNTRIES, SITE_NAME } from '../../data/constants'
 
 import './Elements.scss'
 
@@ -28,6 +28,7 @@ export default function Elements() {
 
     return(
         <>
+            <title>{`${title} | ${SITE_NAME}`}</title>
              <HeroPage
                 title={title}
             />
