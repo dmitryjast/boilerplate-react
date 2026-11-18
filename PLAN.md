@@ -55,6 +55,7 @@ _Last updated: 2026-11-18_
 - [ ] Reset password: validate the link on page open — backend `POST /auth/reset-password/validate` `{ userId, token }` (doesn't consume the token, same response for any failure, rate limit) + frontend "Checking link…" → form / "expired" with link to `/forgot`. Keep the 401 handling on submit. Workflow: read the backend from here, write a spec, the backend chat implements it
 - [x] Page titles — `<title>` per page via React 19 hoisting (2026-11-18)
 - [ ] Page meta: `<meta name="description">` per page; `<meta name="robots" content="noindex" />` on the 404 page
+- [ ] Dashboard 404: unknown `/dashboard/*` paths (e.g. `/dashboard/unknown`) now fall to the public 404 with the site header — add a `path="*"` route inside `DashboardLayout` with its own not-found page
 - [ ] Dashboard: layout (sidebar + user menu with Settings and Logout); Edit Profile and Change Password pages inside the dashboard (+ backend API?)
 - [x] Home — base SaaS landing (2026-11-09)
 - [x] Features — demo sections (2026-11-10)
@@ -207,6 +208,12 @@ _Last updated: 2026-11-18_
 
 ### 2026-11-18
 - Page titles: `SITE_NAME = 'React Boilerplate'` in `data/constants.ts` (same name as the footer copyright); each page renders `<title>{`${title} | ${SITE_NAME}`}</title>` first in its fragment (React 19 hoists it to `<head>`), Home — just `SITE_NAME`. `index.html` fallback `frontend` → `React Boilerplate`. Browser (temp server 5179, logged in): public, policy, `/elements`, 404, `/dashboard` titles OK; guest-only auth pages redirected to `/` (logged in) — not checked, same pattern.
+
+- Dashboard structure (user's choice): `components/Dashboard/` (`DashboardLayout`, `DashboardSidebar`, `DashboardHeader`) and `pages/Dashboard/` (`Overview`, `Profile`, `ChangePassword`) — `.tsx` stubs + empty `.scss`, not wired. Old `pages/DashboardPage/Dashboard.tsx` moved (`git mv`) to `pages/Dashboard/Overview/Overview.tsx` (same content, class `section-overview`), route `/dashboard` → `<Overview />`, old folder deleted.
+
+- Layouts (React Router layout routes, like `AuthRoute`): new `components/Layouts/PublicLayout` (`Header` + `<Outlet />` + `Footer` + `ScrollToTop`) wraps all public, guest-only, `/verify-email`, policy, `/elements` and 404 routes. Dashboard: `AuthRoute requireAuth` → `/dashboard` with `DashboardLayout` (`DashboardSidebar` + `.dashboard-main` with `DashboardHeader` + `<Outlet />`), nested `index` → `Overview`, `profile` → `Profile`, `password` → `ChangePassword` (stubs). `BannerStack` (verification + cookies) stays global in `App.tsx`. Browser (temp server 5179, logged in): public pages have header/footer/ScrollToTop, dashboard pages don't; `/dashboard/unknown` → public 404.
+- Decided for later (dashboard markup): verification reminder becomes a full-width strip inside `DashboardLayout` above the content and is removed from the public site; cookie banner stays global in `BannerStack`.
+- React Query: keep the dependency, decide when building dashboard data.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form

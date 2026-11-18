@@ -78,10 +78,13 @@ src/
 │   ├── ScrollToTop/         # global "back to top" button
 │   ├── ErrorMessage/        # error text under a field
 │   ├── ContactForm/         # contact form (Name, Email, Subject, Message → POST /contact), usable on any page
+│   ├── Layouts/             # PublicLayout (Header + Outlet + Footer + ScrollToTop) for all non-dashboard routes
+│   ├── Dashboard/           # DashboardLayout (Sidebar + Header + Outlet, route /dashboard), DashboardSidebar, DashboardHeader (stubs)
 │   └── ui/                  # UI kit: Button, Input, TextArea, Select, CheckBox, DatePicker,
 │                            #         DropDown, Accordion, Modal, Banner, BannerStack, Slider, InputMasked
 └── pages/
-    ├── HomePage/  AboutPage/  FeaturesPage/  PricingPage/  ContactPage/  PolicyPages/  ElementsPage/  NotFoundPage/  DashboardPage/
+    ├── HomePage/  AboutPage/  FeaturesPage/  PricingPage/  ContactPage/  PolicyPages/  ElementsPage/  NotFoundPage/
+    ├── Dashboard/  Overview/ (/dashboard)  Profile/ (/dashboard/profile)  ChangePassword/ (/dashboard/password)
     └── Auth/  Login/  Register/  Forgot/  ResetPassword/  VerifyEmail/
 ```
 

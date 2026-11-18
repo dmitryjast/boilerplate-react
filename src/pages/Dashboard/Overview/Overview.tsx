@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
-import HeroPage from '../../components/Hero/HeroPage';
-import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-import Button from '../../components/ui/Button/Button';
+import HeroPage from '../../../components/Hero/HeroPage';
+import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
+import Button from '../../../components/ui/Button/Button';
 
-import { SITE_NAME } from '../../data/constants';
+import { SITE_NAME } from '../../../data/constants';
 
-import './Dashboard.scss';
+import './Overview.scss';
 
-export default function Dashboard() {
+export default function Overview() {
 
     const title = 'Dashboard';
 
@@ -33,7 +33,7 @@ export default function Dashboard() {
                 {label: title},
             ]}
             />
-            <section className='section-dashboard pt-60 pb-120'>
+            <section className='section-overview pt-60 pb-120'>
                 <div className='container'>
                     <div className='section-inner'>
                         <Button type='button' onClick={handleLogout}>Logout</Button>
