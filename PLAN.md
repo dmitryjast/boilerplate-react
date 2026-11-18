@@ -202,6 +202,8 @@ _Last updated: 2026-11-09_
 
 - Contact form extracted into `components/ContactForm` (`ContactForm.tsx` + `.scss`: state, react-hook-form + zod, `contactApi`, success state, card styles) so it can be dropped on any page (e.g. Home) without the Contact page; `Contact.tsx` keeps only the info column + `<ContactForm />`. Browser: same look, validation errors OK.
 
+- 429 handling (backend is adding `@nestjs/throttler`): "Too many attempts. Please try again later." — inline check `isAxiosError(error) && error.response?.status === 429` in each place (no shared helper, user's call): Login, Register, ResetPassword (before the generic else), Forgot, ContactForm, VerificationBanner, VerificationForm (link verify, code check, send, resend — send/resend previously only logged to console, now set `error` on 429). Not checked in the browser — backend doesn't return 429 yet.
+
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form
 - `0f479fa` Added full auth functionality

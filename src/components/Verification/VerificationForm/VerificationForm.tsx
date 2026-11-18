@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
+import { isAxiosError } from 'axios'
 import { useAuth } from '../../../context/AuthContext'
 import { authApi } from '../../../api/auth/auth.api'
 import Button from '../../ui/Button/Button'
@@ -40,8 +41,12 @@ export default function VerificationForm() {
                 setVerified(true)
                 await refreshUser()
                 setTimeout(() => navigate('/'), 3000)
-            } catch {
-                setError('Link expired or invalid. Please request a new verification email.')
+            } catch (error) {
+                if(isAxiosError(error) && error.response?.status === 429) {
+                    setError('Too many attempts. Please try again later.')
+                } else {
+                    setError('Link expired or invalid. Please request a new verification email.')
+                }
             } finally {
                 setChecking(false)
             }
@@ -77,6 +82,9 @@ export default function VerificationForm() {
             setSent(true)
         } catch (err) {
             console.error(err)
+            if(isAxiosError(err) && err.response?.status === 429) {
+                setError('Too many attempts. Please try again later.')
+            }
         }
     }
 
@@ -88,6 +96,9 @@ export default function VerificationForm() {
             setResendCooldown(59)
         } catch (err) {
             console.error(err)
+            if(isAxiosError(err) && err.response?.status === 429) {
+                setError('Too many attempts. Please try again later.')
+            }
         }
     }
 
@@ -127,8 +138,12 @@ export default function VerificationForm() {
             })
             setVerified(true)
             await refreshUser()
-        } catch {
-            setError('Invalid or expired code. Please try again.')
+        } catch (error) {
+            if(isAxiosError(error) && error.response?.status === 429) {
+                setError('Too many attempts. Please try again later.')
+            } else {
+                setError('Invalid or expired code. Please try again.')
+            }
         } finally {
             setChecking(false)
         }

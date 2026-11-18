@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { isAxiosError } from 'axios'
 import { Link } from 'react-router-dom'
 import { authApi } from '../../../api/auth/auth.api'
 import { forgotSchema, type ForgotFormData } from '../../../schemas/forgot.schema'
@@ -27,8 +28,12 @@ export default function Forgot() {
         try {
             await authApi.forgotPassword(data)
             setSent(true)
-        } catch {
-            setServerError('Something went wrong. Please try again.')
+        } catch (error) {
+            if(isAxiosError(error) && error.response?.status === 429) {
+                setServerError('Too many attempts. Please try again later.')
+            } else {
+                setServerError('Something went wrong. Please try again.')
+            }
         }
     }
 

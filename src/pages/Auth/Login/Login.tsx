@@ -34,6 +34,8 @@ export default function Login() {
         } catch (error) {
             if(isAxiosError(error) && error.response?.status === 401) {
                 setServerError('Invalid email or password.')
+            } else if(isAxiosError(error) && error.response?.status === 429) {
+                setServerError('Too many attempts. Please try again later.')
             } else {
                 setServerError('Something went wrong. Please try again.')
             }

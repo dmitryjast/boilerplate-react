@@ -38,6 +38,8 @@ export default function Register() {
         } catch (error) {
             if(isAxiosError(error) && error.response?.status === 409) {
                 setServerError('User with this email already exists.')
+            } else if(isAxiosError(error) && error.response?.status === 429) {
+                setServerError('Too many attempts. Please try again later.')
             } else {
                 setServerError('Something went wrong. Please try again.')
             }

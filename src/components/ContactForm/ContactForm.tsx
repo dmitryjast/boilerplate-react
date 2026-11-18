@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { isAxiosError } from 'axios';
 import { contactApi } from '../../api/contact/contact.api';
 import { contactSchema, type ContactFormData } from '../../schemas/contact.schema';
 
@@ -24,8 +25,12 @@ export default function ContactForm() {
         try {
             await contactApi.send(data)
             setSent(true)
-        } catch {
-            setServerError('Something went wrong. Please try again.')
+        } catch (error) {
+            if(isAxiosError(error) && error.response?.status === 429) {
+                setServerError('Too many attempts. Please try again later.')
+            } else {
+                setServerError('Something went wrong. Please try again.')
+            }
         }
     }
 

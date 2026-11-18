@@ -44,6 +44,8 @@ export default function ResetPassword() {
         } catch (error) {
             if(isAxiosError(error) && error.response?.status === 401) {
                 setServerError('Reset link expired or invalid. Please request a new one.')
+            } else if(isAxiosError(error) && error.response?.status === 429) {
+                setServerError('Too many attempts. Please try again later.')
             } else {
                 setServerError('Something went wrong. Please try again.')
             }

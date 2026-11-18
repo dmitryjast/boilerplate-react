@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { isAxiosError } from 'axios'
 import { useAuth } from '../../../context/AuthContext'
 import { authApi } from '../../../api/auth/auth.api'
 import Banner from '../../ui/Banner/Banner'
@@ -24,7 +25,11 @@ export default function VerificationBanner() {
             setSent(true)
         } catch (err) {
             console.error(err)
-            setError('Could not send the email. Please try again.')
+            if(isAxiosError(err) && err.response?.status === 429) {
+                setError('Too many attempts. Please try again later.')
+            } else {
+                setError('Could not send the email. Please try again.')
+            }
         } finally {
             setSending(false)
         }
