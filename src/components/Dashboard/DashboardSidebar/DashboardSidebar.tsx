@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, User, type LucideIcon } from 'lucide-react'
+import { LayoutDashboard, User, X, type LucideIcon } from 'lucide-react'
+import type { MouseEvent } from 'react';
 
 import Logo from '../../Header/Logo';
 import DashboardSidebarUser from './DashboardSidebarUser';
@@ -34,14 +35,30 @@ const navSections: NavSection[] = [
     },
 ];
 
-export default function DashboardSidebar() {
+interface DashboardSidebarProps {
+    onClose: () => void;
+}
+
+export default function DashboardSidebar({ onClose }: DashboardSidebarProps) {
+
+    const handleNavClick = (e: MouseEvent) => {
+        if((e.target as HTMLElement).closest('a')) onClose()
+    }
 
     return (
         <aside className='dashboard-sidebar'>
             <div className='dashboard-sidebar-logo'>
                 <Logo />
+                <button
+                    type='button'
+                    className='dashboard-sidebar-close'
+                    aria-label='Close menu'
+                    onClick={onClose}
+                >
+                    <X size={20} />
+                </button>
             </div>
-            <nav className='dashboard-sidebar-nav'>
+            <nav className='dashboard-sidebar-nav' onClick={handleNavClick}>
                 {navSections.map((section, index) => (
                     <div className='nav-section' key={section.title ?? index}>
                         {section.title && (

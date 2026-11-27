@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { Menu } from 'lucide-react'
 
 import Clock from '../../ui/Clock/Clock';
 import DashboardHeaderUser from './DashboardHeaderUser';
@@ -11,7 +12,12 @@ const pageTitles: Record<string, string> = {
     '/dashboard/password': 'Change Password',
 };
 
-export default function DashboardHeader() {
+interface DashboardHeaderProps {
+    isMenuOpen: boolean;
+    onMenuClick: () => void;
+}
+
+export default function DashboardHeader({ isMenuOpen, onMenuClick }: DashboardHeaderProps) {
 
     const { pathname } = useLocation()
 
@@ -19,6 +25,15 @@ export default function DashboardHeader() {
 
     return (
         <header className='dashboard-header'>
+            <button
+                type='button'
+                className='dashboard-header-menu'
+                aria-label='Open menu'
+                aria-expanded={isMenuOpen}
+                onClick={onMenuClick}
+            >
+                <Menu size={20} />
+            </button>
             <h1 className='dashboard-header-title'>{title}</h1>
             <Clock className='dashboard-header-clock' />
             <DashboardHeaderUser />

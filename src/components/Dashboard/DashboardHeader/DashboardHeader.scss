@@ -9,8 +9,33 @@
     margin-top: 12px;
     padding: 0 32px;
     background: var(--color-background-2);
-    @media (max-width: 767px) {
-        padding: 0 20px;
+    @media (max-width: 1024px) {
+        height: auto;
+        margin-top: 0;
+        padding: 12px;
+    }
+    .dashboard-header-menu {
+        flex-shrink: 0;
+        display: none;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-background);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        color: var(--color-text);
+        cursor: pointer;
+        transition: border-color 0.2s;
+        &:hover {
+            border-color: var(--color-border-hover);
+        }
+        @media (max-width: 1024px) {
+            display: flex;
+            width: 46px;
+            height: 46px;
+        }
     }
     .dashboard-header-title {
         flex: 1;
@@ -32,6 +57,7 @@
     .dashboard-header-user {
         flex-shrink: 0;
         .user-trigger {
+            min-height: 46px;
             display: flex;
             align-items: center;
             gap: 10px;

@@ -9,7 +9,7 @@ _Last updated: 2026-11-27_
 
 ## In progress
 
-- Dashboard markup (P3): `DashboardLayout` skeleton and `DashboardSidebar` done; next — mobile sidebar (burger in `DashboardHeader`), verification strip, cookie banner vs sidebar user block.
+- Dashboard markup (P3): layout, floating sidebar (sections, badges, user block, mobile panel) and header (title, burger, clock, user menu) done; next — verification strip + cookie banner position in the dashboard, dashboard 404, Profile page (change password placement open).
 
 ## TODO (by priority)
 
@@ -236,7 +236,11 @@ _Last updated: 2026-11-27_
 - Nav sections: `navSections` (`{ title?, items }`) — General (Overview) / Account (Profile); titles 11px uppercase. Item `badge?: number` → red pill on the right (`99+` above 99); no real data yet (checked with a badge injected in DOM).
 - Border radius unified with Home (user's request): cards `--radius-lg` (sidebar, dropdown menu), controls `--radius` (nav links, header user trigger — was a 999px pill, dropdown items — was 6px), pills / circles only for badges and avatars.
 - Sidebar logo 140 → 116px (user's request).
+- Tried sidebar user block side padding 12px — reverted to 24px (user: 24 looked better, aligned with logo and nav icons).
 - Header user trigger: white background like the sidebar, closed and open (user's request); hover and open state only darken the border (`--color-border-hover`), chevron rotates when open.
+- Mobile sidebar (≤1024px): open state `isSidebarOpen` in `DashboardLayout` (class `sidebar-open`); `DashboardHeader` gets `isMenuOpen` / `onMenuClick` → burger button (`Menu`, 40px, white, left of the title, `aria-expanded`); `DashboardSidebar` gets `onClose` → X button in the logo block (≤1024px only) and closes on nav link click. The same sidebar card becomes `position: fixed` (12px from top / left / bottom, 280px, max `100vw - 24px`), slides in from the left (`translateX` + `visibility`, 0.3s, like `HeaderMobileMenu`); `.dashboard-overlay` (z 50, sidebar z 51) closes on click; Esc closes; body scroll locked while open; closes automatically when the viewport grows past 1024px (`matchMedia`). Browser (iframes 900 / 390px): burger shown, panel opens / closes on Esc, overlay, X, link click (→ `/dashboard/profile`, title "Profile"), scroll lock on / off, no horizontal overflow; desktop 1920px — burger, X, overlay hidden, sidebar sticky.
+- Edge spacing unified to 12px (user's choice): ≤1024px (where the sidebar becomes a slide-in panel) header `0 12px`, content `12px` all sides — same as the sidebar's 12px from the viewport edge (was 32px at 768–1024 and 20px ≤767). Desktop (>1024px) header / content 32px unchanged. Browser (iframes 390 / 900 / 1024 / 1200): burger at 12px, 32px only above 1024, no overflow.
+- Header ≤1024px (user's choice): no `margin-top`, `height: auto`, `padding: 12px` → 70px tall, burger 40 → 46px, `.user-trigger` `min-height: 46px` (was 42px on mobile without name/role) — burger and user button sit exactly 12px from top / left / right. Desktop unchanged (72px, `margin-top: 12px`, aligned with the sidebar logo block). Browser (iframes 390 / 900 / 1200): 12px top / sides on 390 and 900, desktop as before, no overflow.
 - Found: global `BannerStack` (bottom-left) covers the sidebar user block in the dashboard. Verification banner moves into the dashboard strip (planned); cookie banner still overlaps — needs a decision.
 
 ### Before 2026-10-16 (from git, branch `dev`)
