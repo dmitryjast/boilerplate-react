@@ -12,7 +12,9 @@ export default function DashboardLayout() {
             <DashboardSidebar />
             <div className='dashboard-main'>
                 <DashboardHeader />
-                <Outlet />
+                <main className='dashboard-content'>
+                    <Outlet />
+                </main>
             </div>
         </div>
     )

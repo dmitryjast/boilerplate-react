@@ -3,13 +3,13 @@
 Living document: current work, TODO, open questions, session log.
 **Update at the end of every session** (and when switching tasks). Project architecture lives in [DEVELOPMENT.md](DEVELOPMENT.md).
 
-_Last updated: 2026-11-18_
+_Last updated: 2026-11-27_
 
 ---
 
 ## In progress
 
-- Nothing in progress. Boilerplate is SaaS-only; header shows "Go to Dashboard" for logged-in users, `/dashboard` is a stub with Logout. P1 closed.
+- Dashboard markup (P3): `DashboardLayout` skeleton and `DashboardSidebar` done; next — `DashboardHeader` (page title + mobile burger), mobile sidebar, verification strip, cookie banner vs sidebar user block.
 
 ## TODO (by priority)
 
@@ -57,6 +57,7 @@ _Last updated: 2026-11-18_
 - [ ] Page meta: `<meta name="description">` per page; `<meta name="robots" content="noindex" />` on the 404 page
 - [ ] Dashboard 404: unknown `/dashboard/*` paths (e.g. `/dashboard/unknown`) now fall to the public 404 with the site header — add a `path="*"` route inside `DashboardLayout` with its own not-found page
 - [ ] Dashboard: layout (sidebar + user menu with Settings and Logout); Edit Profile and Change Password pages inside the dashboard (+ backend API?)
+- [ ] Avatar upload in Profile (later, user's request) — `MeResponse.userPicture` already exists; `DashboardSidebarUser` shows it if set, otherwise initials. Needs backend upload endpoint + storage
 - [x] Home — base SaaS landing (2026-11-09)
 - [x] Features — demo sections (2026-11-10)
 - [x] Pricing, About — basic demo content (2026-11-10)
@@ -214,6 +215,13 @@ _Last updated: 2026-11-18_
 - Layouts (React Router layout routes, like `AuthRoute`): new `components/Layouts/PublicLayout` (`Header` + `<Outlet />` + `Footer` + `ScrollToTop`) wraps all public, guest-only, `/verify-email`, policy, `/elements` and 404 routes. Dashboard: `AuthRoute requireAuth` → `/dashboard` with `DashboardLayout` (`DashboardSidebar` + `.dashboard-main` with `DashboardHeader` + `<Outlet />`), nested `index` → `Overview`, `profile` → `Profile`, `password` → `ChangePassword` (stubs). `BannerStack` (verification + cookies) stays global in `App.tsx`. Browser (temp server 5179, logged in): public pages have header/footer/ScrollToTop, dashboard pages don't; `/dashboard/unknown` → public 404.
 - Decided for later (dashboard markup): verification reminder becomes a full-width strip inside `DashboardLayout` above the content and is removed from the public site; cookie banner stays global in `BannerStack`.
 - React Query: keep the dependency, decide when building dashboard data.
+
+### 2026-11-27
+- Dashboard markup started with `DashboardLayout`: `<Outlet />` wrapped in `main.dashboard-content`; `DashboardLayout.scss` — flex row, `min-height: 100vh`, `background-2`; sidebar 260px, white, right border, `sticky` full height, hidden ≤1024px (mobile panel later); `.dashboard-main` `flex: 1; min-width: 0`, column; content padding 32px → 20px ≤767px. Sidebar / header still empty. Browser (temp server 5179, logged in): 1920px sidebar 260px + main 1660px; 390px (iframe) sidebar hidden, padding 20px, no horizontal overflow. `Overview` still has the public `HeroPage` + breadcrumbs + Logout — to be replaced when header is done.
+- `DashboardSidebar` (`aside`): reused `Header/Logo` (140px) in a 72px top block with bottom border (`DashboardHeader` should match the height); nav from a `navItems` const (Overview `end`, Profile; lucide `LayoutDashboard` / `User`, 18px; Change Password not in the sidebar — belongs to Profile, user's decision) via `NavLink`; links 15px / 500 secondary, hover `background-2`, `.active` indigo text on `rgba(79,70,229,.08)`. `ul` `padding: 0` (global `ul, ol { padding-left: 30px }` in `main.scss` — icons now at 24px, aligned with the logo). Many items: nav is `flex: 1; min-height: 0; overflow-y: auto` — scrolls inside the sidebar, logo stays. Browser: active item correct on `/dashboard` and `/dashboard/profile`; 33 items injected in DOM — nav scrolls, logo and page don't move.
+- Logout moved to the sidebar instead of a header user menu (user's decision; no separate Settings — Profile plays that role): `.dashboard-sidebar-user` pinned at the bottom (border-top, 16px 24px) — avatar 36px (`userPicture` or initials from `name`, indigo on light indigo), name 14px/600 + email 13px secondary (ellipsis), icon button `LogOut` (`aria-label` / `title` "Log out", same style as `.modal-close`), `logout()` + `navigate('/')` like in `Overview`; extracted into `DashboardSidebar/DashboardSidebarUser.tsx` (next to the sidebar like `Header/HeaderMenu.tsx`, styles stay in `DashboardSidebar.scss`). `DashboardHeader` will only have the page title + mobile burger. Browser: block at the bottom, long email truncated, hover OK; Logout not clicked (would end the test session). `Overview` still has its own Logout button — remove with the header work.
+- Role badge for everyone (user's decision: boilerplate shows it, real projects decide): `.user-name-row` (name shrinks with ellipsis + `.user-role` badge `flex-shrink: 0`, `max-width: 80px` + ellipsis, `title` = full role, 11px/600 indigo on light indigo, `capitalize`). Browser: test account role is `user`. Long name + `admin` → name ~61px ("Alexan…"); long name + long role → name 27px ("A…") — text area is only ~115px wide; tried role on its own line under email (block 76 → 102px) — reverted by user's decision, badge stays next to the name.
+- Found: global `BannerStack` (bottom-left) covers the sidebar user block in the dashboard. Verification banner moves into the dashboard strip (planned); cookie banner still overlaps — needs a decision.
 
 ### Before 2026-10-16 (from git, branch `dev`)
 - `8713b75` Added error output to forgot form
