@@ -1,0 +1,106 @@
+.dashboard-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 72px;
+    margin-top: 12px;
+    padding: 0 32px;
+    background: var(--color-background-2);
+    @media (max-width: 767px) {
+        padding: 0 20px;
+    }
+    .dashboard-header-title {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .dashboard-header-clock {
+        flex-shrink: 0;
+        align-items: flex-end;
+        text-align: right;
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+    .dashboard-header-user {
+        flex-shrink: 0;
+        .user-trigger {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 4px 8px 4px 4px;
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            transition: background-color 0.2s, border-color 0.2s;
+            &:hover {
+                border-color: var(--color-border-hover);
+            }
+            .user-info {
+                display: flex;
+                flex-direction: column;
+                max-width: 160px;
+                @media (max-width: 767px) {
+                    display: none;
+                }
+            }
+            .user-chevron {
+                flex-shrink: 0;
+                color: var(--color-text-secondary);
+                transition: transform 0.2s;
+            }
+        }
+        &.active {
+            .user-trigger {
+                border-color: var(--color-border-hover);
+                .user-chevron {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        .dropdown-menu {
+            min-width: 260px;
+        }
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            .user-info {
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+            }
+        }
+        .user-name,
+        .user-role,
+        .user-email {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+        }
+        .user-role,
+        .user-email {
+            color: var(--color-text-secondary);
+            font-size: 12px;
+            line-height: 16px;
+        }
+        .user-role {
+            text-transform: capitalize;
+        }
+        .user-email {
+            font-size: 13px;
+        }
+    }
+}

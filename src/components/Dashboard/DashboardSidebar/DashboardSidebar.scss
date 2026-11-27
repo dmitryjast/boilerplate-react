@@ -1,23 +1,55 @@
 .dashboard-sidebar {
+    --sidebar-background: var(--color-background);
+    --sidebar-border: var(--color-border);
+    --sidebar-text: var(--color-text);
+    --sidebar-text-secondary: var(--color-text-secondary);
+    --sidebar-section-title: var(--color-placeholder);
+    --sidebar-hover-background: var(--color-background-2);
+    --sidebar-active-background: rgba(79, 70, 229, 0.08);
+    --sidebar-active-text: var(--color-main-2);
+    --sidebar-badge-background: var(--color-error);
+    --sidebar-badge-text: #FFFFFF;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    background: var(--sidebar-background);
+    border: 1px solid var(--sidebar-border);
+    border-radius: var(--radius-lg);
+    color: var(--sidebar-text);
     .dashboard-sidebar-logo {
         display: flex;
         align-items: center;
         height: 72px;
         padding: 0 24px;
-        border-bottom: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--sidebar-border);
         .logo {
             img {
-                max-width: 140px;
+                max-width: 116px;
             }
         }
     }
     .dashboard-sidebar-nav {
         flex: 1;
         min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         padding: 16px 12px;
         overflow-y: auto;
+        .nav-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            .nav-section-title {
+                padding: 0 12px;
+                color: var(--sidebar-section-title);
+                font-size: 11px;
+                font-weight: 600;
+                line-height: 16px;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+            }
+        }
         ul {
             display: flex;
             flex-direction: column;
@@ -30,18 +62,47 @@
                 gap: 12px;
                 padding: 10px 12px;
                 border-radius: var(--radius);
-                color: var(--color-text-secondary);
+                color: var(--sidebar-text-secondary);
                 font-size: 15px;
                 font-weight: 500;
                 text-decoration: none;
                 transition: background-color 0.2s, color 0.2s;
+                svg {
+                    flex-shrink: 0;
+                }
                 &:hover {
-                    background: var(--color-background-2);
-                    color: var(--color-text);
+                    background: var(--sidebar-hover-background);
+                    color: var(--sidebar-text);
                 }
                 &.active {
-                    background: rgba(79, 70, 229, 0.08);
-                    color: var(--color-main-2);
+                    background: var(--sidebar-active-background);
+                    color: var(--sidebar-active-text);
+                }
+                .nav-label {
+                    flex: 1;
+                    color: inherit;
+                    font-size: inherit;
+                    font-weight: inherit;
+                    line-height: 20px;
+                    min-width: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                .nav-badge {
+                    flex-shrink: 0;
+                    min-width: 20px;
+                    height: 20px;
+                    padding: 0 6px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 999px;
+                    background: var(--sidebar-badge-background);
+                    color: var(--sidebar-badge-text);
+                    font-size: 11px;
+                    font-weight: 600;
+                    line-height: 1;
                 }
             }
         }
@@ -51,68 +112,29 @@
         align-items: center;
         gap: 12px;
         padding: 16px 24px;
-        border-top: 1px solid var(--color-border);
-        .user-avatar {
-            flex-shrink: 0;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            overflow: hidden;
-            background: rgba(79, 70, 229, 0.08);
-            color: var(--color-main-2);
-            font-size: 14px;
-            font-weight: 600;
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
+        border-top: 1px solid var(--sidebar-border);
         .user-info {
             flex: 1;
             min-width: 0;
             display: flex;
             flex-direction: column;
             .user-name,
-            .user-email {
+            .user-role {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
-            .user-name-row {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                min-width: 0;
-                .user-name {
-                    min-width: 0;
-                }
-                .user-role {
-                    flex-shrink: 0;
-                    max-width: 80px;
-                    padding: 2px 6px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    border-radius: 4px;
-                    background: rgba(79, 70, 229, 0.08);
-                    color: var(--color-main-2);
-                    font-size: 11px;
-                    font-weight: 600;
-                    line-height: 16px;
-                    text-transform: capitalize;
-                }
-            }
             .user-name {
+                color: var(--sidebar-text);
                 font-size: 14px;
                 font-weight: 600;
+                line-height: 20px;
             }
-            .user-email {
-                color: var(--color-text-secondary);
+            .user-role {
+                color: var(--sidebar-text-secondary);
                 font-size: 13px;
+                line-height: 18px;
+                text-transform: capitalize;
             }
         }
         .user-logout {
@@ -126,11 +148,11 @@
             background: none;
             border: none;
             border-radius: var(--radius);
-            color: var(--color-text-secondary);
+            color: var(--sidebar-text-secondary);
             cursor: pointer;
             &:hover {
-                background: var(--color-background-2);
-                color: var(--color-text);
+                background: var(--sidebar-hover-background);
+                color: var(--sidebar-text);
             }
         }
     }

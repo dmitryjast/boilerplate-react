@@ -1,0 +1,16 @@
+.clock {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    .clock-time {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        font-variant-numeric: tabular-nums;
+    }
+    .clock-date {
+        color: var(--color-text-secondary);
+        font-size: 12px;
+        line-height: 16px;
+    }
+}

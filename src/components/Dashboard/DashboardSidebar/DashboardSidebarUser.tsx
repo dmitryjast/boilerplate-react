@@ -2,17 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { LogOut } from 'lucide-react'
 import { useAuth } from '../../../context/AuthContext';
 
+import Avatar from '../../ui/Avatar/Avatar';
+
 export default function DashboardSidebarUser() {
 
     const { user, logout } = useAuth()
     const navigate = useNavigate()
-
-    const initials = (user?.name ?? '')
-        .split(' ')
-        .filter(Boolean)
-        .slice(0, 2)
-        .map((part) => part[0].toUpperCase())
-        .join('');
 
     const handleLogout = () => {
         logout();
@@ -21,20 +16,10 @@ export default function DashboardSidebarUser() {
 
     return (
         <div className='dashboard-sidebar-user'>
-            <div className='user-avatar'>
-                {user?.userPicture
-                    ? <img src={user.userPicture} alt={user.name} />
-                    : initials
-                }
-            </div>
+            <Avatar name={user?.name} src={user?.userPicture} />
             <div className='user-info'>
-                <div className='user-name-row'>
-                    <span className='user-name'>{user?.name}</span>
-                    {user?.userRole && (
-                        <span className='user-role' title={user.userRole}>{user.userRole}</span>
-                    )}
-                </div>
-                <span className='user-email'>{user?.email}</span>
+                <span className='user-name'>{user?.name}</span>
+                <span className='user-role'>{user?.userRole}</span>
             </div>
             <button
                 type='button'

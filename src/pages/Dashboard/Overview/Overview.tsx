@@ -1,10 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext';
-
-import HeroPage from '../../../components/Hero/HeroPage';
-import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
-import Button from '../../../components/ui/Button/Button';
-
 import { SITE_NAME } from '../../../data/constants';
 
 import './Overview.scss';
@@ -13,33 +6,11 @@ export default function Overview() {
 
     const title = 'Dashboard';
 
-    const { logout } = useAuth()
-    const navigate = useNavigate()
-
-    const handleLogout = () => {
-        logout();
-        navigate("/");
-    }
-
     return (
         <>
             <title>{`${title} | ${SITE_NAME}`}</title>
-            <HeroPage
-                title={title}
-            />
-            <Breadcrumbs
-            items={[
-                {label: 'Home', link: '/'},
-                {label: title},
-            ]}
-            />
-            <section className='section-overview pt-60 pb-120'>
-                <div className='container'>
-                    <div className='section-inner'>
-                        <Button type='button' onClick={handleLogout}>Logout</Button>
-                    </div>
-                </div>
-            </section>
+            <div className='section-overview'>
+            </div>
         </>
     )
 }
