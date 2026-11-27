@@ -21,13 +21,11 @@ import Policy from "./pages/PolicyPages/Policy";
 import Overview from "./pages/Dashboard/Overview/Overview";
 import Profile from "./pages/Dashboard/Profile/Profile";
 import ChangePassword from "./pages/Dashboard/ChangePassword/ChangePassword";
+import DashboardNotFound from "./pages/Dashboard/NotFound/DashboardNotFound";
 
 import Elements from "./pages/ElementsPage/Elements";
 import NotFound from "./pages/NotFoundPage/NotFound";
 
-import VerificationBanner from "./components/Verification/VerificationBanner/VerificationBanner";
-import CookiesPopup from "./components/CookiesPopup/CookiesPopup";
-import BannerStack from "./components/ui/BannerStack/BannerStack";
 
 function App() {
   
@@ -77,17 +75,12 @@ function App() {
             <Route index element={<Overview />} />
             <Route path="profile" element={<Profile />} />
             <Route path="password" element={<ChangePassword />} />
+            <Route path="*" element={<DashboardNotFound />} />
           </Route>
         </Route>
 
       </Routes>
 
-      {/* Global Components */}
-      <BannerStack position="bottom-left">
-        <VerificationBanner />
-        <CookiesPopup />
-      </BannerStack>
-      
     </BrowserRouter>
   )
 }

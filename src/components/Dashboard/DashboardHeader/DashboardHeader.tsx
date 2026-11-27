@@ -21,7 +21,7 @@ export default function DashboardHeader({ isMenuOpen, onMenuClick }: DashboardHe
 
     const { pathname } = useLocation()
 
-    const title = pageTitles[pathname.replace(/\/+$/, '') || '/'] ?? '';
+    const title = pageTitles[pathname.replace(/\/+$/, '') || '/'] ?? 'Page Not Found';
 
     return (
         <header className='dashboard-header'>

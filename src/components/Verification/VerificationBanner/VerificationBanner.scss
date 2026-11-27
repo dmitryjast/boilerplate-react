@@ -1,56 +1,99 @@
 .verification-banner {
-    max-width: 640px;
-    @media (max-width: 767px) {
-        max-width: none;
-        padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 16px 16px 16px 20px;
+    background: var(--color-background-error);
+    border: 1px solid #FECACA;
+    border-radius: var(--radius-lg);
+    @media (max-width: 1024px) {
+        margin-bottom: 12px;
     }
-    .banner-inner {
+    @media (max-width: 767px) {
+        position: relative;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 16px;
+    }
+    .banner-icon {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
         display: flex;
-        align-items: flex-end;
-        gap: 24px;
-        @media (max-width: 767px) {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 20px;
-        }
-        .banner-text {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        svg {
-            color: var(--color-main-2);
-        }
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(220, 38, 38, 0.1);
+        color: var(--color-error);
+    }
+    .banner-text {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
         p {
-            font-size: 14px;
             color: var(--color-text-secondary);
+            font-size: 14px;
+            line-height: 20px;
         }
         .banner-title {
-            font-size: 16px;
-            font-weight: 600;
             color: var(--color-text);
+            font-weight: 600;
         }
         .error-message {
+            margin-top: 4px;
             color: var(--color-error);
         }
-        .button {
-            flex-shrink: 0;
-            @media (max-width: 767px) {
-                width: 100%;
-            }
+    }
+    .button {
+        flex-shrink: 0;
+        width: fit-content;
+        @media (max-width: 767px) {
+            width: 100%;
         }
-        .btn-verify {
-            background: var(--color-main-2);
-            color: #FFF;
-            &:hover {
-                background: var(--color-main-3);
-            }
+    }
+    .btn-verify {
+        background: var(--color-error);
+        border-color: var(--color-error);
+        color: #FFF;
+        &:hover {
+            background: #B91C1C;
+            border-color: #B91C1C;
         }
-        .btn-sent {
-            background: #F0FDF4;
-            border-color: #BBF7D0;
-            color: #15803D;
-            opacity: 1;
+        &:focus-visible {
+            box-shadow: var(--focus-ring-error);
+        }
+    }
+    .btn-sent {
+        background: #F0FDF4;
+        border-color: #BBF7D0;
+        color: #15803D;
+        opacity: 1;
+    }
+    .banner-close {
+        display: none;
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        border-radius: var(--radius);
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        &:hover {
+            background: rgba(220, 38, 38, 0.08);
+            color: var(--color-text);
+        }
+        @media (max-width: 767px) {
+            position: absolute;
+            top: 12px;
+            right: 12px;
         }
     }
 }

@@ -57,9 +57,9 @@
         flex-direction: column;
         .dashboard-content {
             flex: 1;
-            padding: 32px;
+            padding: 0 32px 32px;
             @media (max-width: 1024px) {
-                padding: 12px;
+                padding: 0 12px 12px;
             }
         }
     }

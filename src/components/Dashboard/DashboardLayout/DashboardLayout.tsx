@@ -3,6 +3,9 @@ import { Outlet } from 'react-router-dom';
 
 import DashboardSidebar from '../DashboardSidebar/DashboardSidebar';
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
+import VerificationBanner from '../../Verification/VerificationBanner/VerificationBanner';
+import CookiesPopup from '../../CookiesPopup/CookiesPopup';
+import BannerStack from '../../ui/BannerStack/BannerStack';
 
 import './DashboardLayout.scss';
 
@@ -39,9 +42,13 @@ export default function DashboardLayout() {
             <div className='dashboard-main'>
                 <DashboardHeader isMenuOpen={isSidebarOpen} onMenuClick={() => setIsSidebarOpen(true)} />
                 <main className='dashboard-content'>
+                    <VerificationBanner />
                     <Outlet />
                 </main>
             </div>
+            <BannerStack position='bottom-right'>
+                <CookiesPopup />
+            </BannerStack>
         </div>
     )
 }

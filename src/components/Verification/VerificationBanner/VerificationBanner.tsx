@@ -2,12 +2,11 @@ import { useState } from 'react'
 import { isAxiosError } from 'axios'
 import { useAuth } from '../../../context/AuthContext'
 import { authApi } from '../../../api/auth/auth.api'
-import Banner from '../../ui/Banner/Banner'
 import Button from '../../ui/Button/Button'
 
 import './VerificationBanner.scss'
 
-import { MailCheck } from 'lucide-react'
+import { MailCheck, X } from 'lucide-react'
 
 export default function VerificationBanner() {
 
@@ -35,25 +34,33 @@ export default function VerificationBanner() {
         }
     }
 
-    if (!user || user.verifiedAt) return null
+    if (!user || user.verifiedAt || !isOpen) return null
 
     return (
-        <Banner isOpen={isOpen} onClose={() => setIsOpen(false)} className='verification-banner'>
-            <div className='banner-inner'>
-                <div className='banner-text'>
-                    <MailCheck size={32} />
-                    <p className='banner-title'>Verification</p>
-                    <p>Please verify your email to unlock all application features. We'll send you a verification email.</p>
-                    {error && <p className='error-message'>{error}</p>}
-                </div>
-                <Button
-                    variant={sent ? 'sent' : 'verify'}
-                    onClick={handleSend}
-                    disabled={sent || sending}
-                >
-                    {sent ? 'Sent, check your email' : sending ? 'Sending...' : 'Send verification email'}
-                </Button>
+        <div className='verification-banner'>
+            <div className='banner-icon'>
+                <MailCheck size={20} />
             </div>
-        </Banner>
+            <div className='banner-text'>
+                <p className='banner-title'>Verify your email</p>
+                <p>Please verify your email to unlock all application features. We'll send you a verification email.</p>
+                {error && <p className='error-message'>{error}</p>}
+            </div>
+            <Button
+                variant={sent ? 'sent' : 'verify'}
+                onClick={handleSend}
+                disabled={sent || sending}
+            >
+                {sent ? 'Sent, check your email' : sending ? 'Sending...' : 'Send verification email'}
+            </Button>
+            <button
+                type='button'
+                className='banner-close'
+                aria-label='Close banner'
+                onClick={() => setIsOpen(false)}
+            >
+                <X size={18} />
+            </button>
+        </div>
     )
 }
